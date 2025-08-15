@@ -1,6 +1,6 @@
 // src/components/MyFamily.tsx
-import { type SimpleCardType } from "../lib/data.ts";
-import { SimpleCard } from "./SimpleCard.tsx";
+import { type SimpleCardType } from "../lib/data";
+import { SimpleCard } from "./SimpleCard";
 
 export function MyFamily({ items }: { items: SimpleCardType[] }) {
     return (

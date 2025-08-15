@@ -1,4 +1,4 @@
-import { type ProjectType } from '../lib/data.ts';
+import { type ProjectType } from '../lib/data';
 
 export function ProjectCard({ project }: { project: ProjectType }) {
     return (

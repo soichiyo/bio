@@ -1,5 +1,5 @@
 // src/components/SimpleCard.tsx
-import { type SimpleCardType } from "../lib/data.ts";
+import { type SimpleCardType } from "../lib/data";
 
 export function SimpleCard({ card }: { card: SimpleCardType }) {
     return (

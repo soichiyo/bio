@@ -1,5 +1,5 @@
-import { type ProjectType } from '../lib/data.ts';
-import { ProjectCard } from './ProjectCard.tsx';
+import { type ProjectType } from '../lib/data';
+import { ProjectCard } from './ProjectCard';
 
 export function Projects({ items }: { items: ProjectType[] }) {
     return (

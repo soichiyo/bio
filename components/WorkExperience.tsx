@@ -1,5 +1,5 @@
 // src/components/WorkExperience.tsx
-import { type WorkExperienceType } from '../lib/data.ts';
+import { type WorkExperienceType } from '../lib/data';
 
 export function WorkExperience({ items }: { items: WorkExperienceType[] }) {
     // 全てのバッジに共通する基本スタイルを定義
