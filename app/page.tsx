@@ -163,7 +163,6 @@ export default function ProfilePage() {
       {/* フッター - よりシンプルに */}
       <footer className="mt-20 pt-8 border-t border-border">
         <div className="text-center text-sm text-muted-foreground">
-          <p className="mb-2">無料で相談する</p>
           <p>© 2024 {profileData.name}</p>
         </div>
       </footer>

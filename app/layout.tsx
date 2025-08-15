@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     default: 'Soichiro Yoshimura',
     template: '%s | Soichiro Yoshimura'
   },
-  description: 'Product Manager, Photographer, DJ, Father or SOMETHING. AIを前提とした新しい時代のユーザー体験を爆速で仮説検証するMVP開発に注力しています。',
+  description: 'Product Manager, Photographer, DJ, Father or SOMETHING.',
   keywords: ['Product Manager', 'AI', 'UX Design', 'MVP Development', 'Tokyo', 'Photography', 'DJ'],
   authors: [{ name: 'Soichiro Yoshimura' }],
   creator: 'Soichiro Yoshimura',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: 'https://soichiyo.dev',
     siteName: 'Soichiro Yoshimura',
     title: 'Soichiro Yoshimura',
-    description: 'Product Manager, Photographer, DJ, Father or SOMETHING. AIを前提とした新しい時代のユーザー体験を爆速で仮説検証するMVP開発に注力しています。',
+    description: 'Product Manager, Photographer, DJ, Father or SOMETHING.',
     images: [
       {
         url: '/assets/profile-avatar.png',
