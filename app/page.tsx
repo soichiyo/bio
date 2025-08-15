@@ -10,6 +10,7 @@ import { HobbiesSection } from "../components/sections/HobbiesSection";
 import { CredentialsSection } from "../components/sections/CredentialsSection";
 import { MyFamilySection } from "../components/sections/MyFamilySection";
 import { ExpertiseSection } from "../components/sections/ExpertiseSection";
+import { PersonalCharacteristicsSection } from "../components/sections/PersonalCharacteristicsSection";
 import Image from "next/image";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
 import { profileData } from "../lib/data";
@@ -19,20 +20,21 @@ function ProfileHeader() {
   return (
     <header className="mb-12">
       {/* プロフィール情報 - よりミニマルに */}
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex items-center gap-6 mb-6">
         <Image
           src={profileData.avatar}
           alt={profileData.name}
-          width={40}
-          height={40}
-          className="rounded-full object-cover"
+          width={140}
+          height={140}
+          className="w-[140px] h-[140px] rounded-full object-cover border-4 border-border shadow-lg"
           priority
         />
         <div>
-          <h1 className="text-xl font-semibold text-foreground">
+          <h1 className="text-2xl font-semibold text-foreground">
             {profileData.name}
           </h1>
-          <p className="text-sm text-muted-foreground">{profileData.jobTitle}</p>
+          <p className="text-lg text-muted-foreground mb-2">{profileData.jobTitle}</p>
+          <p className="text-sm text-muted-foreground">{profileData.location}</p>
         </div>
       </div>
 
@@ -69,8 +71,8 @@ export default function ProfilePage() {
       <div className="space-y-16">
         {/* 💼 Work Experience */}
         <section>
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <span>💼</span>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">💼</span>
             Work Experience
           </h2>
           <WorkSection />
@@ -78,8 +80,8 @@ export default function ProfilePage() {
 
         {/* 🚀 Projects */}
         <section>
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <span>🚀</span>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">🚀</span>
             Projects
           </h2>
           <ProjectsSection />
@@ -87,8 +89,8 @@ export default function ProfilePage() {
 
         {/* 🛠️ Skills */}
         <section>
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <span>🛠️</span>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">🛠️</span>
             Skills
           </h2>
           <SkillsSection />
@@ -96,17 +98,26 @@ export default function ProfilePage() {
 
         {/* 🎨 Expertise */}
         <section>
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <span>🎨</span>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">🎨</span>
             Expertise
           </h2>
           <ExpertiseSection />
         </section>
 
+        {/* 🧠 Personal Characteristics */}
+        <section>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">🧠</span>
+            Personality
+          </h2>
+          <PersonalCharacteristicsSection />
+        </section>
+
         {/* 📸 Gallery */}
         <section>
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <span>📸</span>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">📸</span>
             Gallery
           </h2>
           <GallerySection />
@@ -114,8 +125,8 @@ export default function ProfilePage() {
 
         {/* 🎯 Hobbies */}
         <section>
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <span>🎯</span>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">🎯</span>
             Hobbies
           </h2>
           <HobbiesSection />
@@ -123,8 +134,8 @@ export default function ProfilePage() {
 
         {/* 🏆 Credentials */}
         <section>
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <span>🏆</span>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">🏆</span>
             Credentials
           </h2>
           <CredentialsSection />
@@ -132,8 +143,8 @@ export default function ProfilePage() {
 
         {/* 👨‍👩‍👧‍👦 Family */}
         <section>
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <span>👨‍👩‍👧‍👦</span>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">👨‍👩‍👧‍👦</span>
             My Family
           </h2>
           <MyFamilySection />
@@ -141,8 +152,8 @@ export default function ProfilePage() {
 
         {/* 💬 Contact */}
         <section>
-          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
-            <span>💬</span>
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+            <span className="text-3xl">💬</span>
             Contact
           </h2>
           <ContactSection />

@@ -22,22 +22,22 @@ export function Chip({ text, icon, style }: ChipProps) {
         <img
           alt={`${text} icon`}
           loading="lazy"
-          width="16"
-          height="16"
-          className="w-4 h-4"
+          width="20"
+          height="20"
+          className="w-5 h-5"
           src={icon}
         />
       );
     }
 
     // それ以外の場合は絵文字と判断
-    return <span className="text-base">{icon}</span>;
+    return <span className="text-2xl">{icon}</span>;
   };
 
   return (
     <div className={`${baseStyle} ${style || defaultStyle}`}>
       {renderIcon()}
-      {text}
+      <span>{text}</span>
     </div>
   );
 }
