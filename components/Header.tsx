@@ -26,16 +26,16 @@ export function Header({ data }: { data: typeof profileData }) {
             </h1>
 
             {/* Description */}
-            <p className="max-w-xl text-gray-600 mb-6">
+            <p className="max-w-xl text-muted-foreground mb-6">
                 {data.description}
             </p>
 
             {/* Info Section */}
             <div className="flex flex-col items-center gap-2 mb-8">
-                <div className="flex items-center gap-2 text-sm text-gray-800">
+                <div className="flex items-center gap-2 text-sm text-foreground">
                     <span className="font-semibold">✍️ {data.jobTitle}</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-800">
+                <div className="flex items-center gap-2 text-sm text-foreground">
                     <span className="font-semibold">🇯🇵 {data.location}</span>
                 </div>
             </div>
@@ -48,7 +48,7 @@ export function Header({ data }: { data: typeof profileData }) {
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-3 w-full px-4 py-3 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors duration-200 font-semibold text-gray-800"
+                        className="flex items-center justify-center gap-3 w-full px-4 py-3 bg-secondary hover:bg-secondary/80 rounded-xl transition-colors duration-200 font-semibold text-secondary-foreground"
                     >
                         {iconComponents[link.icon as keyof typeof iconComponents]}
                         {link.name}

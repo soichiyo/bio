@@ -47,7 +47,7 @@ export function ProjectCard({ project }: { project: ProjectType }) {
                         </div>
                         <div>
                             <h3 className="font-bold">{project.appName}</h3>
-                            <p className="text-sm text-gray-600">{project.appDescription}</p>
+                            <p className="text-sm text-muted-foreground">{project.appDescription}</p>
                         </div>
                     </div>
                     {project.status === 'live' ? (

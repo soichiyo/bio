@@ -11,7 +11,7 @@ export function WorkExperience({ items }: { items: WorkExperienceType[] }) {
             <div className="space-y-6">
                 {items.map((item, index) => (
                     <div key={index}>
-                        <div className="text-black/50 text-sm mb-1">{item.period}</div>
+                        <div className="text-muted-foreground text-sm mb-1">{item.period}</div>
                         <h3 className="text-base font-medium mb-3">{item.title}</h3>
                         <div className="flex flex-wrap gap-1">
                             {item.companies.map((company, cIndex) => (
