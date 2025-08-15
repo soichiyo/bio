@@ -13,6 +13,7 @@ import { ExpertiseSection } from "../components/sections/ExpertiseSection";
 import { PersonalCharacteristicsSection } from "../components/sections/PersonalCharacteristicsSection";
 import Image from "next/image";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
+import { ChatButton } from "../components/ui/ChatButton";
 import { profileData } from "../lib/data";
 
 // nulogicスタイルのシンプルなヘッダー
@@ -42,6 +43,11 @@ function ProfileHeader() {
       <p className="text-muted-foreground max-w-2xl leading-relaxed mb-6">
         {profileData.description}
       </p>
+
+      {/* Ask For Chat ボタン */}
+      <div className="mb-6">
+        <ChatButton />
+      </div>
 
       {/* SNSリンク - シンプルに */}
       <div className="flex gap-3 text-sm">
