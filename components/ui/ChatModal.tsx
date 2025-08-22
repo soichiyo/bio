@@ -23,7 +23,7 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
         {/* Header */}
         <div className="flex items-center justify-between p-3 border-b border-border">
           <h2 className="text-lg font-semibold text-foreground">
-            Chat with Soichiro
+            Chat with AI Soichiro
           </h2>
           <button
             onClick={onClose}
