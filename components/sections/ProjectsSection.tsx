@@ -1,12 +1,17 @@
+"use client";
+
+import { motion } from "motion/react";
 import { projects } from "../../lib/data";
 
 export function ProjectsSection() {
   return (
     <div className="space-y-6">
       {projects.map((project) => (
-        <article
+        <motion.article
           key={project.id}
-          className="group border border-border rounded-lg p-4 hover:bg-accent/50 transition-all duration-200"
+          className="group border border-border rounded-lg p-4 hover:bg-accent/50 transition-colors duration-200"
+          whileHover={{ y: -4 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
         >
           {/* プロジェクト画像 - nulogicスタイルで上部に大きく表示 */}
           {project.projectImage && (
@@ -76,7 +81,7 @@ export function ProjectsSection() {
               );
             })}
           </div>
-        </article>
+        </motion.article>
       ))}
     </div>
   );
