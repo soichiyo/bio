@@ -11,61 +11,9 @@ import { CredentialsSection } from "../components/sections/CredentialsSection";
 import { MyFamilySection } from "../components/sections/MyFamilySection";
 import { ExpertiseSection } from "../components/sections/ExpertiseSection";
 import { PersonalCharacteristicsSection } from "../components/sections/PersonalCharacteristicsSection";
-import Image from "next/image";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
-import { ChatButton } from "../components/ui/ChatButton";
+import { ProfileHeader } from "../components/ProfileHeader";
 import { profileData } from "../lib/data";
-
-// nulogicスタイルのシンプルなヘッダー
-function ProfileHeader() {
-  return (
-    <header className="mb-12">
-      {/* プロフィール情報 - よりミニマルに */}
-      <div className="flex items-center gap-6 mb-6">
-        <Image
-          src={profileData.avatar}
-          alt={profileData.name}
-          width={140}
-          height={140}
-          className="w-[140px] h-[140px] rounded-full object-cover border-4 border-border shadow-lg"
-          priority
-        />
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">
-            {profileData.name}
-          </h1>
-          <p className="text-lg text-muted-foreground mb-2">{profileData.jobTitle}</p>
-          <p className="text-sm text-muted-foreground">{profileData.location}</p>
-        </div>
-      </div>
-
-      {/* 説明文 - よりコンパクトに */}
-      <p className="text-muted-foreground max-w-2xl leading-relaxed mb-6">
-        {profileData.description}
-      </p>
-
-      {/* Ask For Chat ボタン */}
-      <div className="mb-6">
-        <ChatButton />
-      </div>
-
-      {/* SNSリンク - シンプルに */}
-      <div className="flex gap-3 text-sm">
-        {profileData.socialLinks.map((link) => (
-          <a
-            key={link.name}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors underline"
-          >
-            {link.name === "X (Twitter)" ? "𝕏" : link.name}
-          </a>
-        ))}
-      </div>
-    </header>
-  );
-}
 
 export default function ProfilePage() {
   return (
