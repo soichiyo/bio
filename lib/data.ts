@@ -111,6 +111,11 @@ export const profileData: ProfileDataType = {
       icon: "LinkedIn",
     },
     {
+      name: "GitHub",
+      url: "https://github.com/soichiyo",
+      icon: "GitHub",
+    },
+    {
       name: "note",
       url: "https://note.com/soichiro",
       icon: "FileText",
@@ -246,6 +251,7 @@ export const skills: SkillType[] = [
   },
   {
     text: "MySQL",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
     style:
       "bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-orange-300/50",
   },
@@ -256,7 +262,7 @@ export const skills: SkillType[] = [
   },
   {
     text: "React Native",
-    icon: "/assets/skills/react.svg",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
     style:
       "bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 border-sky-300/50",
   },
@@ -267,18 +273,19 @@ export const skills: SkillType[] = [
   },
   {
     text: "Figma",
-    icon: "/assets/skills/figma.svg",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
     style:
       "bg-pink-100 dark:bg-pink-900/50 text-pink-700 dark:text-pink-300 border-pink-300/50",
   },
   {
     text: "TypeScript",
-    icon: "/assets/skills/typescript.svg",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
     style:
       "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-300/50",
   },
   {
     text: "Python",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
     style:
       "bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 border-yellow-300/50",
   },
@@ -379,6 +386,36 @@ export const hobbies: SkillType[] = [
     icon: "💨",
     style:
       "bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 border-teal-300/50",
+  },
+  {
+    text: "麻雀",
+    icon: "🀄",
+    style:
+      "bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 border-red-300/50",
+  },
+  {
+    text: "SUP",
+    icon: "🏄",
+    style:
+      "bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300 border-cyan-300/50",
+  },
+  {
+    text: "料理",
+    icon: "🍳",
+    style:
+      "bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-orange-300/50",
+  },
+  {
+    text: "キャンプ",
+    icon: "⛺",
+    style:
+      "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 border-green-300/50",
+  },
+  {
+    text: "ランニング",
+    icon: "🏃",
+    style:
+      "bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 border-sky-300/50",
   },
 ];
 

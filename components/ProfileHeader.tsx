@@ -35,7 +35,7 @@ export function ProfileHeader() {
 
         <div>
           <h1 className="text-2xl font-semibold text-foreground">
-            <CharacterReveal text={profileData.name} delay={0.3} />
+            <CharacterReveal text={profileData.name} delay={0.3} glitch />
           </h1>
 
           <motion.p
