@@ -100,7 +100,7 @@ export async function POST(req: Request) {
       messages: prunedMessages,
     });
 
-    return result.toTextStreamResponse();
+    return result.toUIMessageStreamResponse();
   } catch {
     return new Response(
       JSON.stringify({
