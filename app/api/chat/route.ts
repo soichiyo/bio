@@ -1,6 +1,6 @@
 // app/api/chat/route.ts
 
-import { streamText, type ModelMessage } from "ai";
+import { streamText, convertToModelMessages, type ModelMessage, type UIMessage } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import fs from "node:fs";
 import path from "node:path";
@@ -65,22 +65,15 @@ export async function POST(req: Request) {
 
   // Parse request
   const body = await req.json();
-  const messages: ModelMessage[] = body.messages ?? [];
+  const uiMessages: UIMessage[] = body.messages ?? [];
 
-  // Validate latest user message
-  // AI SDK v5+ sends parts array in raw body; extract text for validation
-  const rawMessages: Array<{ role: string; content?: string; parts?: Array<{ type: string; text?: string }> }> = body.messages ?? [];
-  const lastRaw = rawMessages[rawMessages.length - 1];
-  if (lastRaw?.role === "user") {
-    let content = "";
-    if (typeof lastRaw.content === "string") {
-      content = lastRaw.content;
-    } else if (Array.isArray(lastRaw.parts)) {
-      content = lastRaw.parts
-        .filter((p) => p.type === "text")
-        .map((p) => p.text ?? "")
-        .join("");
-    }
+  // Validate latest user message (extract text from parts)
+  const lastMsg = uiMessages[uiMessages.length - 1];
+  if (lastMsg?.role === "user") {
+    const content = lastMsg.parts
+      ?.filter((p): p is { type: "text"; text: string } => p.type === "text")
+      .map((p) => p.text)
+      .join("") ?? "";
     const validation = validateInput(content);
     if (!validation.valid) {
       return new Response(
@@ -90,8 +83,9 @@ export async function POST(req: Request) {
     }
   }
 
-  // Prune history to stay within token budget
-  const prunedMessages = pruneHistory(messages);
+  // Convert UI messages to model messages and prune history
+  const modelMessages = await convertToModelMessages(uiMessages);
+  const prunedMessages = pruneHistory(modelMessages);
 
   try {
     const result = streamText({

@@ -14,6 +14,8 @@ const MAX_TURNS = 15;
 const WELCOME_MESSAGE =
   "こんにちは! そちゃんです。何でも聞いてください 🙌";
 
+const chatTransport = new DefaultChatTransport({ api: "/api/chat" });
+
 export function ChatModal({ isOpen, onClose }: ChatModalProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -28,12 +30,12 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
     regenerate,
     setMessages,
   } = useChat({
-    transport: new DefaultChatTransport({ api: "/api/chat" }),
+    transport: chatTransport,
     onFinish: () => {
       setTurnCount((prev) => prev + 1);
     },
-    onError: () => {
-      // Error is handled via the error state
+    onError: (err) => {
+      console.error("useChat error:", err);
     },
   });
 
