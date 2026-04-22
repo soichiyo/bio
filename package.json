@@ -10,14 +10,17 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@ai-sdk/openai-compatible": "^2.0.41",
+    "@ai-sdk/react": "^3.0.170",
     "@radix-ui/react-slot": "^1.2.3",
+    "ai": "^6.0.168",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.518.0",
     "motion": "^12.38.0",
     "next": "^15.5.14",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react-dom": "^19.2.5",
     "react-masonry-css": "^1.0.16",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
