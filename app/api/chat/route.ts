@@ -68,12 +68,19 @@ export async function POST(req: Request) {
   const messages: ModelMessage[] = body.messages ?? [];
 
   // Validate latest user message
-  const lastMessage = messages[messages.length - 1];
-  if (lastMessage?.role === "user") {
-    const content =
-      typeof lastMessage.content === "string"
-        ? lastMessage.content
-        : "";
+  // AI SDK v5+ sends parts array in raw body; extract text for validation
+  const rawMessages: Array<{ role: string; content?: string; parts?: Array<{ type: string; text?: string }> }> = body.messages ?? [];
+  const lastRaw = rawMessages[rawMessages.length - 1];
+  if (lastRaw?.role === "user") {
+    let content = "";
+    if (typeof lastRaw.content === "string") {
+      content = lastRaw.content;
+    } else if (Array.isArray(lastRaw.parts)) {
+      content = lastRaw.parts
+        .filter((p) => p.type === "text")
+        .map((p) => p.text ?? "")
+        .join("");
+    }
     const validation = validateInput(content);
     if (!validation.valid) {
       return new Response(
