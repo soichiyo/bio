@@ -17,8 +17,9 @@ export function ProfileHeader() {
 
   return (
     <header className="mb-12">
-      <div className="flex items-center gap-6 mb-6">
+      <div className="flex flex-col items-center sm:flex-row sm:items-center gap-6 mb-6">
         <motion.div
+          className="shrink-0"
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5, ease: "backOut" }}
@@ -28,12 +29,12 @@ export function ProfileHeader() {
             alt={profileData.name}
             width={140}
             height={140}
-            className="w-[140px] h-[140px] rounded-full object-cover border-4 border-border shadow-lg"
+            className="w-20 h-20 sm:w-[140px] sm:h-[140px] rounded-full object-cover border-4 border-border shadow-lg"
             priority
           />
         </motion.div>
 
-        <div>
+        <div className="text-center sm:text-left">
           <h1 className="text-2xl font-semibold text-foreground">
             <CharacterReveal text={profileData.name} delay={0.3} glitch />
           </h1>
@@ -69,7 +70,7 @@ export function ProfileHeader() {
       </motion.div>
 
       <motion.div
-        className="flex gap-3 text-sm"
+        className="flex flex-wrap gap-3 text-sm"
         initial="hidden"
         animate="visible"
         variants={{

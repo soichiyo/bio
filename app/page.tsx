@@ -11,6 +11,7 @@ import { HobbiesSection } from "../components/sections/HobbiesSection";
 import { CredentialsSection } from "../components/sections/CredentialsSection";
 import { MyFamilySection } from "../components/sections/MyFamilySection";
 import { ExpertiseSection } from "../components/sections/ExpertiseSection";
+import { WritingsSection } from "../components/sections/WritingsSection";
 import { PersonalCharacteristicsSection } from "../components/sections/PersonalCharacteristicsSection";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
 import { ProfileHeader } from "../components/ProfileHeader";
@@ -43,6 +44,17 @@ export default function ProfilePage() {
               Projects
             </h2>
             <ProjectsSection />
+          </section>
+        </ScrollReveal>
+
+        {/* ✍️ Writings */}
+        <ScrollReveal>
+          <section>
+            <h2 className="text-lg font-medium mb-4 flex items-center gap-3">
+              <span className="text-3xl">✍️</span>
+              Writings
+            </h2>
+            <WritingsSection />
           </section>
         </ScrollReveal>
 
