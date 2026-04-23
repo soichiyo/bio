@@ -6,7 +6,7 @@ type ChipProps = {
 
 export function Chip({ text, icon, style }: ChipProps) {
   const baseStyle =
-    "whitespace-nowrap border transition-all duration-200 hover:scale-105 hover:shadow-md h-auto px-3 py-2 rounded-full text-sm font-medium flex items-center gap-2";
+    "border transition-all duration-200 hover:scale-105 hover:shadow-md h-auto px-3 py-2 rounded-full text-sm font-medium flex items-center gap-2";
   const defaultStyle =
     "bg-secondary hover:bg-accent text-secondary-foreground border-border";
 
