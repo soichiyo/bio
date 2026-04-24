@@ -4,11 +4,11 @@ type ChipProps = {
   style?: string;
 };
 
-export function Chip({ text, icon, style }: ChipProps) {
+export function Chip({ text, icon }: ChipProps) {
   const baseStyle =
-    "border transition-all duration-200 hover:scale-105 hover:shadow-md h-auto px-3 py-2 rounded-full text-sm font-medium flex items-center gap-2";
+    "group border border-border bg-card px-3 py-2 text-xs font-data uppercase tracking-[0.06em] text-muted-foreground transition-colors duration-200 hover:border-[var(--border-visible)] hover:text-foreground flex items-center gap-2";
   const defaultStyle =
-    "bg-secondary hover:bg-accent text-secondary-foreground border-border";
+    "rounded-md";
 
   const renderIcon = () => {
     if (!icon) return null;
@@ -24,18 +24,17 @@ export function Chip({ text, icon, style }: ChipProps) {
           loading="lazy"
           width="20"
           height="20"
-          className="w-5 h-5"
+          className="h-4 w-4 grayscale"
           src={icon}
         />
       );
     }
 
-    // それ以外の場合は絵文字と判断
-    return <span className="text-2xl">{icon}</span>;
+    return <span className="h-2 w-2 bg-muted-foreground transition-colors group-hover:bg-foreground" />;
   };
 
   return (
-    <div className={`${baseStyle} ${style || defaultStyle}`}>
+    <div className={`${baseStyle} ${defaultStyle}`}>
       {renderIcon()}
       <span>{text}</span>
     </div>
