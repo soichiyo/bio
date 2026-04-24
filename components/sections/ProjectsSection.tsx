@@ -1,39 +1,45 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { projects } from "../../lib/data";
 
 export function ProjectsSection() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {projects.map((project) => (
         <motion.article
           key={project.id}
-          className="group border border-border rounded-lg p-4 hover:bg-accent/50 transition-colors duration-200"
+          className="group border border-border rounded-lg p-3 transition-colors duration-200 hover:bg-accent/50 sm:p-4"
           whileHover={{ y: -4 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
         >
           {/* プロジェクト画像 - nulogicスタイルで上部に大きく表示 */}
           {project.projectImage && (
-            <div className="mb-4">
-              <img
+            <div className="mb-4 flex justify-center sm:block">
+              <Image
                 src={project.projectImage}
                 alt={project.title}
-                className="w-full h-32 object-cover rounded-lg"
+                width={697}
+                height={138}
+                sizes="(max-width: 640px) 320px, 100vw"
+                className="h-auto w-[320px] max-w-full rounded-lg object-contain sm:h-32 sm:w-full sm:object-cover"
               />
             </div>
           )}
 
           {/* アプリ情報とロゴ - nulogicスタイル */}
-          <div className="flex items-center gap-3 mb-3">
+          <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center">
             {project.appIcon && (
-              <img
+              <Image
                 src={project.appIcon}
                 alt={`${project.appName} logo`}
-                className="w-10 h-10 rounded-lg object-contain bg-white"
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-lg bg-white object-contain"
               />
             )}
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               <h3 className="font-medium text-foreground">
                 {project.appName}
               </h3>
@@ -46,7 +52,7 @@ export function ProjectsSection() {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-primary hover:text-primary/80 font-medium transition-colors"
+                className="text-xs font-medium text-primary transition-colors hover:text-primary/80 sm:self-auto"
               >
                 View →
               </a>

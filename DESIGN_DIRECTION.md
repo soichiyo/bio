@@ -1,43 +1,92 @@
-# Design Direction — Portfolio Site Renewal
+# Design Direction — Personal Telemetry OS
 
-## インスピレーション
+## Concept
 
-[Shopify Design](https://shopify.design/) — 派手なJSアニメーションではなく、**抑制された中にある異質さ**で成り立っているサイト。
+This portfolio is not a resume page with decorative motion. It is a personal operating surface for Soichiro Yoshimura: work, coaching, product craft, writing, photography, family, and personality expressed as live signals.
 
-- セクションごとの色面の切り替え（別の部屋に入る感覚）
-- 要素の前後関係（深度）とスクロール連動の微妙なずれ
-- カードのスタッキング（動いた後の残像のような配置）
-- WebGLのアクセント（全体ではなく一点突破）
-- ビデオが「アニメーション」の代わり
+The visitor should feel they are observing a person in motion, not reading a static profile.
 
-**「グリッチでかっこいい」の本質は、ノイズや歪みのエフェクトではなく、予想を裏切るリズムと空間の操作。**
+## Core Principle
 
-## 現状の課題
+**Readable bio first, characterful system second.**
 
-今のサイトは `max-w-3xl` の1カラム、`space-y-16` で等間隔に並ぶセクション群。ホワイト/ダークの2色、アニメーションなし。情報としては十分機能しているが、**「体験」がない**。読み手に「読む」行為しか求めていない。
+The site must still let recruiters, collaborators, and friends quickly understand who Soichiro is, what he has done, and how to contact him. The design earns its personality through structure, typography, rhythm, and small mechanical behaviors.
 
-## 目指す姿
+## Design DNA
 
-- **ページに入った瞬間の印象** — 最初の1秒で「ここは普通じゃない」と感じさせる何か
-- **スクロールにリズムがある** — 等間隔の繰り返しではなく、緩急・密度の変化
-- **要素が生きている感覚** — 全部が動く必要はないが、いくつかの要素に存在感や呼吸がある
-- **「この人は面白い人だな」と思わせる佇まい** — サイト自体がセンスの証明になる
+### Dot Matrix as Structure
 
-## 絶対条件
+Dots are used to express signal density, capability matrices, status, and activity. They are not confetti. If a dot appears, it should imply state, rhythm, history, or telemetry.
 
-**「只者じゃない感」と「情報の受け取りやすさ」の両立。**
+### Industrial Transparency
 
-- 動きや演出は「この人のレベルを感じさせる装置」であり、情報伝達の邪魔になった瞬間に失敗
-- 採用担当者やクライアントが経歴を確認したいとき、ちゃんとすぐ読める
-- その読む体験の中に「サイト自体がすでに作品だな」という感覚が滲んでいる
-- **派手さではなく練度で殴る**
+Expose the structure: hairline borders, module IDs, labels, timestamps, coordinate-like grids, visible sections, and deliberate empty space. Cards should feel like instruments, not marketing tiles.
 
-## 実現レイヤー
+### One Red Signal
 
-| レベル | 内容 | 技術例 |
-|---|---|---|
-| 軽い | スクロール連動のfade-in/slide、ホバーの微細な変化 | Intersection Observer + CSS transition |
-| 中くらい | セクション背景色の切り替え、パララックス的な深度、テキストの文字単位アニメーション | Framer Motion / CSS scroll-driven animations |
-| 重い | WebGLによるグリッチテクスチャ、ジェネラティブな背景、3D要素 | Three.js / GLSL shader（1箇所だけ） |
+Nothing red is rare and earned. Use `#D71921` only as the primary beacon, preferably for contact or current availability. It should not become an ambient accent.
 
-全部やるのではなく、**要所に絞る**。「1箇所だけ異質なものを入れる」というShopify Designのアプローチが、今の「ミニマルで読みやすい」良さを壊さずに体験を加える最善策。
+### Telemetry Over Decoration
+
+Every animated element should read as data: a metric counting up, a ticker transmitting writing, a signal pulsing, a meter filling, a scanline checking a module. Motion should settle unless it represents ongoing life.
+
+### Human Layer Inside the Machine
+
+The OS language should not erase warmth. Family, coaching, photography, and personality are not side notes; they are the human signal inside the system.
+
+## Typography
+
+- `Doto`: hero numerals and dot-matrix display moments only.
+- `Space Mono`: uppercase labels, status text, metadata, numeric readouts.
+- `Space Grotesk`: names, section titles, body copy, readable interface text.
+
+Avoid casual emoji-led headings in the main system surface. Use labels, IDs, and structured language instead.
+
+## Layout Strategy
+
+### Top Surface
+
+Create a high-impact `PersonalOSDashboard` above the detailed bio sections.
+
+Recommended modules:
+
+- Identity Core: name, roles, current mode, location.
+- Current Signal: Studio Prairie and current responsibility.
+- Coaching Meter: 850+ hours and certifications.
+- Product Log: LINE, Lovegraph, THE COACH, Studio Prairie.
+- Writing Ticker: Zenn and note transmissions.
+- Skill Matrix: capability signal field.
+- Family Nodes: human network.
+- Contact Beacon: the single red signal.
+
+### Detail Sections
+
+Below the dashboard, keep the page readable with calmer sections:
+
+- Career Log / Work Experience
+- Modules / Projects
+- Transmission Log / Writings
+- Capability Matrix / Skills and Expertise
+- Inner Telemetry / Personality
+- Optical Archive / Gallery
+- Human Network / Family
+- Beacon / Contact
+
+## Motion Rules
+
+- Count important numbers on first render.
+- Fill segmented meters in sequence.
+- Let tickers and live clocks move continuously.
+- Use LED pulses sparingly.
+- Add scanline hover passes on system cards.
+- Support reduced motion.
+
+Do not animate every section. The top surface can feel alive; the long-form content should feel calm and readable.
+
+## Implementation Notes
+
+- Keep content centralized in `lib/data.ts`.
+- Prefer small reusable dashboard primitives over one giant component when the pattern repeats.
+- Use existing Next.js, React, Tailwind, Motion, and lucide dependencies.
+- Do not introduce a design system or external UI framework.
+- Validate with `npm run type-check` and `npm run build`.

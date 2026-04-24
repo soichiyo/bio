@@ -13,12 +13,10 @@ export function PersonalCharacteristicsSection() {
         {personalCharacteristics.map((characteristic, index) => (
           <div
             key={`${characteristic.title}-${index}`}
-            className="p-4 border border-border rounded-lg bg-card hover:shadow-sm transition-shadow duration-200"
+            className="telemetry-card p-4"
           >
             <div className="flex items-center gap-3 mb-2">
-              {characteristic.icon && (
-                <span className="text-2xl">{characteristic.icon}</span>
-              )}
+              <span className="h-2 w-2 bg-foreground" style={{ opacity: 0.45 + (index % 3) * 0.18 }} />
               <h3 className="text-md font-semibold text-foreground">
                 {characteristic.title}
               </h3>

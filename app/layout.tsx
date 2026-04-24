@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" className="dark" suppressHydrationWarning>
       <body className="antialiased">
         <MotionProvider>{children}</MotionProvider>
       </body>
