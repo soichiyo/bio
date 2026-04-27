@@ -506,8 +506,8 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="CONTACT BEACON" className="min-h-[280px]">
-          <div className="flex h-full flex-col justify-between gap-4">
+        <Card label="CONTACT BEACON" className="min-h-[300px]">
+          <div className="flex min-h-[224px] flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
               <Mail className="h-6 w-6 signal-red" strokeWidth={1.5} />
               <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.5} />
