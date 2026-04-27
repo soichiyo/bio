@@ -93,7 +93,7 @@ function SegmentMeter({ value, segments = 18 }: { value: number; segments?: numb
 
 function DotField({ count = 64, active = 34 }: { count?: number; active?: number }) {
   return (
-    <div className="grid w-full max-w-[180px] grid-cols-8 gap-1.5 justify-self-start md:justify-self-end">
+    <div className="grid w-full max-w-none grid-cols-12 gap-1.5 justify-self-stretch md:max-w-[180px] md:grid-cols-8 md:justify-self-end">
       {Array.from({ length: count }).map((_, index) => {
         const isActive = index % 3 === 0 || index < active || index === 47;
         return (
