@@ -469,15 +469,15 @@ export const certifications: CredentialType[] = [
     issuer: "Global Coaching Institute",
     year: 2022,
   },
+];
+
+// [新規] 学歴 (Education) データの追加
+export const education: CredentialType[] = [
   {
     title: "The Science of Well-Being",
     issuer: "Yale University",
     year: 2021,
   },
-];
-
-// [新規] 学歴 (Education) データの追加
-export const education: CredentialType[] = [
   {
     title: "Faculty of Business Administration",
     issuer: "Hosei University",
