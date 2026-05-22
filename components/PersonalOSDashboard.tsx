@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import {
   ArrowUpRight,
+  Bot,
   BriefcaseBusiness,
   CircuitBoard,
   MessageCircle,
@@ -116,6 +117,15 @@ export function PersonalOSDashboard() {
       { label: "coaching", value: 86 },
       { label: "creative", value: 72 },
       { label: "technical", value: 64 },
+    ],
+    []
+  );
+  const agenticSignals = useMemo(
+    () => [
+      { label: "delegation", value: "Codex + opencode workers" },
+      { label: "harness", value: "Hermes Agent / cron / health checks" },
+      { label: "knowledge", value: "Studio Prairie rules / skills / templates" },
+      { label: "ops", value: "PRs / review / repo stewardship" },
     ],
     []
   );
@@ -288,7 +298,84 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="WRITING TRANSMISSION" className="min-h-[260px] sm:col-span-2 lg:col-span-7">
+        <Card label="AI OPERATIONS" className="min-h-[300px] sm:col-span-2 lg:col-span-7">
+          <div className="flex h-full flex-col gap-5">
+            <div className="flex items-start justify-between gap-3">
+              <Bot className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
+              <div className="grid grid-cols-4 gap-1.5">
+                {["CDX", "CC", "OP", "HM"].map((item, index) => (
+                  <span
+                    key={item}
+                    className="flex h-8 w-8 items-center justify-center border border-border font-data text-[10px] uppercase text-muted-foreground"
+                    style={{ opacity: 0.44 + index * 0.14 }}
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-medium leading-tight tracking-[-0.01em] text-foreground">
+                Agentic workbench, not just prompts.
+              </h2>
+              <p className="mt-3 text-sm leading-snug text-muted-foreground">
+                Codex, Claude Code, opencode, Hermes Agent, and Studio Prairie LLM assets are used as a delegated product and engineering environment.
+              </p>
+            </div>
+
+            <div className="grid gap-2 border-t border-border pt-3">
+              {agenticSignals.map((signal) => (
+                <div key={signal.label} className="grid grid-cols-[94px_1fr] gap-3">
+                  <span className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
+                    {signal.label}
+                  </span>
+                  <span className="text-sm leading-snug text-foreground">
+                    {signal.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+
+        <Card label="CONTACT BEACON" className="min-h-[300px] lg:col-span-5">
+          <div className="flex min-h-[224px] flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <Mail className="h-6 w-6 signal-red" strokeWidth={1.5} />
+              <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.5} />
+            </div>
+            <div>
+              <div className="mb-3 h-2 w-20 signal-red-bg" />
+              <h2 className="text-xl font-medium tracking-[-0.01em] text-foreground">Open channel</h2>
+              <p className="mt-1 break-all font-data text-[11px] uppercase tracking-[0.04em] text-muted-foreground">
+                {profileData.email}
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+              <button
+                type="button"
+                onClick={() => setIsChatOpen(true)}
+                className="inline-flex items-center justify-center gap-2 border border-border px-3 py-2 font-data text-[11px] uppercase tracking-[0.08em] text-foreground transition-colors hover:border-[var(--border-visible)] hover:bg-accent"
+              >
+                <MessageCircle size={14} />
+                Chat with AI
+              </button>
+              <a
+                className="inline-flex items-center justify-center gap-2 border border-border px-3 py-2 font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground transition-colors hover:border-[var(--border-visible)] hover:text-foreground"
+                href={`mailto:${profileData.email}`}
+              >
+                Mail
+                <ArrowUpRight size={14} />
+              </a>
+            </div>
+            <div className="border-t border-border pt-3">
+              <ProfileLinks />
+            </div>
+          </div>
+        </Card>
+
+        <Card label="WRITING TRANSMISSION" className="min-h-[260px] sm:col-span-2 lg:col-span-full">
           <div className="flex h-full flex-col gap-4">
             <div className="grid gap-4 md:grid-cols-[1fr_150px]">
               <a
@@ -354,42 +441,6 @@ export function PersonalOSDashboard() {
                   </span>
                 </a>
               ))}
-            </div>
-          </div>
-        </Card>
-
-        <Card label="CONTACT BEACON" className="min-h-[300px] lg:col-span-5">
-          <div className="flex min-h-[224px] flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <Mail className="h-6 w-6 signal-red" strokeWidth={1.5} />
-              <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.5} />
-            </div>
-            <div>
-              <div className="mb-3 h-2 w-20 signal-red-bg" />
-              <h2 className="text-xl font-medium tracking-[-0.01em] text-foreground">Open channel</h2>
-              <p className="mt-1 break-all font-data text-[11px] uppercase tracking-[0.04em] text-muted-foreground">
-                {profileData.email}
-              </p>
-            </div>
-            <div className="grid grid-cols-1 gap-2">
-              <button
-                type="button"
-                onClick={() => setIsChatOpen(true)}
-                className="inline-flex items-center justify-center gap-2 border border-border px-3 py-2 font-data text-[11px] uppercase tracking-[0.08em] text-foreground transition-colors hover:border-[var(--border-visible)] hover:bg-accent"
-              >
-                <MessageCircle size={14} />
-                Chat with AI
-              </button>
-              <a
-                className="inline-flex items-center justify-center gap-2 border border-border px-3 py-2 font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground transition-colors hover:border-[var(--border-visible)] hover:text-foreground"
-                href={`mailto:${profileData.email}`}
-              >
-                Mail
-                <ArrowUpRight size={14} />
-              </a>
-            </div>
-            <div className="border-t border-border pt-3">
-              <ProfileLinks />
             </div>
           </div>
         </Card>
