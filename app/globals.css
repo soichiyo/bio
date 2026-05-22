@@ -103,6 +103,10 @@ body::before {
   opacity: 0.42;
 }
 
+body:has(.legacy-bio-page)::before {
+  opacity: 0;
+}
+
 ::selection {
   background: var(--nothing-red);
   color: #ffffff;

@@ -66,7 +66,7 @@ export function ProfileHeader() {
         className="mb-6"
         {...fadeIn(0.3 + nameRevealDuration + 0.45)}
       >
-        <ChatButton />
+        <ChatButton variant="inline" />
       </motion.div>
 
       <motion.div
