@@ -157,8 +157,8 @@ export function PersonalOSDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Card label="PROFILE SUMMARY" className="sm:col-span-2 lg:col-span-2">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.72fr)_minmax(220px,0.86fr)_minmax(190px,0.7fr)] lg:items-start">
+        <Card label="PROFILE SUMMARY" className="sm:col-span-2 lg:col-span-1">
           <div className="grid gap-5 sm:grid-cols-[136px_1fr] sm:items-start">
             <div className="relative h-36 w-full overflow-hidden border border-border bg-muted sm:h-36 sm:w-36">
               <Image
@@ -228,8 +228,10 @@ export function PersonalOSDashboard() {
             </div>
           </div>
         </Card>
+      </div>
 
-        <Card label="CAREER LOG" className="sm:col-span-2 lg:col-span-2">
+      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-12">
+        <Card label="CAREER LOG" className="sm:col-span-2 lg:col-span-6">
           <div className="grid h-full gap-4 sm:grid-cols-[1fr_160px]">
             <div className="space-y-2">
               {workExperiences.map((work) => (
@@ -253,7 +255,7 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="CAPABILITY MATRIX" className="min-h-[300px]">
+        <Card label="CAPABILITY MATRIX" className="min-h-[300px] lg:col-span-3">
           <div className="flex h-full flex-col gap-5">
             <div className="flex items-start justify-between gap-3">
               <CircuitBoard className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
@@ -299,7 +301,7 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="WRITING TRANSMISSION" className="min-h-[260px] sm:col-span-2 lg:col-span-2">
+        <Card label="WRITING TRANSMISSION" className="min-h-[260px] sm:col-span-2 lg:col-span-7">
           <div className="flex h-full flex-col gap-4">
             <div className="grid gap-4 md:grid-cols-[1fr_150px]">
               <a
@@ -369,7 +371,7 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="HUMAN NETWORK" className="min-h-[300px]">
+        <Card label="HUMAN NETWORK" className="min-h-[300px] lg:col-span-5">
           <div className="flex h-full flex-col gap-5">
             <div className="flex items-start justify-between">
               <UsersRound className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
@@ -418,7 +420,7 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="OPTICAL ARCHIVE" className="min-h-[190px]">
+        <Card label="OPTICAL ARCHIVE" className="min-h-[190px] lg:col-span-3">
           <div className="flex h-full flex-col justify-between">
             <Camera className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
             <div>
@@ -435,7 +437,7 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="PUBLIC LINKS" className="min-h-[210px]">
+        <Card label="PUBLIC LINKS" className="min-h-[210px] lg:col-span-4">
           <div className="flex h-full flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
               <Network className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
@@ -455,7 +457,7 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="CONTACT BEACON" className="min-h-[300px]">
+        <Card label="CONTACT BEACON" className="min-h-[300px] lg:col-span-5">
           <div className="flex min-h-[224px] flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
               <Mail className="h-6 w-6 signal-red" strokeWidth={1.5} />
