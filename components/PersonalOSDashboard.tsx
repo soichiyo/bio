@@ -144,7 +144,7 @@ export function PersonalOSDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.72fr)_minmax(220px,0.86fr)_minmax(190px,0.7fr)] lg:items-start">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.72fr)_minmax(220px,0.86fr)_minmax(190px,0.7fr)] lg:items-stretch">
         <Card label="PROFILE SUMMARY" className="sm:col-span-2 lg:col-span-1">
           <div className="grid gap-5 sm:grid-cols-[136px_1fr] sm:items-start">
             <div className="relative h-36 w-full overflow-hidden border border-border bg-muted sm:h-36 sm:w-36">
