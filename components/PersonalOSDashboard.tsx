@@ -12,7 +12,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   expertise,
   myFamily,
@@ -25,30 +25,6 @@ import {
 } from "../lib/data";
 import { ChatModal } from "./ui/ChatModal";
 import type { CSSProperties, ReactNode } from "react";
-
-function useCountUp(target: number, duration = 900) {
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    const startedAt = performance.now();
-    let frame = 0;
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - startedAt) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(target * eased));
-
-      if (progress < 1) {
-        frame = requestAnimationFrame(tick);
-      }
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [duration, target]);
-
-  return value;
-}
 
 function Card({
   children,
@@ -66,9 +42,6 @@ function Card({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
     >
-      <div className="pointer-events-none absolute right-4 top-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-        <span className="telemetry-label">LIVE</span>
-      </div>
       <div className="telemetry-label mb-4">{label}</div>
       {children}
     </motion.article>
@@ -91,26 +64,6 @@ function SegmentMeter({ value, segments = 18 }: { value: number; segments?: numb
   );
 }
 
-function DotField({ count = 64, active = 34 }: { count?: number; active?: number }) {
-  return (
-    <div className="grid w-full max-w-none grid-cols-12 gap-1.5 justify-self-stretch md:max-w-[180px] md:grid-cols-8 md:justify-self-end">
-      {Array.from({ length: count }).map((_, index) => {
-        const isActive = index % 3 === 0 || index < active || index === 47;
-        return (
-          <span
-            key={index}
-            className={`aspect-square ${isActive ? "dot-pulse bg-foreground" : "bg-border"}`}
-            style={{
-              opacity: isActive ? 0.18 + ((index * 7) % 6) * 0.12 : 0.34,
-              "--dot-delay": `${(index % 11) * 120}ms`,
-            } as CSSProperties}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
 function MiniBars({ values, labels }: { values: number[]; labels?: string[] }) {
   return (
     <div className="flex h-12 items-end gap-1 sm:h-16" aria-hidden="true">
@@ -129,19 +82,20 @@ function MiniBars({ values, labels }: { values: number[]; labels?: string[] }) {
   );
 }
 
-function SocialPorts() {
+function PublicLinks() {
   return (
-    <div className="grid grid-cols-3 gap-1.5">
-      {profileData.socialLinks.map((link, index) => (
-        <span
+    <div className="grid grid-cols-2 gap-2">
+      {profileData.socialLinks.map((link) => (
+        <a
           key={link.name}
-          className="h-6 border border-border bg-foreground/80 sm:h-7"
-          title={link.name}
-          style={{
-            opacity: 0.35 + (index % 3) * 0.18,
-            transitionDelay: `${index * 45}ms`,
-          }}
-        />
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-between gap-2 border border-border px-2 py-1.5 font-data text-[11px] uppercase tracking-[0.04em] text-muted-foreground transition-colors hover:border-[var(--border-visible)] hover:text-foreground"
+        >
+          <span className="truncate">{link.name === "X (Twitter)" ? "X" : link.name}</span>
+          <ArrowUpRight className="h-3 w-3 shrink-0" strokeWidth={1.5} />
+        </a>
       ))}
     </div>
   );
@@ -149,12 +103,12 @@ function SocialPorts() {
 
 export function PersonalOSDashboard() {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const coachingHours = useCountUp(850);
-  const familyNodes = useCountUp(myFamily.length, 700);
-  const projectCount = useCountUp(projects.length, 700);
-  const writingCount = useCountUp(writings.length, 700);
-  const photoCount = useCountUp(photoGallery.length, 700);
-  const socialCount = useCountUp(profileData.socialLinks.length, 700);
+  const coachingHours = 850;
+  const familyNodes = myFamily.length;
+  const projectCount = projects.length;
+  const writingCount = writings.length;
+  const photoCount = photoGallery.length;
+  const socialCount = profileData.socialLinks.length;
 
   const currentWork = workExperiences[0];
   const latestWriting = writings[0];
@@ -189,66 +143,52 @@ export function PersonalOSDashboard() {
   );
 
   return (
-    <section className="mb-16 sm:mb-20">
+    <section className="mb-14 sm:mb-16">
       <div className="mb-5 flex flex-col gap-3 border-b border-border pb-5 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div className="telemetry-label mb-2">PERSONAL TELEMETRY OS / BIO-001</div>
+          <div className="telemetry-label mb-2">PERSONAL PROFILE / TELEMETRY VIEW</div>
           <h1 className="text-3xl font-semibold tracking-[-0.01em] text-foreground sm:text-5xl">
             {profileData.name}
           </h1>
         </div>
         <div className="flex items-center gap-3 font-data text-xs uppercase tracking-[0.08em] text-muted-foreground">
-          <span className="led-dot" />
-          <span>Tokyo signal active</span>
+          <span className="h-2 w-2 bg-foreground" />
+          <span>{profileData.location}</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:[grid-auto-rows:minmax(240px,auto)]">
-        <Card label="IDENTITY CORE" className="min-h-0 sm:col-span-2 sm:min-h-[430px] lg:col-span-2 lg:row-span-2">
-          <div className="flex h-full flex-col justify-between gap-7 sm:gap-8">
-            <div>
-              <div className="mb-6 flex flex-col gap-4 sm:mb-7 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <div className="font-display-dot text-[44px] font-normal leading-none tracking-[-0.04em] text-[var(--display)] sm:text-[72px]">
-                    SOICHIYO
-                  </div>
-                  <div className="mt-2 font-data text-xs uppercase tracking-[0.08em] text-muted-foreground">
-                    IDENTITY HANDLE / PRODUCT + COACHING + CREATIVE
-                  </div>
-                </div>
-                <div className="relative h-36 w-full shrink-0 overflow-hidden border border-border bg-muted sm:h-28 sm:w-28">
-                  <Image
-                    src={profileData.avatar}
-                    alt={profileData.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 112px"
-                    priority
-                    className="object-cover grayscale"
-                  />
-                </div>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <Card label="PROFILE SUMMARY" className="sm:col-span-2 lg:col-span-2">
+          <div className="grid gap-5 sm:grid-cols-[136px_1fr] sm:items-start">
+            <div className="relative h-36 w-full overflow-hidden border border-border bg-muted sm:h-36 sm:w-36">
+              <Image
+                src={profileData.avatar}
+                alt={profileData.name}
+                fill
+                sizes="(max-width: 640px) 100vw, 144px"
+                priority
+                className="object-cover grayscale"
+              />
+            </div>
+            <div className="min-w-0">
+              <div className="font-display-dot text-[42px] font-normal leading-none tracking-[-0.03em] text-[var(--display)] sm:text-[56px]">
+                SOICHIYO
               </div>
-              <p className="max-w-xl text-lg leading-snug tracking-[-0.01em] text-foreground sm:text-2xl">
+              <p className="mt-3 text-lg leading-snug tracking-[-0.01em] text-foreground sm:text-2xl">
                 {profileData.description}
               </p>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-[1fr_180px]">
-              <div className="space-y-3">
-                <div className="telemetry-rule" />
-                <div className="grid grid-cols-1 gap-3 font-data text-xs uppercase tracking-[0.08em] text-muted-foreground sm:grid-cols-2">
-                  <span>MODE / {profileData.jobTitle}</span>
-                  <span>LOC / {profileData.location}</span>
-                  <span>PROJECTS / {projectCount} LIVE MODULES</span>
-                  <span>FAMILY / {familyNodes} NODES</span>
-                </div>
+              <div className="mt-5 grid grid-cols-1 gap-2 font-data text-xs uppercase tracking-[0.08em] text-muted-foreground sm:grid-cols-2">
+                <span>Role / {profileData.jobTitle}</span>
+                <span>Base / {profileData.location}</span>
+                <span>Projects / {projectCount}</span>
+                <span>Family / {familyNodes}</span>
               </div>
-              <DotField count={48} active={34} />
             </div>
           </div>
         </Card>
 
-        <Card label="CURRENT SIGNAL" className="min-h-[220px] sm:min-h-[240px]">
-          <div className="flex flex-col gap-8 sm:gap-10">
+        <Card label="CURRENT WORK">
+          <div className="flex h-full flex-col gap-5">
             <BriefcaseBusiness className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
             <div>
               <div className="font-data text-xs uppercase tracking-[0.08em] text-muted-foreground">
@@ -259,11 +199,16 @@ export function PersonalOSDashboard() {
               </h2>
               <p className="mt-1 text-sm leading-snug text-muted-foreground">{currentWork.title.replace(" at", "")}</p>
             </div>
+            <div className="border-t border-border pt-4">
+              <p className="text-sm leading-snug text-muted-foreground">
+                Current focus is the business and product growth of Prairie Card.
+              </p>
+            </div>
           </div>
         </Card>
 
-        <Card label="COACHING METER" className="min-h-[240px] sm:min-h-[300px] lg:min-h-[240px]">
-          <div className="flex h-full flex-col justify-between">
+        <Card label="COACHING PRACTICE">
+          <div className="flex h-full flex-col gap-5">
             <div className="flex items-baseline gap-2">
               <span className="font-display-dot text-6xl leading-none tracking-[-0.03em] text-[var(--display)]">
                 {coachingHours}
@@ -272,12 +217,19 @@ export function PersonalOSDashboard() {
             </div>
             <div className="space-y-3">
               <SegmentMeter value={86} />
-              <p className="text-sm text-muted-foreground">850+ coaching hours logged.</p>
+              <p className="text-sm text-muted-foreground">
+                Professional coaching hours logged through client work.
+              </p>
+            </div>
+            <div className="border-t border-border pt-4">
+              <p className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
+                Leadership / product teams / personal transformation
+              </p>
             </div>
           </div>
         </Card>
 
-        <Card label="PRODUCT LOG" className="min-h-[240px] sm:col-span-2 lg:col-span-2">
+        <Card label="CAREER LOG" className="sm:col-span-2 lg:col-span-2">
           <div className="grid h-full gap-4 sm:grid-cols-[1fr_160px]">
             <div className="space-y-2">
               {workExperiences.map((work) => (
@@ -372,7 +324,7 @@ export function PersonalOSDashboard() {
               <div className="grid grid-cols-3 gap-2 md:grid-cols-1">
                 <div>
                   <div className="font-display-dot text-5xl leading-none tracking-[-0.03em] text-[var(--display)]">
-                    0{writingCount}
+                    {String(writingCount).padStart(2, "0")}
                   </div>
                   <div className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
                     entries
@@ -427,7 +379,7 @@ export function PersonalOSDashboard() {
             <div className="grid grid-cols-3 gap-3">
               <div>
                 <div className="font-display-dot text-5xl leading-none tracking-[-0.03em] text-[var(--display)]">
-                  0{familyNodes}
+                  {String(familyNodes).padStart(2, "0")}
                 </div>
                 <div className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
                   close nodes
@@ -472,7 +424,7 @@ export function PersonalOSDashboard() {
             <div>
               <div className="mb-2 flex items-end gap-3">
                 <span className="font-display-dot text-5xl leading-none tracking-[-0.03em] text-[var(--display)]">
-                  0{photoCount}
+                  {String(photoCount).padStart(2, "0")}
                 </span>
                 <span className="pb-1.5 font-data text-xs uppercase tracking-[0.08em] text-muted-foreground">photos</span>
               </div>
@@ -483,24 +435,21 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="PUBLIC CHANNELS" className="min-h-[210px]">
-          <div className="flex h-full flex-col justify-between">
+        <Card label="PUBLIC LINKS" className="min-h-[210px]">
+          <div className="flex h-full flex-col justify-between gap-4">
             <div className="flex items-center justify-between">
               <Network className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
-              <span className="led-dot" style={{ animationDelay: "400ms" }} />
+              <span className="font-data text-sm text-foreground">{socialCount}</span>
             </div>
             <div className="space-y-3">
               <div className="flex items-baseline gap-2">
-                <span className="font-display-dot text-5xl leading-none tracking-[-0.03em] text-[var(--display)]">
-                  0{socialCount}
-                </span>
-                <span className="font-data text-xs uppercase tracking-[0.08em] text-muted-foreground">
-                  ports
+                <span className="text-lg font-medium tracking-[-0.01em] text-foreground">
+                  Shareable channels
                 </span>
               </div>
-              <SocialPorts />
+              <PublicLinks />
               <p className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-                Social links exposed below
+                Links are shown as names, not abstract ports
               </p>
             </div>
           </div>

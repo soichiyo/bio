@@ -96,14 +96,14 @@ Do not animate every section. The top surface can feel alive; the long-form cont
 The site keeps both the calmer legacy bio and the Personal Telemetry OS surface
 available so the first impression can be switched without reverting commits.
 
-- `legacy`: the default one-column profile page with the avatar header and
-  emoji-led sections.
-- `telemetry`: the dashboard-first Personal Telemetry OS surface.
+- `telemetry`: the default dashboard-first Personal Telemetry OS surface.
+- `legacy`: the one-column profile page with the avatar header and emoji-led
+  sections.
 
 Switch locally with URL params:
 
-- `/` or `/?design=legacy`
-- `/?design=telemetry`
+- `/` or `/?design=telemetry`
+- `/?design=legacy`
 
 Switch the default deployment by setting `BIO_DESIGN_VARIANT=legacy` or
 `BIO_DESIGN_VARIANT=telemetry`.

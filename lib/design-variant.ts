@@ -5,7 +5,7 @@ export type BioDesignVariant = (typeof BIO_DESIGN_VARIANTS)[number];
 const configuredDefaultDesign = process.env.BIO_DESIGN_VARIANT;
 
 export const DEFAULT_BIO_DESIGN: BioDesignVariant =
-  configuredDefaultDesign === "telemetry" ? "telemetry" : "legacy";
+  configuredDefaultDesign === "legacy" ? "legacy" : "telemetry";
 
 export function parseBioDesignVariant(
   value: string | string[] | undefined,
@@ -14,6 +14,10 @@ export function parseBioDesignVariant(
 
   if (variant === "telemetry" || variant === "personal-os") {
     return "telemetry";
+  }
+
+  if (variant === "legacy" || variant === "classic") {
+    return "legacy";
   }
 
   return DEFAULT_BIO_DESIGN;
