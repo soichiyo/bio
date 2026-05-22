@@ -4,19 +4,15 @@ import { motion } from "motion/react";
 import {
   ArrowUpRight,
   BriefcaseBusiness,
-  Camera,
   CircuitBoard,
   MessageCircle,
   Mail,
-  Network,
-  UsersRound,
 } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import {
   expertise,
   myFamily,
-  photoGallery,
   profileData,
   projects,
   skills,
@@ -82,16 +78,16 @@ function MiniBars({ values, labels }: { values: number[]; labels?: string[] }) {
   );
 }
 
-function PublicLinks() {
+function ProfileLinks() {
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="flex flex-wrap gap-2">
       {profileData.socialLinks.map((link) => (
         <a
           key={link.name}
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-between gap-2 border border-border px-2 py-1.5 font-data text-[11px] uppercase tracking-[0.04em] text-muted-foreground transition-colors hover:border-[var(--border-visible)] hover:text-foreground"
+          className="inline-flex items-center gap-1.5 border border-border px-2 py-1.5 font-data text-[11px] uppercase tracking-[0.04em] text-muted-foreground transition-colors hover:border-[var(--border-visible)] hover:text-foreground"
         >
           <span className="truncate">{link.name === "X (Twitter)" ? "X" : link.name}</span>
           <ArrowUpRight className="h-3 w-3 shrink-0" strokeWidth={1.5} />
@@ -107,8 +103,6 @@ export function PersonalOSDashboard() {
   const familyNodes = myFamily.length;
   const projectCount = projects.length;
   const writingCount = writings.length;
-  const photoCount = photoGallery.length;
-  const socialCount = profileData.socialLinks.length;
 
   const currentWork = workExperiences[0];
   const latestWriting = writings[0];
@@ -122,13 +116,6 @@ export function PersonalOSDashboard() {
       { label: "coaching", value: 86 },
       { label: "creative", value: 72 },
       { label: "technical", value: 64 },
-    ],
-    []
-  );
-  const humanNodes = useMemo(
-    () => [
-      ...myFamily.map((member) => ({ label: member.label.text, type: "close" })),
-      ...profileData.socialLinks.slice(0, 5).map((link) => ({ label: link.name, type: "public" })),
     ],
     []
   );
@@ -157,8 +144,8 @@ export function PersonalOSDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Card label="PROFILE SUMMARY" className="sm:col-span-2 lg:col-span-2">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.72fr)_minmax(220px,0.86fr)_minmax(190px,0.7fr)] lg:items-start">
+        <Card label="PROFILE SUMMARY" className="sm:col-span-2 lg:col-span-1">
           <div className="grid gap-5 sm:grid-cols-[136px_1fr] sm:items-start">
             <div className="relative h-36 w-full overflow-hidden border border-border bg-muted sm:h-36 sm:w-36">
               <Image
@@ -228,9 +215,11 @@ export function PersonalOSDashboard() {
             </div>
           </div>
         </Card>
+      </div>
 
-        <Card label="CAREER LOG" className="sm:col-span-2 lg:col-span-2">
-          <div className="grid h-full gap-4 sm:grid-cols-[1fr_160px]">
+      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-[repeat(24,minmax(0,1fr))]">
+        <Card label="CAREER LOG" className="sm:col-span-2 lg:col-span-7">
+          <div className="grid h-full gap-4 xl:grid-cols-[1fr_140px]">
             <div className="space-y-2">
               {workExperiences.map((work) => (
                 <div key={work.period} className="grid grid-cols-[84px_1fr] gap-3 border-b border-border pb-1.5 last:border-0">
@@ -253,7 +242,7 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="CAPABILITY MATRIX" className="min-h-[300px]">
+        <Card label="CAPABILITY MATRIX" className="min-h-[300px] lg:col-span-5">
           <div className="flex h-full flex-col gap-5">
             <div className="flex items-start justify-between gap-3">
               <CircuitBoard className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
@@ -299,7 +288,7 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="WRITING TRANSMISSION" className="min-h-[260px] sm:col-span-2 lg:col-span-2">
+        <Card label="WRITING TRANSMISSION" className="min-h-[260px] sm:col-span-2 lg:col-span-7">
           <div className="flex h-full flex-col gap-4">
             <div className="grid gap-4 md:grid-cols-[1fr_150px]">
               <a
@@ -369,94 +358,8 @@ export function PersonalOSDashboard() {
           </div>
         </Card>
 
-        <Card label="HUMAN NETWORK" className="min-h-[300px]">
-          <div className="flex h-full flex-col gap-5">
-            <div className="flex items-start justify-between">
-              <UsersRound className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
-              <span className="led-dot" style={{ animationDelay: "650ms" }} />
-            </div>
-
-            <div className="grid grid-cols-3 gap-3">
-              <div>
-                <div className="font-display-dot text-5xl leading-none tracking-[-0.03em] text-[var(--display)]">
-                  {String(familyNodes).padStart(2, "0")}
-                </div>
-                <div className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-                  close nodes
-                </div>
-              </div>
-              <div className="border-l border-border pl-3">
-                <div className="font-data text-lg text-foreground">{socialCount}</div>
-                <div className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-                  public ports
-                </div>
-              </div>
-              <div className="border-l border-border pl-3">
-                <div className="font-data text-lg text-foreground">850+</div>
-                <div className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-                  coach hrs
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-5 gap-1.5">
-              {humanNodes.map((node, index) => (
-                <span
-                  key={`${node.label}-${index}`}
-                  className="aspect-square border border-border bg-foreground"
-                  style={{ opacity: node.type === "close" ? 0.72 : 0.24 + (index % 3) * 0.12 }}
-                  title={node.label}
-                />
-              ))}
-            </div>
-
-            <div className="border-t border-border pt-3">
-              <p className="text-sm leading-snug text-muted-foreground">
-                Family, public channels, and coaching relationships as living contact surfaces.
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        <Card label="OPTICAL ARCHIVE" className="min-h-[190px]">
-          <div className="flex h-full flex-col justify-between">
-            <Camera className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
-            <div>
-              <div className="mb-2 flex items-end gap-3">
-                <span className="font-display-dot text-5xl leading-none tracking-[-0.03em] text-[var(--display)]">
-                  {String(photoCount).padStart(2, "0")}
-                </span>
-                <span className="pb-1.5 font-data text-xs uppercase tracking-[0.08em] text-muted-foreground">photos</span>
-              </div>
-              <p className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-                Sony a7III / 50mm / 135mm
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        <Card label="PUBLIC LINKS" className="min-h-[210px]">
-          <div className="flex h-full flex-col justify-between gap-4">
-            <div className="flex items-center justify-between">
-              <Network className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} />
-              <span className="font-data text-sm text-foreground">{socialCount}</span>
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-baseline gap-2">
-                <span className="text-lg font-medium tracking-[-0.01em] text-foreground">
-                  Shareable channels
-                </span>
-              </div>
-              <PublicLinks />
-              <p className="font-data text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-                Links are shown as names, not abstract ports
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        <Card label="CONTACT BEACON" className="min-h-[300px]">
-          <div className="flex min-h-[224px] flex-col justify-between gap-4">
+        <Card label="CONTACT BEACON" className="min-h-[300px] lg:col-span-5">
+          <div className="flex min-h-[224px] flex-col gap-4">
             <div className="flex items-center justify-between">
               <Mail className="h-6 w-6 signal-red" strokeWidth={1.5} />
               <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.5} />
@@ -484,6 +387,9 @@ export function PersonalOSDashboard() {
                 Mail
                 <ArrowUpRight size={14} />
               </a>
+            </div>
+            <div className="border-t border-border pt-3">
+              <ProfileLinks />
             </div>
           </div>
         </Card>
