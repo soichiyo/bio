@@ -1,5 +1,5 @@
 import { ExternalLink } from "../ui/ExternalLink";
-import { profileData } from "../../lib/data";
+import { profileData } from "@/content";
 
 export function ContactSection() {
   return (

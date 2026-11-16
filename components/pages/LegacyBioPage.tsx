@@ -15,7 +15,7 @@ import { SkillsSection } from "../sections/SkillsSection";
 import { WorkSection } from "../sections/WorkSection";
 import { WritingsSection } from "../sections/WritingsSection";
 import { ThemeToggle } from "../ui/ThemeToggle";
-import { profileData } from "../../lib/data";
+import { profileData } from "@/content";
 
 function LegacySection({
   icon,

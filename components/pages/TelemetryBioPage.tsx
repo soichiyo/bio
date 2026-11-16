@@ -16,7 +16,7 @@ import { WorkSection } from "../sections/WorkSection";
 import { WritingsSection } from "../sections/WritingsSection";
 import { ChatButton } from "../ui/ChatButton";
 import { ThemeToggle } from "../ui/ThemeToggle";
-import { profileData } from "../../lib/data";
+import { profileData } from "@/content";
 
 function SectionHeading({
   id,

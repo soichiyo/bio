@@ -1,4 +1,4 @@
-import { photoGallery } from '../../lib/data';
+import { photoGallery } from '@/content';
 import { PhotoGallery } from '../PhotoGallery';
 
 export function GallerySection() {

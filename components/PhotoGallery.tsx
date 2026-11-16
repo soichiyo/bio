@@ -7,7 +7,7 @@ import { motion, useInView } from "motion/react";
 import Masonry from "react-masonry-css";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import { type PhotoType } from "../lib/data";
+import { type PhotoType } from "@/content";
 
 type PhotoGalleryProps = {
   photos: PhotoType[];

@@ -1,4 +1,4 @@
-import { certifications, education } from '../../lib/data';
+import { certifications, education } from '@/content';
 import { CredentialItem } from '../ui/CredentialItem';
 
 export function CredentialsSection() {

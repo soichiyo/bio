@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import type { CredentialType } from "../../lib/data";
+import type { CredentialType } from "@/content";
 
 export function CredentialItem({ title, issuer, year, proof }: CredentialType) {
     const content = (

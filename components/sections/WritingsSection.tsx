@@ -1,5 +1,5 @@
 import { ExternalLink } from "lucide-react";
-import { writings } from "../../lib/data";
+import { writings } from "@/content";
 
 const platformMeta = {
   zenn: { label: "Zenn", style: "bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300" },

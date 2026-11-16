@@ -1,5 +1,5 @@
 import { Section } from '../Section';
-import { hobbies } from '../../lib/data';
+import { hobbies } from '@/content';
 import { Chip } from './Chip';
 
 export function HobbiesSection() {

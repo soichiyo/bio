@@ -1,0 +1,448 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`content > keeps every value unchanged by the move 1`] = `
+{
+  "certifications": [
+    {
+      "issuer": "Leadership Circle",
+      "proof": {
+        "label": "Certificate",
+        "url": "https://drive.google.com/file/d/1rBPsY9MNQatHZivVHXoMJ2acTqHHnGJh/view",
+      },
+      "title": "Leadership Circle Profile Certification",
+      "year": 2023,
+    },
+    {
+      "issuer": "THE COACH Inc.",
+      "proof": {
+        "label": "Badge",
+        "url": "https://www.credly.com/badges/a07a164a-8088-4437-9f34-187c8820be5f?source=linked_in_profile",
+      },
+      "title": "THE COACH ICP™ Certified Integration Coaching Professional",
+      "year": 2021,
+    },
+    {
+      "issuer": "CRR Global",
+      "proof": {
+        "label": "Certificate",
+        "url": "https://drive.google.com/file/d/1sJH0Pne_hRMPp3yfOHAdI0W0yo2VV6DW/view?usp=drive_link",
+      },
+      "title": "ORSC (Organization and Relationship Systems Coach) Basics",
+      "year": 2021,
+    },
+    {
+      "issuer": "Global Coaching Institute",
+      "title": "Global Coaching Institute 101/102",
+      "year": 2022,
+    },
+  ],
+  "education": [
+    {
+      "issuer": "Yale University",
+      "proof": {
+        "label": "Certificate",
+        "url": "https://www.coursera.org/account/accomplishments/certificate/LGZKRVHPUZEROR",
+      },
+      "title": "The Science of Well-Being",
+      "year": 2021,
+    },
+    {
+      "issuer": "Hosei University",
+      "title": "Faculty of Business Administration",
+      "year": 2016,
+    },
+  ],
+  "expertise": [
+    {
+      "icon": "🚀",
+      "style": "bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 border-purple-300/50",
+      "text": "2C Business Development",
+    },
+    {
+      "icon": "🎯",
+      "style": "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-300/50",
+      "text": "Integration Coaching (ICP™)",
+    },
+    {
+      "icon": "👥",
+      "style": "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 border-green-300/50",
+      "text": "Relationship Systems Coaching (ORSC)",
+    },
+    {
+      "icon": "📱",
+      "style": "bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 border-indigo-300/50",
+      "text": "Product Management & Strategy",
+    },
+    {
+      "icon": "💑",
+      "style": "bg-pink-100 dark:bg-pink-900/50 text-pink-700 dark:text-pink-300 border-pink-300/50",
+      "text": "Couple & Family Dynamics",
+    },
+    {
+      "icon": "⭐",
+      "style": "bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 border-yellow-300/50",
+      "text": "Leadership Development",
+    },
+    {
+      "icon": "🧠",
+      "style": "bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 border-teal-300/50",
+      "text": "Well-being & Psychology",
+    },
+    {
+      "icon": "📷",
+      "style": "bg-gray-100 dark:bg-gray-900/50 text-gray-700 dark:text-gray-300 border-gray-300/50",
+      "text": "Photography",
+    },
+    {
+      "icon": "🎵",
+      "style": "bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300 border-cyan-300/50",
+      "text": "DJ/Music Production",
+    },
+  ],
+  "hobbies": [
+    {
+      "icon": "🎮",
+      "style": "bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 border-purple-300/50",
+      "text": "ゲーム",
+    },
+    {
+      "icon": "🔮",
+      "style": "bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300 border-violet-300/50",
+      "text": "占い",
+    },
+    {
+      "icon": "📷",
+      "style": "bg-gray-100 dark:bg-gray-900/50 text-gray-700 dark:text-gray-300 border-gray-300/50",
+      "text": "カメラ",
+    },
+    {
+      "icon": "💭",
+      "style": "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-300/50",
+      "text": "人生相談",
+    },
+    {
+      "icon": "🍺",
+      "style": "bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border-amber-300/50",
+      "text": "お酒",
+    },
+    {
+      "icon": "💨",
+      "style": "bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 border-teal-300/50",
+      "text": "シーシャ",
+    },
+    {
+      "icon": "🀄",
+      "style": "bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 border-red-300/50",
+      "text": "麻雀",
+    },
+    {
+      "icon": "🏄",
+      "style": "bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300 border-cyan-300/50",
+      "text": "SUP",
+    },
+    {
+      "icon": "🍳",
+      "style": "bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-orange-300/50",
+      "text": "料理",
+    },
+    {
+      "icon": "⛺",
+      "style": "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 border-green-300/50",
+      "text": "キャンプ",
+    },
+    {
+      "icon": "🏃",
+      "style": "bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 border-sky-300/50",
+      "text": "ランニング",
+    },
+  ],
+  "myFamily": [
+    {
+      "id": 1,
+      "image": "/assets/photos/family/koppe.jpg",
+      "label": {
+        "emoji": "🐿️",
+        "text": "Koppe",
+      },
+    },
+    {
+      "id": 2,
+      "image": "/assets/photos/family/muu.jpg",
+      "label": {
+        "emoji": "🐈",
+        "text": "Muu",
+      },
+    },
+    {
+      "id": 3,
+      "image": "/assets/photos/family/kolon.jpg",
+      "label": {
+        "emoji": "🐈",
+        "text": "Kolon",
+      },
+    },
+    {
+      "id": 4,
+      "image": "/assets/photos/family/minato.jpg",
+      "label": {
+        "emoji": "👶",
+        "text": "Minato",
+      },
+    },
+    {
+      "id": 5,
+      "image": "/assets/photos/family/oharu.jpg",
+      "label": {
+        "emoji": "👩",
+        "text": "Oharu",
+      },
+    },
+  ],
+  "personalCharacteristics": [
+    {
+      "description": "内向型・直感型・感情型・知覚型",
+      "icon": "🧠",
+      "title": "MBTI: INFP",
+    },
+    {
+      "description": "人の感情に敏感で、相手の気持ちを察知することが得意",
+      "icon": "💭",
+      "title": "Sensitive to Emotions",
+    },
+    {
+      "description": "内省的で、自分自身と深く向き合うことを大切にしている",
+      "icon": "🔍",
+      "title": "Introspective",
+    },
+    {
+      "description": "個人の成長と自己実現を重視し、常に向上心を持っている",
+      "icon": "🌱",
+      "title": "Values Personal Growth",
+    },
+    {
+      "description": "自分の核となる価値観にコミットし、それに基づいて行動する",
+      "icon": "⭐",
+      "title": "Core Values Commitment",
+    },
+  ],
+  "photoGallery": [
+    {
+      "alt": "Description of photo 1",
+      "height": 1200,
+      "src": "/assets/photos/photo_01.jpg",
+      "width": 800,
+    },
+    {
+      "alt": "Description of photo 2",
+      "height": 800,
+      "src": "/assets/photos/photo_02.jpg",
+      "width": 1200,
+    },
+    {
+      "alt": "Description of photo 3",
+      "height": 1000,
+      "src": "/assets/photos/photo_03.jpg",
+      "width": 800,
+    },
+  ],
+  "profileData": {
+    "avatar": "/assets/profile-avatar.png",
+    "description": "Product Manager, Professional Coach, Photographer, DJ, Father or SOMETHING.",
+    "email": "soichiro0111@gmail.com",
+    "jobTitle": "2C Business Responsibility, Studio Prairie",
+    "location": "Machida, Tokyo, JP",
+    "name": "Soichiro Yoshimura",
+    "socialLinks": [
+      {
+        "icon": "Twitter",
+        "name": "X",
+        "url": "https://x.com/soichi_yo",
+      },
+      {
+        "icon": "Facebook",
+        "name": "Facebook",
+        "url": "https://www.facebook.com/soichiyo",
+      },
+      {
+        "icon": "Instagram",
+        "name": "Instagram",
+        "url": "https://instagram.com/soichiyo",
+      },
+      {
+        "icon": "LinkedIn",
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/soichiyo",
+      },
+      {
+        "icon": "GitHub",
+        "name": "GitHub",
+        "url": "https://github.com/soichiyo",
+      },
+      {
+        "icon": "FileText",
+        "name": "note",
+        "url": "https://note.com/soichiro",
+      },
+    ],
+  },
+  "projects": [
+    {
+      "appDescription": "850+ hours of professional coaching experience",
+      "appIcon": "/assets/app/coaching.jpg",
+      "appName": "Coaching",
+      "bgColor": "bg-[#4A90E2]",
+      "id": 1,
+      "projectImage": "/assets/projects/coaching-cicp-certification.jpg",
+      "status": "live",
+      "tags": [
+        "Coaching",
+        "Leadership",
+        "Development",
+      ],
+      "title": "Professional Coaching Practice",
+      "url": "https://thecoach.jp/meet/coach/soichiro-yoshimura/",
+    },
+    {
+      "appDescription": "1000+ photographers platform & 300% YoY growth",
+      "appIcon": "/assets/app/lovegraph.jpg",
+      "appName": "Lovegraph",
+      "bgColor": "bg-[#FF6B9D]",
+      "id": 2,
+      "projectImage": "/assets/projects/lovegraph-growth-scale.jpg",
+      "status": "live",
+      "tags": [
+        "Product Management",
+        "Growth",
+        "Platform",
+      ],
+      "title": "Lovegraph Growth & Scale",
+      "url": "https://careerhack.en-japan.com/report/detail/939",
+    },
+    {
+      "appDescription": "iOS product development & user authentication",
+      "appIcon": "/assets/app/line.jpg",
+      "appName": "LINE",
+      "bgColor": "bg-[#00B900]",
+      "id": 3,
+      "projectImage": "/assets/projects/line-profile-plus.jpg",
+      "status": "live",
+      "tags": [
+        "iOS",
+        "Product Management",
+        "Security",
+      ],
+      "title": "LINE Profile+ Launch",
+      "url": "https://developers.line.biz/ja/docs/partner-docs/line-profile-plus/",
+    },
+  ],
+  "skills": [
+    {
+      "style": "bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 border-purple-300/50",
+      "text": "Marketing",
+    },
+    {
+      "style": "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-300/50",
+      "text": "Product Management",
+    },
+    {
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+      "style": "bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-orange-300/50",
+      "text": "MySQL",
+    },
+    {
+      "style": "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 border-green-300/50",
+      "text": "Coaching",
+    },
+    {
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      "style": "bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 border-sky-300/50",
+      "text": "React Native",
+    },
+    {
+      "style": "bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300 border-cyan-300/50",
+      "text": "Lightroom",
+    },
+    {
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+      "style": "bg-pink-100 dark:bg-pink-900/50 text-pink-700 dark:text-pink-300 border-pink-300/50",
+      "text": "Figma",
+    },
+    {
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      "style": "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-300/50",
+      "text": "TypeScript",
+    },
+    {
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+      "style": "bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 border-yellow-300/50",
+      "text": "Python",
+    },
+  ],
+  "workExperiences": [
+    {
+      "companies": [
+        {
+          "icon": "/assets/company/studio-prairie.jpg",
+          "name": "Studio Prairie",
+          "style": "bg-purple-100 text-purple-800 border-purple-300/50",
+        },
+      ],
+      "period": "2024 - Present",
+      "title": "2C Business Responsibility at",
+    },
+    {
+      "companies": [
+        {
+          "icon": "/assets/company/the-coach.jpg",
+          "name": "THE COACH Inc.",
+          "style": "bg-blue-100 text-blue-800 border-blue-300/50",
+        },
+      ],
+      "period": "2022 - 2023",
+      "title": "Director at",
+    },
+    {
+      "companies": [
+        {
+          "icon": "/assets/company/lovegraph.jpg",
+          "name": "Lovegraph Inc.",
+          "style": "bg-pink-100 text-pink-800 border-pink-300/50",
+        },
+      ],
+      "period": "2017 - 2022",
+      "title": "CPO/CXO/Executive Officer at",
+    },
+    {
+      "companies": [
+        {
+          "icon": "/assets/company/line.jpg",
+          "name": "LINE Corporation",
+          "style": "bg-green-100 text-green-800 border-green-300/50",
+        },
+      ],
+      "period": "2016 - 2017",
+      "title": "Global Account / Product Manager at",
+    },
+  ],
+  "writings": [
+    {
+      "date": "2026-04",
+      "platform": "zenn",
+      "title": "Claude Code設定の全体設計、個人的ベストプラクティス（2026年4月版）",
+      "url": "https://zenn.dev/soichiyo/articles/b2a0ba2814acf6",
+    },
+    {
+      "date": "2026-04",
+      "platform": "zenn",
+      "title": "AI-Native GTD を作ってみた — GTDに「誰がやる？」を足す実験",
+      "url": "https://zenn.dev/soichiyo/articles/45ca0fd1925d5d",
+    },
+    {
+      "date": "2024-07",
+      "platform": "note",
+      "title": "プレーリーカードの事業責任者になりました",
+      "url": "https://note.com/soichiro/n/n734668a8d936",
+    },
+  ],
+}
+`;

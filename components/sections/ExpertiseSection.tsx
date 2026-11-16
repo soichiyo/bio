@@ -1,4 +1,4 @@
-import { expertise } from "../../lib/data";
+import { expertise } from "@/content";
 import { Chip } from "../ui/Chip";
 
 export function ExpertiseSection() {
