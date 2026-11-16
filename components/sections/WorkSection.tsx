@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { workExperiences } from "../../lib/data";
 
 export function WorkSection() {
@@ -21,8 +22,10 @@ export function WorkSection() {
               <div key={company.name} className="flex items-center">
                 <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border hover:bg-accent transition-colors">
                   {company.icon && (
-                    <img
+                    <Image
                       src={company.icon}
+                      width={24}
+                      height={24}
                       alt={company.name}
                       className="w-6 h-6 rounded object-contain"
                     />

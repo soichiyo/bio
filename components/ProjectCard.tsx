@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { type ProjectType } from '../lib/data';
 
 export function ProjectCard({ project }: { project: ProjectType }) {
@@ -7,11 +8,13 @@ export function ProjectCard({ project }: { project: ProjectType }) {
                 <div className={project.bgColor}>
                     <div className="relative aspect-square w-full">
                         {project.projectImage ? (
-                            <img
+                            <Image
                                 alt={`${project.appName} project`}
                                 loading="lazy"
                                 className="object-cover absolute h-full w-full left-0 top-0 right-0 bottom-0"
                                 src={project.projectImage}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
                             />
                         ) : (
                             <div className="absolute inset-0 flex items-center justify-center pb-20">
@@ -37,11 +40,11 @@ export function ProjectCard({ project }: { project: ProjectType }) {
                 <div className="flex items-center p-3 pl-4 bg-[#F6F5F4] justify-between">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg overflow-hidden">
-                            <img
+                            <Image
                                 alt={`${project.appName} logo`}
                                 loading="lazy"
-                                width="40"
-                                height="40"
+                                width={40}
+                                height={40}
                                 src={project.appIcon}
                             />
                         </div>

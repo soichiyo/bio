@@ -1,3 +1,4 @@
+import Image from "next/image";
 // src/components/SimpleCard.tsx
 import { type SimpleCardType } from "../lib/data";
 
@@ -5,8 +6,10 @@ export function SimpleCard({ card }: { card: SimpleCardType }) {
     return (
         // [変更] groupクラス、ボーダー、トランジションを追加
         <div className="relative aspect-square w-full overflow-hidden rounded-xl group border border-border transition-transform hover:scale-[1.02]">
-            <img
+            <Image
                 src={card.image}
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
                 alt={card.label.text}
                 // [変更] ホバーエフェクトを調整
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
