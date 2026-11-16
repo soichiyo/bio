@@ -4,8 +4,29 @@ import { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { ChatModal } from "./ChatModal";
 
-export function ChatButton() {
+type ChatButtonProps = {
+  variant?: "floating" | "inline";
+};
+
+export function ChatButton({ variant = "floating" }: ChatButtonProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (variant === "inline") {
+    return (
+      <>
+        <button
+          type="button"
+          onClick={() => setIsModalOpen(true)}
+          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity duration-200 hover:opacity-80"
+        >
+          <MessageCircle size={20} />
+          Chat with AI Me!
+        </button>
+
+        <ChatModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      </>
+    );
+  }
 
   return (
     <>
