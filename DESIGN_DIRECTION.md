@@ -90,3 +90,20 @@ Do not animate every section. The top surface can feel alive; the long-form cont
 - Use existing Next.js, React, Tailwind, Motion, and lucide dependencies.
 - Do not introduce a design system or external UI framework.
 - Validate with `npm run type-check` and `npm run build`.
+
+## Design Variants
+
+The site keeps both the calmer legacy bio and the Personal Telemetry OS surface
+available so the first impression can be switched without reverting commits.
+
+- `telemetry`: the default dashboard-first Personal Telemetry OS surface.
+- `legacy`: the one-column profile page with the avatar header and emoji-led
+  sections.
+
+Switch locally with URL params:
+
+- `/` or `/?design=telemetry`
+- `/?design=legacy`
+
+Switch the default deployment by setting `BIO_DESIGN_VARIANT=legacy` or
+`BIO_DESIGN_VARIANT=telemetry`.
