@@ -1,12 +1,20 @@
-# Soichiro Yoshimura
+# Personal Portfolio
 
-**Product Manager, Photographer, DJ, Father or SOMETHING.**
+A personal portfolio showcasing selected photography and profile information.
 
-Based in Tokyo, JP
+## Development
 
-## Connect
+```bash
+npm run dev
+```
 
-- **X (Twitter)**: [@soichi_yo](https://x.com/soichi_yo)
-- **Threads**: [@soichiyo](https://threads.net/soichiyo)  
-- **Instagram**: [@soichiyo](https://instagram.com/soichiyo)
-- **Email**: soichiro0111@gmail.com
+## Verification
+
+```bash
+npm run type-check
+npm run lint
+npm test
+npm run build
+```
+
+See [AGENTS.md](AGENTS.md) for project guidance.

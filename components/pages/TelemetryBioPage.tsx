@@ -177,7 +177,7 @@ export function TelemetryBioPage() {
 
       <footer className="mx-auto mt-24 max-w-4xl border-t border-border pt-8">
         <div className="text-center font-data text-xs uppercase tracking-[0.08em] text-muted-foreground">
-          <p>© 2024 {profileData.name}</p>
+          <p>© {new Date().getFullYear()} {profileData.name}</p>
         </div>
       </footer>
     </main>
