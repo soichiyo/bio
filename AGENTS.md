@@ -29,7 +29,7 @@ Type definitions live in `content/types.ts`.
 ### Page Composition
 
 - `app/layout.tsx` — metadata, global CSS, and `MotionProvider`.
-- `app/page.tsx` — selects `LegacyBioPage` by default or `TelemetryBioPage` with `?design=telemetry`; both live in `components/pages/`.
+- `app/page.tsx` — selects `TelemetryBioPage` by default. `?design=legacy` or `BIO_DESIGN_VARIANT=legacy` selects `LegacyBioPage`; both are in `components/pages/`.
 - `components/PersonalOSDashboard.tsx` — main telemetry dashboard surface.
 - `components/SectionRail.tsx` — fixed left section navigator for desktop/tablet.
 - `components/sections/` — detailed content sections below the dashboard.
