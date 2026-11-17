@@ -3,11 +3,11 @@ import { workExperiences } from "./career";
 import { describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { assertPublicAsset } from "@/lib/content/assets";
-import { readFileSync } from "node:fs";
-import { stack } from "./stack";
+import { assertPublicAsset, assertLogoAsset } from "@/lib/content/assets";
+import { isCalendarDate } from "@/lib/stack/latest";
+import { stack, latestBaseline } from "./stack";
 import { plugins } from "./plugins";
-import { logos, validateEntries } from "./logos";
+import { logos, validateEntries, validateLogoNames } from "./logos";
 import { showcase, validateShowcase, visibleShowcase } from "./showcase";
 import { aiProfile, coachingCredentials, profileFamily, careerHighlights } from "./ai-profile";
 describe("AI profile content", () => {
@@ -20,11 +20,10 @@ describe("AI profile content", () => {
       expect(workExperiences.some(work => work.companies.some(company => company.name === highlight.company))).toBe(true);
     }
   });
-  it("checks every logo path and rejects active SVG content", () => {
-    for (const asset of Object.values(logos)) for (const path of [asset.src, asset.darkSrc].filter((path): path is string => !!path)) {
-      expect(() => assertPublicAsset(path)).not.toThrow();
-      const svg = readFileSync(join(process.cwd(), "public", path), "utf8");
-      expect(svg).not.toMatch(/<(script|foreignObject|image|iframe|html)\b|\son\w+\s*=|@import|(?:href\s*=\s*["'](?!#))|url\(\s*["']?(?:https?:|\/\/|data:)/i);
+  it("checks every registered mapping and both theme assets", () => {
+    expect(() => validateLogoNames()).not.toThrow();
+    for (const asset of Object.values(logos)) for (const path of [asset.src, asset.darkSrc].filter((path): path is string => path !== undefined)) {
+      expect(() => assertLogoAsset(path)).not.toThrow();
     }
     for (const logo of ["", "missing", "toString"]) expect(() => validateEntries([{name:"Example",logo}])).toThrow();
   });
@@ -36,8 +35,10 @@ describe("AI profile content", () => {
   it("supports an additional tool without an image", () => {
     expect(() => validateEntries([...plugins, {name: "Example"}])).not.toThrow();
   });
-  it("keeps showcase hidden until a real entry is added; images are optional", () => {
-    expect(visibleShowcase(showcase)).toEqual([]);
+  it("validates the baseline and showcase content; images are optional", () => {
+    expect(typeof latestBaseline.name).toBe("string");
+    expect(latestBaseline.name.trim()).not.toBe("");
+    expect(isCalendarDate(latestBaseline.asOf)).toBe(true);
     expect(() => validateShowcase(showcase, assertPublicAsset)).not.toThrow();
     const example = {title:"Example", description:"Synthetic example", url:"https://example.com", tools:[{name:"Example"}]};
     expect(() => validateShowcase([example])).not.toThrow();
