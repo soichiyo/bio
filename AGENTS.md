@@ -14,13 +14,9 @@ The current product direction is **Personal Telemetry OS**: a Nothing-inspired, 
 - **Build:** `npm run build`
 - **Lint:** `npm run lint`
 - **Type check:** `npm run type-check`
+- **Test:** `npm test`
 
-No test framework is configured. For UI changes, run at least `npm run type-check` and `npm run lint`, then spot-check `http://localhost:3000/` in the browser.
-
-Known lint output:
-- `next lint` is deprecated in newer Next.js versions.
-- The current ESLint setup reports a Next plugin detection warning.
-- `app/layout.tsx` reports `react-refresh/only-export-components` because it exports metadata.
+For UI changes, run at least `npm run type-check` and `npm run lint`, then spot-check `http://localhost:3000/` in the browser.
 
 ## Architecture
 
