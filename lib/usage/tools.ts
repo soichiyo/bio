@@ -1,6 +1,6 @@
 import type { ToolId } from "./types";
 
-export const TOOL_ORDER: readonly ToolId[] = ["codex", "claude-code", "cursor"];
+export const TOOL_ORDER: readonly ToolId[] = ["claude-code", "codex", "cursor"];
 export const USAGE_TOOLS: Record<ToolId, { name: string; color: string }> = {
   codex: { name: "Codex", color: "var(--usage-codex, #ededed)" },
   "claude-code": { name: "Claude Code", color: "var(--usage-claude, #ff8a3d)" },
