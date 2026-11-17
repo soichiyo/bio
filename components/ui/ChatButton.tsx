@@ -6,9 +6,10 @@ import { ChatModal } from "./ChatModal";
 
 type ChatButtonProps = {
   variant?: "floating" | "inline";
+  label?: string;
 };
 
-export function ChatButton({ variant = "floating" }: ChatButtonProps) {
+export function ChatButton({ variant = "floating", label = "Chat with AI Me!" }: ChatButtonProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (variant === "inline") {
@@ -20,7 +21,7 @@ export function ChatButton({ variant = "floating" }: ChatButtonProps) {
           className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity duration-200 hover:opacity-80"
         >
           <MessageCircle size={20} />
-          Chat with AI Me!
+          {label}
         </button>
 
         <ChatModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
