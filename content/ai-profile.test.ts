@@ -1,3 +1,5 @@
+import { projects } from "./projects";
+import { workExperiences } from "./career";
 import { describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
@@ -7,8 +9,17 @@ import { stack } from "./stack";
 import { plugins } from "./plugins";
 import { logos, validateEntries } from "./logos";
 import { showcase, validateShowcase, visibleShowcase } from "./showcase";
-import { aiProfile, coachingCredentials, profileFamily } from "./ai-profile";
+import { aiProfile, coachingCredentials, profileFamily, careerHighlights } from "./ai-profile";
 describe("AI profile content", () => {
+  it("uses only existing public project statements for matching career companies", () => {
+    expect(careerHighlights.map(item => item.company)).toEqual(["Lovegraph Inc.", "LINE Corporation"]);
+    for (const highlight of careerHighlights) {
+      const project = projects.find(item => item.id === highlight.projectId)!;
+      expect(highlight.text).toBe(project.appDescription);
+      expect(highlight.url).toBe(project.url);
+      expect(workExperiences.some(work => work.companies.some(company => company.name === highlight.company))).toBe(true);
+    }
+  });
   it("checks every logo path and rejects active SVG content", () => {
     for (const asset of Object.values(logos)) for (const path of [asset.src, asset.darkSrc].filter((path): path is string => !!path)) {
       expect(() => assertPublicAsset(path)).not.toThrow();

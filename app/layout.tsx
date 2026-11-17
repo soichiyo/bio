@@ -1,28 +1,31 @@
+import { aiProfile } from "@/content/ai-profile";
 import type { Metadata } from 'next'
 import './globals.css'
 import { MotionProvider } from "../components/animations/MotionProvider"
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.soichiroyoshimura.com"),
+  alternates: { canonical: "/" },
   title: {
     default: 'Soichiro Yoshimura',
     template: '%s | Soichiro Yoshimura'
   },
-  description: 'Product Manager, Photographer, DJ, Father or SOMETHING.',
+  description: aiProfile.description,
   keywords: ['Product Manager', 'AI', 'UX Design', 'MVP Development', 'Tokyo', 'Photography', 'DJ'],
   authors: [{ name: 'Soichiro Yoshimura' }],
   creator: 'Soichiro Yoshimura',
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
-    url: 'https://soichiyo.dev',
+    url: 'https://www.soichiroyoshimura.com',
     siteName: 'Soichiro Yoshimura',
     title: 'Soichiro Yoshimura',
-    description: 'Product Manager, Photographer, DJ, Father or SOMETHING.',
+    description: aiProfile.description,
     images: [
       {
         url: '/assets/profile-avatar.jpg',
-        width: 1200,
-        height: 630,
+        width: 1638,
+        height: 1092,
         alt: 'Soichiro Yoshimura',
       },
     ],
