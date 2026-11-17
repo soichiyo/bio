@@ -3,7 +3,7 @@ import type { ProfileDataType } from './types';
 
 
 // 画像パス（Next.jsのpublicフォルダ）
-const profileAvatar = "/assets/profile-avatar.png";
+const profileAvatar = "/assets/profile-avatar.jpg";
 
 
 

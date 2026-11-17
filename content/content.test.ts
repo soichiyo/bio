@@ -46,4 +46,10 @@ describe("content", () => {
       expect(new Set(ids).size).toBe(ids.length);
     }
   });
+  it("describes every photo instead of using placeholder alt text", () => {
+    expect(content.photoGallery.filter((p) => /^Description of photo/.test(p.alt))).toEqual([]);
+  });
+  it("points the avatar at a .jpg file", () => {
+    expect(content.profileData.avatar).toBe("/assets/profile-avatar.jpg");
+  });
 });

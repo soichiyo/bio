@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description: 'Product Manager, Photographer, DJ, Father or SOMETHING.',
     images: [
       {
-        url: '/assets/profile-avatar.png',
+        url: '/assets/profile-avatar.jpg',
         width: 1200,
         height: 630,
         alt: 'Soichiro Yoshimura',

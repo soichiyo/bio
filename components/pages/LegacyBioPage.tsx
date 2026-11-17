@@ -95,7 +95,7 @@ export function LegacyBioPage() {
 
       <footer className="mt-20 border-t border-border pt-8">
         <div className="text-center text-sm text-muted-foreground">
-          <p>© 2024 {profileData.name}</p>
+          <p>© {new Date().getFullYear()} {profileData.name}</p>
         </div>
       </footer>
     </main>
