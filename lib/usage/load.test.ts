@@ -10,7 +10,7 @@ describe("fetchValidatedUsage", () => {
   it("fetches the fixed URL without an inner cache and validates before resolving", async () => {
     const spy = vi.fn<typeof fetch>().mockResolvedValue(Response.json(usageFixture()));
     expect(await fetchValidatedUsage(spy)).toEqual(usageFixture());
-    expect(spy).toHaveBeenCalledWith(USAGE_URL, { cache: "no-store", signal: expect.any(AbortSignal) });
+    expect(spy).toHaveBeenCalledWith(USAGE_URL, { cache: "no-store", signal: expect.any(AbortSignal), headers: expect.any(Headers) });
   });
   it.each(["http", "json", "schema", "timeout"])("rejects %s instead of caching a substitute", async kind => {
     const response = kind === "http" ? new Response("", { status: 503 }) :
@@ -46,4 +46,31 @@ describe("resolveUsage", () => {
 
 it("bundled public data matches the upstream contract", () => {
   expect(parseUsage(bundled).generatedAt).toBe(bundled.generatedAt);
+});
+
+it("authenticates only the server request to the weekly endpoint", async () => {
+  const spy=vi.fn<typeof fetch>().mockResolvedValue(Response.json(usageFixture()));
+  await fetchValidatedUsage(spy,"synthetic-test-token");
+  const [url,init]=spy.mock.calls[0];const headers=new Headers(init?.headers);
+  expect(url).toBe("https://api.github.com/repos/soichiyo/ai-usage/contents/weekly.json");
+  expect(headers.get("authorization")).toBe("Bearer synthetic-test-token");
+  expect(headers.get("accept")).toBe("application/vnd.github.raw+json");
+  expect(headers.get("x-github-api-version")).toBe("2022-11-28");
+});
+it.each(["", "   "])("omits authorization for an empty token", async token => {
+  const spy=vi.fn<typeof fetch>().mockResolvedValue(Response.json(usageFixture()));
+  await fetchValidatedUsage(spy,token);
+  expect(new Headers(spy.mock.calls[0][1]?.headers).has("authorization")).toBe(false);
+});
+it.each([401,403,404])("sanitizes %i and returns a weekly fallback", async status => {
+  const spy=vi.fn<typeof fetch>().mockResolvedValue(new Response("private response synthetic-test-token",{status}));
+  const error=await fetchValidatedUsage(spy,"synthetic-test-token").catch(e=>e);
+  expect(error.message).toBe("USAGE_FETCH_FAILED");
+  expect(JSON.stringify(error,Object.getOwnPropertyNames(error))).not.toMatch(/synthetic-test-token|private response/);
+  expect((await resolveUsage(()=>fetchValidatedUsage(spy,"synthetic-test-token"),bundled)).origin).toBe("bundled");
+});
+it("does not retain the upstream exception as a cause",async()=>{
+  const spy=vi.fn<typeof fetch>().mockRejectedValue(new Error("synthetic-test-token"));
+  const error=await fetchValidatedUsage(spy,"synthetic-test-token").catch(e=>e);
+  expect(error.cause).toBeUndefined();expect(String(error)).toBe("Error: USAGE_FETCH_FAILED");
 });

@@ -1,5 +1,6 @@
 import { TOOL_ORDER } from "./tools";
-import type { Usage } from "./types";
+import { addDays } from "./dates";
+import type { WeeklyUsage } from "./types";
 
 export class UsageValidationError extends Error {
   constructor() { super("INVALID_USAGE"); this.name = "UsageValidationError"; }
@@ -34,8 +35,12 @@ function array(value: unknown): unknown[] {
   if (!Array.isArray(value)) invalid();
   return value;
 }
-export function parseUsage(value: unknown): Usage {
-  const root = keys(value, ["schemaVersion", "generatedAt", "collectors", "sources", "daily", "snapshots"], ["longestRun"]);
+function sunday(value: unknown): asserts value is string {
+  date(value);
+  if (new Date(value + "T00:00:00Z").getUTCDay() !== 0) invalid();
+}
+export function parseUsage(value: unknown): WeeklyUsage {
+  const root = keys(value, ["schemaVersion", "generatedAt", "collectors", "tools", "coverage", "weeks", "snapshots"], ["longestRun"]);
   if (root.schemaVersion !== 1) invalid();
   timestamp(root.generatedAt);
   const seen = new Set<string>();
@@ -45,30 +50,31 @@ export function parseUsage(value: unknown): Usage {
     if (seen.has(row.machine)) invalid();
     seen.add(row.machine);
   }
-  const sources = object(root.sources);
-  for (const [tool, item] of Object.entries(sources)) {
+  const tools = array(root.tools);
+  let previousTool = -1;
+  if (!tools.length) invalid();
+  for (const tool of tools) {
     oneOf(tool, TOOL_ORDER);
-    const row = keys(item, ["mode", "coverage"]);
-    oneOf(row.mode, ["auto", "import"]);
-    const range = keys(row.coverage, ["from", "to"]);
-    date(range.from); date(range.to);
-    if (range.from > range.to) invalid();
+    const index = (TOOL_ORDER as readonly string[]).indexOf(tool);
+    if (index <= previousTool) invalid();
+    previousTool = index;
   }
-  let previous = "";
-  for (const item of array(root.daily)) {
-    const row = keys(item, ["date", "tokens"]); date(row.date);
-    if (row.date <= previous) invalid();
-    previous = row.date;
-    for (const [tool, count] of Object.entries(object(row.tokens))) {
-      oneOf(tool, TOOL_ORDER); integer(count);
-      const coverage = object(object(sources[tool]).coverage);
-      if (row.date < (coverage.from as string) || row.date > (coverage.to as string)) invalid();
-    }
+  const coverage = keys(root.coverage, ["from", "to"]);
+  sunday(coverage.from); sunday(coverage.to);
+  if (coverage.from > coverage.to) invalid();
+  const weeks = array(root.weeks);
+  let expected = coverage.from, total = 0, last = "";
+  for (const item of weeks) {
+    const row = keys(item, ["week", "tokens"]);
+    sunday(row.week); integer(row.tokens);
+    if (row.week !== expected) invalid();
+    last = row.week; expected = addDays(row.week, 7);
+    total += row.tokens; integer(total);
   }
+  if (!weeks.length || last !== coverage.to) invalid();
   if (Object.prototype.hasOwnProperty.call(root, "longestRun")) {
-    const run = keys(root.longestRun, ["seconds", "tool", "date", "rule"]);
-    integer(run.seconds); date(run.date);
-    oneOf(run.tool, ["claude-code", "codex"]); oneOf(run.rule, ["active", "raw"]);
+    const run = keys(root.longestRun, ["seconds", "tool", "week"]);
+    integer(run.seconds); sunday(run.week); oneOf(run.tool, ["claude-code", "codex"]);
   }
   for (const item of array(root.snapshots)) {
     const row = keys(item, ["key", "value", "asOf", "source"]);
@@ -76,6 +82,5 @@ export function parseUsage(value: unknown): Usage {
     if (typeof row.value !== "number" || !Number.isFinite(row.value) || row.value < 0) invalid();
     date(row.asOf); oneOf(row.source, ["chatgpt-profile", "manual"]);
   }
-  return value as Usage;
+  return value as WeeklyUsage;
 }
-

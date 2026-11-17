@@ -30,7 +30,7 @@ Type definitions live in `content/types.ts`.
 
 - `app/layout.tsx` — metadata, global CSS, and `MotionProvider`.
 - `app/page.tsx` — selects `AIProfilePage` by default. `?design=legacy` or `BIO_DESIGN_VARIANT=legacy` selects `LegacyBioPage`; both are in `components/pages/`.
-- `lib/usage/`, `lib/writing/` — validated public usage/RSS, cache/fallback and selection.
+- `lib/usage/`, `lib/writing/` — validated weekly usage/RSS, cache/fallback and selection.
 - `components/sections/` — detailed content sections below the dashboard.
 - `components/ui/` — reusable primitives such as `ThemeToggle`, `ChatButton`, `ChatModal`, `Chip`, and `CredentialItem`.
 - `components/animations/` — Motion provider and reveal helpers.
@@ -39,7 +39,7 @@ Type definitions live in `content/types.ts`.
 
 `AIProfilePage` uses `getUsage()` and `getWriting()`; legacy calls neither. README covers data, logo registration, Latest dates, Showcase publication and Career additions.
 
-Keep missing values distinct from zero. Show only active longest runs. Filters affect the heatmap and monthly table, not the five headline metrics. Preserve keyboard access and 390px layouts. Keep new CSS under `.ai-profile` and preserve legacy components and content.
+Keep missing values distinct from zero. Show only active longest runs. Show 26 combined weeks; headline metrics use all collected weeks. Preserve keyboard access and 390px layouts. Keep new CSS under `.ai-profile` and preserve legacy components and content.
 
 ## Styling
 
@@ -47,14 +47,14 @@ Tailwind CSS is used with CSS custom properties in `app/globals.css`.
 
 Current visual language:
 - Dark-first UI with light mode support.
-- Dot-matrix usage history backed by published data.
+- Weekly dot columns backed by aggregated data.
 - Thin borders, quiet labels, and ample whitespace.
 - `Doto` for hero dot numerals only.
 - `Space Mono` for uppercase labels, metadata, and numeric readouts.
 - `Space Grotesk` for readable headings and body text.
 - One rare red signal: `#D71921`.
 
-Profile classes (`ai-panel`, `usage-cell`, `font-display-dot`, `font-data`) live in `app/globals.css`.
+Profile classes (`ai-panel`, `weekly-chart`, `font-display-dot`, `font-data`) live in `app/globals.css`.
 
 ## AI Chat
 
