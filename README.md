@@ -6,6 +6,8 @@ AIの利用状況と、仕事・文章・コーチング・写真・家族をま
 
 ## 開発と検証
 
+開発環境はNode.js 24.15以降の24系、または22.22.2以降の22系を使います。チャットのDOMテストで使うjsdomの要件に合わせています。
+
 ```bash
 npm ci
 npm run dev
@@ -71,7 +73,31 @@ npm run start
 
 ## コンテンツと公開
 
-公開本文は `content/` にあります。Stackは `stack.ts`、Pluginsは `plugins.ts`、Showcaseは `showcase.ts` に項目を追加します。ロゴ画像がなければ文字で表示します。Showcaseが空ならナビゲーションも非表示です。Writingの新着はRSS、旧デザインと控えは手動更新です。
+公開本文は `content/` にあります。Writingの新着はRSS、旧デザインと控えは手動更新です。
+
+### Stack・Pluginsとロゴ
+
+`stack.ts` の役割別配列、または `plugins.ts` に `{ name, logo?, hidden? }` を追加します。公開してよい名前だけを記入します。全ツールがhiddenの役割見出しは表示しません。
+
+ロゴは `logos.ts` の登録キーを指定します。公式の配布元と利用条件を確かめ、画像を `public/assets/logos/` へ置き、[素材台帳](docs/assets/logos.md)に出所を記録します。暗い背景用の公式素材があれば `darkSrc` へ登録します。`logoByName` は公開名の対応表で、PluginsやContactなどで共有します。ロゴを登録しない項目も名前を表示します。画像の色反転は行いません。
+
+Stackの `addedAt` は実際に追加した日が分かる場合だけ `YYYY-MM-DD` で記入します。Latestは、本人申告の2026-11-16より新しく、JSTの今日以下で最も新しい表示対象を選びます。同日は配列順を優先し、hidden・日付なし・未来日は候補にしません。候補がなければ「Gemini 4.0・本人申告2026-11-16」を表示します。既存ツールの追加日を推測で埋めません。
+
+### Showcase
+
+`showcase.ts` の `showcaseEnabled` はfalse、公開用配列は空で始めています。掲載時はtrueにして、`title`・`description`・HTTPSの `url`・使用ツールの `tools: ToolEntry[]` を追加します。作品は配列順で並びます。全体がfalse、または個別hiddenを除いた項目が0なら、本体とナビの両方を隠します。
+
+画像は任意です。指定するときは `image: "/assets/showcase/<slug>.jpg"` とし、実ファイルを置きます。画像なしは文字カードになります。`npm test -- content components/sections/ShowcaseSection.test.ts` で必須項目、ツール名の重複、未登録ロゴ、画像の存在・大小文字、認証情報を含まないHTTPS URLを検査します。公開用配列へ合成作品を残しません。
+
+### Careerの補足
+
+`ai-profile.ts` の `careerHighlights` に会社名を明示して対応付けます。現在は既存の公開データ `projects.ts` のLINE・Lovegraphの説明とURLだけを使っています。公開根拠のない成果・数字・担当範囲を追加しません。旧デザインが読む配列とexportは別に維持します。
+
+### 残っている入力・確認
+
+- ロゴ: 採用済み3ブランドと、文字表示を続ける項目の理由は[素材台帳](docs/assets/logos.md)に集約しています。
+- Career・Showcase: ほかの会社の実績と新しい作品は、公開する文章・根拠・URLの選定待ちです。
+- Cursor: 実CSVの形式・対象期間・合計・欠損は未確認です。取り込みはai-usage側の別作業で、未取得を0にはしません。
 
 GitHubのCIとVercelプレビューを確認してからmainへマージします。本番がReadyになった後に、ソースのコミット一致、新ページ、旧デザイン、公開データとの一致を確認します。問題がある場合はVercelの直前の正常な本番デプロイへ戻します。
 

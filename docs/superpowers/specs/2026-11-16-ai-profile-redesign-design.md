@@ -12,13 +12,15 @@ soichiroyoshimura.com を、転職や新規プロジェクト獲得の営業で�
 
 いまのページは bento 型で情報量はあるが、意味のない数字（Projects / 3、Family / 5）や固定値のグラフが混ざり、同じ内容が上下で2回出ている。これを整理し、実データに置き換える。
 
-## 既存ページの確認（2026-11-17）
+## 基盤整備時のページ確認（2026-11-17、計画3の実装前）
 
-現在は旧デザイン（`LegacyBioPage`）と現行デザイン（`TelemetryBioPage`）の2つがある。`?design=legacy`で旧デザイン、`?design=telemetry`で現行デザインを表示する。指定がない場合は現行デザインになり、環境変数`BIO_DESIGN_VARIANT=legacy`を設定した場合だけ旧デザインになる。切り替えは`app/page.tsx`と`lib/design-variant.ts`にある。
+計画3の実装前は旧デザイン（`LegacyBioPage`）と現行デザイン（`TelemetryBioPage`）の2つがある。`?design=legacy`で旧デザイン、`?design=telemetry`で現行デザインを表示する。指定がない場合は現行デザインになり、環境変数`BIO_DESIGN_VARIANT=legacy`を設定した場合だけ旧デザインになる。切り替えは`app/page.tsx`と`lib/design-variant.ts`にある。
 
 基盤整備では両方を残した。2026-11-17に、計画3では現行デザインを新しいAIプロフィールへ置き換え、旧デザインは比較・退避用に残すと決定した。`?design=telemetry`は新ページ、`?design=legacy`は旧デザインを表示する。第3のデザイン名は増やさない。`ProfileHeader`は旧デザインで使用中のため削除しない。
 
 実装計画: `docs/superpowers/plans/2026-11-17-ai-usage-display.md`。
+
+現在は `AIProfilePage` が通常表示になり、旧デザインはそのまま残している。計画4でRSSを導入した。計画5では操作性、ロゴ、追加日によるLatest、Showcaseの公開スイッチ、既存実績と共有メタ情報を整える。Cursorの実CSV取り込みはai-usage側の別作業とする。
 
 ## ゴール
 
@@ -117,7 +119,7 @@ content/
   stack.ts        ツール（名前、ロゴ、色、役割、追加日）と行
   plugins.ts
   showcase.ts
-  writing.ts      自動取得に失敗したときの控えと、固定表示したい記事
+  writing.ts      自動取得に失敗したときの控えと旧デザイン用の記事（固定記事は採用しない）
   career.ts  coaching.ts  expertise.ts  photos.ts  family.ts  life.ts
   logos.ts        ロゴの名前 → 画像の対応表
 public/assets/
@@ -125,10 +127,10 @@ public/assets/
   logos/<key>.svg
 ```
 
-- **Showcase に足す**: `showcase.ts` に1件書き、画像を `public/assets/showcase/` に置く。並び順は配列の順。`hidden: true` で隠せる。
+- **Showcase に足す**: `showcase.ts` の公開スイッチをtrueにし、題名・一言・HTTPS URL・使用ツールを1件書く。画像は任意で、指定時は `public/assets/showcase/` に置く。並び順は配列の順。`hidden: true` で隠せる。
 - **Stack / Plugins に足す**: 配列に1件書く。ロゴは `logos.ts` の名前で指定する。Stack は役割（Agents / Harness など）を書けば、その見出しの下に並ぶ。使わなくなったツールは消すか `hidden: true` にする。
-- **Latest の行**: Stack のツールに追加日を持たせ、いちばん新しいものを自動で表示する。新しいツールを足すだけで更新される。
-- **ロゴ**: アイコン集のパッケージにあるものはそこから、無いものは各社の公式素材を `public/assets/logos/` に置く。どちらに当たるかは実装時に確認する。
+- **Latest の行**: Stack のツールに任意の追加日を持たせる。初期値の「Gemini 4.0・本人申告2026-11-16」より新しく、JSTの今日以下の表示対象から選ぶ。同日は配列順。hidden・日付なし・未来日は対象外。不正日付は検査で落とす。既存ツールの開始日は推測しない。
+- **ロゴ**: 初期案はアイコン集も候補としていた。計画5では公式素材を `public/assets/logos/` に置き、出所と利用条件を確認できたものだけを採用する。名前を併記し、未確認項目は文字表示を続ける。
 - **足し間違いの検出**: 必須項目の欠け、画像ファイルの不在、ロゴ名の未登録をテストで落とす。
 
 ### Stack の初期内容（本人の申告、2026-11-16 時点）
@@ -213,7 +215,7 @@ Mac ごとのファイル `machines/<id>.json`（その Mac だけが書く）:
 }
 ```
 
-- 上の例の `activeSeconds` と `longestRun.seconds` は、まだ集計していないので 0 にしてある。
+- 上の例の `activeSeconds` と `longestRun.seconds` は、設計時の未集計を表す0。現在の画面は公開JSONの実測値を使用する。
 - **未取得とゼロの区別**: `coverage` は、そのツールのデータを取得できている期間。`daily` の `tokens` には、その日が `coverage` に入っているツールだけを書く。キーがあって `0` なら「使っていない」、キーが無ければ「未取得」。
 - **snapshots**: 自動で取れない数字を手入力する場所。`key` は決めた一覧（`skillsTried` `skillRuns` `topReasoningShare` `fastModeShare`）だけ、`value` は数値、`source` は `chatgpt-profile` か `manual` だけ。
 - **トークンの数え方**: ccusage 20.0.51 がツールごとに出す `totalTokens` をそのまま使う。入力・出力・キャッシュの合計で、キャッシュの読み込みが大半を占める。日付の区切りは Asia/Tokyo。版を上げるときは、同じ日の値が変わらないことを確かめる。
@@ -278,7 +280,9 @@ Mac ごとのファイル `machines/<id>.json`（その Mac だけが書く）:
 
 ## リファクタリング計画
 
-### 掃除
+### 掃除（初期計画）
+
+計画1〜4で基盤と新ページ・RSSは公開済み。下記は当初の方針を残したもので、旧デザインで使用中の部品や `react-masonry-css` は削除しない。
 
 - 使われていない部品を消す: `Header` `MyFamily` `Projects` `WorkExperience` `AboutSection`。刷新で不要になる部品もその時点で消す。
 - Vite 時代の残りを消す: `public/vite.svg`、`public/assets/react.svg`、`tsconfig.app.json`、`tsconfig.node.json`（どこからも参照されていないことを確認してから）、ESLint の react-refresh 設定。
@@ -354,7 +358,7 @@ content/                     上の「コンテンツの持ち方」の通り
 
 - クラウド側で実行した分が手元のログに現れるか（既知のクラウド実行1件で突き合わせる）。
 - 2台のほかにエージェントを動かしている Mac があるか。
-- 各ロゴがアイコン集にあるか。
+- ロゴの素材・実績・CursorのCSVなど、現在残る入力は[README](../../../README.md#残っている入力確認)に集約する。
 
 ## 設計側で決めたこと（要確認）
 

@@ -30,14 +30,14 @@ Type definitions live in `content/types.ts`.
 
 - `app/layout.tsx` — metadata, global CSS, and `MotionProvider`.
 - `app/page.tsx` — selects `AIProfilePage` by default. `?design=legacy` or `BIO_DESIGN_VARIANT=legacy` selects `LegacyBioPage`; both are in `components/pages/`.
-- `lib/usage/` — validated public usage data, cache/fallback, JST metrics and heatmap.
+- `lib/usage/`, `lib/writing/` — validated public usage/RSS, cache/fallback and selection.
 - `components/sections/` — detailed content sections below the dashboard.
 - `components/ui/` — reusable primitives such as `ThemeToggle`, `ChatButton`, `ChatModal`, `Chip`, and `CredentialItem`.
 - `components/animations/` — Motion provider and reveal helpers.
 
 ### AI Profile
 
-`AIProfilePage` composes the approved profile layout. `getUsage()` runs only for the new design; legacy never waits for the external source. See README for data definitions and fallback handling.
+`AIProfilePage` uses `getUsage()` and `getWriting()`; legacy calls neither. README covers data, logo registration, Latest dates, Showcase publication and Career additions.
 
 Keep missing values distinct from zero. Show only active longest runs. Filters affect the heatmap and monthly table, not the five headline metrics. Preserve keyboard access and 390px layouts. Keep new CSS under `.ai-profile` and preserve legacy components and content.
 
@@ -54,11 +54,11 @@ Current visual language:
 - `Space Grotesk` for readable headings and body text.
 - One rare red signal: `#D71921`.
 
-Reusable classes such as `telemetry-card`, `telemetry-label`, `telemetry-rule`, `led-dot`, `dot-pulse`, `font-display-dot`, and `font-data` live in `app/globals.css`.
+Profile classes (`ai-panel`, `usage-cell`, `font-display-dot`, `font-data`) live in `app/globals.css`.
 
 ## AI Chat
 
-The site has a persistent `ChatButton` CTA and a `ChatModal`.
+`ChatButton` opens the shared accessible `ChatModal` dialog.
 
 - UI: `components/ui/ChatButton.tsx`, `components/ui/ChatModal.tsx`
 - API: `app/api/chat/route.ts`
@@ -76,7 +76,7 @@ Use Next.js `<Image>` for local images where practical. Images live under `publi
 - `public/assets/company/`
 - `public/assets/photos/`
 - `public/assets/projects/`
-- `public/assets/skills/`
+- `public/assets/skills/`, `logos/`, `showcase/`
 
 Project banner images are very wide (`697x138`). On mobile, keep them aspect-preserving rather than forcing tall cropped banners.
 
@@ -114,5 +114,5 @@ Do not commit generated/local artifacts such as:
 - Prefer existing data and local component patterns over new abstractions.
 - Keep frontend changes responsive and verify mobile layouts.
 - Avoid external UI frameworks or new design systems.
-- Avoid emoji-led interface language on the main telemetry surface.
+- Avoid emoji-led interface language on the profile.
 - Preserve the site as a personal bio first; the OS/dashboard metaphor should support readability, not obscure it.
