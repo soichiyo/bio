@@ -1,4 +1,4 @@
-import { hobbies } from "../../lib/data";
+import { hobbies } from "@/content";
 import { Chip } from "../ui/Chip";
 import { StaggerChildren } from "../animations/StaggerChildren";
 

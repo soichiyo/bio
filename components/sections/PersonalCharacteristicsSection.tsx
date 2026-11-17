@@ -1,4 +1,4 @@
-import { personalCharacteristics } from "../../lib/data";
+import { personalCharacteristics } from "@/content";
 
 export function PersonalCharacteristicsSection() {
   return (

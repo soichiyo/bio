@@ -19,7 +19,7 @@ import {
   skills,
   workExperiences,
   writings,
-} from "../lib/data";
+} from "@/content";
 import { ChatModal } from "./ui/ChatModal";
 import type { CSSProperties, ReactNode } from "react";
 

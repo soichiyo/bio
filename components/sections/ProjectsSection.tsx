@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { projects } from "../../lib/data";
+import { projects } from "@/content";
 
 export function ProjectsSection() {
   return (

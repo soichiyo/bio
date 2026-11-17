@@ -1,6 +1,6 @@
 import Image from "next/image";
 // src/components/SimpleCard.tsx
-import { type SimpleCardType } from "../lib/data";
+import { type SimpleCardType } from "@/content";
 
 export function SimpleCard({ card }: { card: SimpleCardType }) {
     return (

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { workExperiences } from "../../lib/data";
+import { workExperiences } from "@/content";
 
 export function WorkSection() {
   return (

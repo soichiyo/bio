@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { ChatButton } from "./ui/ChatButton";
 import { CharacterReveal } from "./animations/CharacterReveal";
-import { profileData } from "../lib/data";
+import { profileData } from "@/content";
 
 const fadeIn = (delay: number) => ({
   initial: { opacity: 0, y: 12 },

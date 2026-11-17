@@ -1,5 +1,5 @@
 import { Chip } from "../ui/Chip";
-import { skills } from "../../lib/data";
+import { skills } from "@/content";
 import { StaggerChildren } from "../animations/StaggerChildren";
 
 export function SkillsSection() {

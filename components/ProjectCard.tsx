@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { type ProjectType } from '../lib/data';
+import { type ProjectType } from '@/content';
 
 export function ProjectCard({ project }: { project: ProjectType }) {
     return (

@@ -1,4 +1,4 @@
-import { myFamily } from '../../lib/data';
+import { myFamily } from '@/content';
 import { SimpleCard } from '../SimpleCard';
 
 export function MyFamilySection() {

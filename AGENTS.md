@@ -22,14 +22,14 @@ For UI changes, run at least `npm run type-check` and `npm run lint`, then spot-
 
 ### Data-Driven Content
 
-All portfolio content is centralized in `lib/data.ts`. Profile info, work experiences, projects, skills, expertise, writings, credentials, photos, hobbies, and family data are exported as typed constants. Section components consume this data directly; there is no CMS or database layer.
+Portfolio content is split by domain under `content/` and re-exported from `content/index.ts`. Profile info, work experiences, projects, skills, expertise, writings, credentials, photos, hobbies, and family data are exported as typed constants. Section components consume this data directly; there is no CMS or database layer.
 
-Type definitions live in `types/index.ts`.
+Type definitions live in `content/types.ts`.
 
 ### Page Composition
 
 - `app/layout.tsx` — metadata, global CSS, and `MotionProvider`.
-- `app/page.tsx` — single-page composition. It renders `ThemeToggle`, `SectionRail`, persistent `ChatButton`, the top `PersonalOSDashboard`, then detailed sections.
+- `app/page.tsx` — selects `LegacyBioPage` by default or `TelemetryBioPage` with `?design=telemetry`; both live in `components/pages/`.
 - `components/PersonalOSDashboard.tsx` — main telemetry dashboard surface.
 - `components/SectionRail.tsx` — fixed left section navigator for desktop/tablet.
 - `components/sections/` — detailed content sections below the dashboard.
@@ -55,7 +55,7 @@ When editing the dashboard:
 - Preserve mobile behavior. Several cards use different layouts at `sm`, `md`, and `lg`.
 - Avoid `h-full` inside card bodies unless the parent height is explicitly safe; cards use `overflow-hidden`, so child height mistakes can clip buttons.
 - Keep the Contact Beacon red accent rare and intentional.
-- Do not make telemetry values look arbitrary; tie them to `lib/data.ts` where possible.
+- Do not make telemetry values look arbitrary; tie them to `content/` where possible.
 
 ## Styling
 
