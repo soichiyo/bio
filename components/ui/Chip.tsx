@@ -1,3 +1,4 @@
+import Image from "next/image";
 type ChipProps = {
   text: string;
   icon?: string;
@@ -19,13 +20,14 @@ export function Chip({ text, icon }: ChipProps) {
 
     if (isImagePath) {
       return (
-        <img
+        <Image
           alt={`${text} icon`}
           loading="lazy"
-          width="20"
-          height="20"
+          width={20}
+          height={20}
           className="h-4 w-4 grayscale"
           src={icon}
+          unoptimized
         />
       );
     }

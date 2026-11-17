@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useState, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import Masonry from "react-masonry-css";
@@ -32,8 +34,12 @@ function GalleryImage({
       transition={{ duration: 0.6, ease: "easeOut", delay: index % 2 * 0.15 }}
       onClick={() => onOpen(index)}
     >
-      <img
+      <Image
         src={photo.src}
+        width={photo.width}
+        height={photo.height}
+        unoptimized
+        style={{ width: "auto", height: "auto" }}
         alt={photo.alt}
         className="rounded-lg border border-border cursor-pointer transition-opacity hover:opacity-80"
       />
