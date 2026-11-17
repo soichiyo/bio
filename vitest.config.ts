@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -5,6 +6,6 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["**/*.test.ts"],
-    alias: { "@": new URL(".", import.meta.url).pathname },
+    alias: { "@": fileURLToPath(new URL(".", import.meta.url)) },
   },
 });

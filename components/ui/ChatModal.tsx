@@ -3,7 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { X, Send, RotateCcw } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useId, type KeyboardEvent } from "react";
 
 interface ChatModalProps {
   isOpen: boolean;
@@ -17,6 +17,8 @@ const WELCOME_MESSAGE =
 const chatTransport = new DefaultChatTransport({ api: "/api/chat" });
 
 export function ChatModal({ isOpen, onClose }: ChatModalProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const headingId = useId();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [turnCount, setTurnCount] = useState(0);
@@ -29,10 +31,11 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
     error,
     regenerate,
     setMessages,
+    stop,
   } = useChat({
     transport: chatTransport,
     onFinish: () => {
-      setTurnCount((prev) => prev + 1);
+      if (dialogRef.current?.open) setTurnCount((prev) => prev + 1);
     },
     onError: (err) => {
       console.error("useChat error:", err);
@@ -45,18 +48,40 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
 
   // Auto-scroll to bottom
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isLoading]);
+    if (isOpen) messagesEndRef.current?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
+  }, [messages, isLoading, isOpen]);
 
   // Focus input when modal opens
   useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 100);
-    }
+    const dialog = dialogRef.current;
+    if (!isOpen || !dialog) return;
+    const opener = document.activeElement;
+    dialog.showModal();
+    inputRef.current?.focus();
+    return () => {
+      dialog.close();
+      if (opener instanceof HTMLElement && opener.isConnected) opener.focus();
+    };
   }, [isOpen]);
+
+  function keepFocus(event: KeyboardEvent<HTMLDialogElement>) {
+    if (event.key !== "Tab") return;
+    const controls = [...event.currentTarget.querySelectorAll<HTMLElement>(
+      'button:not(:disabled), textarea:not(:disabled), a[href], input:not(:disabled), [tabindex="0"]',
+    )];
+    const first = controls[0], last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault(); last?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault(); first?.focus();
+    }
+  }
 
   // Reset on close
   function handleClose() {
+    void stop();
     setMessages([]);
     setTurnCount(0);
     setInputText("");
@@ -72,7 +97,7 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
 
   // Handle Enter to submit (Shift+Enter for newline)
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing && e.nativeEvent.keyCode !== 229) {
       e.preventDefault();
       handleSend();
     }
@@ -88,21 +113,20 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 md:p-4">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={handleClose}
-      />
-
+    <dialog ref={dialogRef} aria-labelledby={headingId} aria-modal="true"
+      className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none items-center justify-center border-0 bg-transparent p-2 text-foreground backdrop:bg-black/50 backdrop:backdrop-blur-sm open:flex md:p-4"
+      onCancel={event => { event.preventDefault(); handleClose(); }}
+      onKeyDown={keepFocus}
+      onClick={event => { if (event.target === event.currentTarget) handleClose(); }}>
       {/* Modal */}
       <div className="relative bg-background border border-border rounded-2xl shadow-2xl w-full max-w-2xl h-[95vh] md:h-[80vh] overflow-hidden flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-3 border-b border-border shrink-0">
-          <h2 className="text-lg font-semibold text-foreground">
+          <h2 id={headingId} className="text-lg font-semibold text-foreground">
             Chat with AI Soichiro
           </h2>
           <button
+            type="button" aria-label="チャットを閉じる"
             onClick={handleClose}
             className="p-2 rounded-lg hover:bg-accent transition-colors"
           >
@@ -159,6 +183,7 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
                 接続に問題が発生しました。もう一度試してください。
               </div>
               <button
+                type="button" aria-label="回答を再試行する"
                 onClick={() => regenerate()}
                 className="p-1.5 rounded-lg hover:bg-accent transition-colors"
               >
@@ -183,6 +208,7 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
         <div className="border-t border-border p-3 shrink-0">
           <div className="flex items-end gap-2">
             <textarea
+              aria-label="メッセージ"
               ref={inputRef}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
@@ -198,6 +224,7 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
             />
             <button
               type="button"
+              aria-label="メッセージを送信する"
               onClick={handleSend}
               disabled={!inputText.trim() || isLoading || isAtLimit}
               className="shrink-0 p-2.5 rounded-xl bg-foreground text-background hover:opacity-80 transition-opacity disabled:opacity-30"
@@ -212,6 +239,6 @@ export function ChatModal({ isOpen, onClose }: ChatModalProps) {
           )}
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }
