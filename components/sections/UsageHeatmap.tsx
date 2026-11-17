@@ -63,7 +63,7 @@ export function UsageHeatmap({ usage, today }: { usage: Usage | null; today: str
         <div className="flex items-center gap-2"><span>少</span>{[1, 2, 3, 4].map(level => <span key={level} className="usage-dot" data-level={level} />)}<span>多</span><span className="usage-dot" data-state="zero" />0<span className="usage-dot" data-state="unknown" />未取得<span className="usage-dot" data-state="partial" data-level="2" />一部未取得</div>
       </div>
       {selectedCell && selectedCell.state !== "future" && <UsageDayDetail cell={selectedCell} tools={model.tools} onClose={closeDetail} />}
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground"><span>{model.from}〜{today} · JST</span><button type="button" aria-expanded={table} aria-controls="usage-month-table" onClick={() => setTable(!table)} className="underline underline-offset-4">{table ? "月別表を閉じる" : "月別表を見る"}</button></div>
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground"><span>{model.from}〜{today} · JST</span><button type="button" aria-expanded={table} aria-controls="usage-month-table" onClick={() => setTable(!table)} className="min-h-6 underline underline-offset-4">{table ? "月別表を閉じる" : "月別表を見る"}</button></div>
       {table && <div id="usage-month-table"><UsageMonthTable months={model.months} /></div>}
     </>}
   </section>;
