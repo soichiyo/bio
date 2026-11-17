@@ -5,7 +5,7 @@ import { fetchValidatedUsage, resolveUsage } from "./load-core";
 
 const readCached = unstable_cache(
   () => fetchValidatedUsage(),
-  ["bio-usage-v1"],
+  ["bio-usage-weekly-v1"],
   { revalidate: 3600, tags: ["bio-usage"] },
 );
 
