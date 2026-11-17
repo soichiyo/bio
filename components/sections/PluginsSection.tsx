@@ -8,7 +8,6 @@ export function PluginsSection({ snapshots }: { snapshots: Usage["snapshots"] })
     {plugins.some(item => !item.hidden) && <div className="mt-6"><ToolNames entries={plugins} /></div>}
     {snapshots.length > 0 && <dl className="mt-7 grid grid-cols-2 gap-6 border-t border-border pt-5">{snapshots.map(snapshot => <div key={snapshot.key}>
       <dt className="font-data text-[10px] uppercase text-muted-foreground">{labels[snapshot.key]}</dt><dd className="mt-2 font-display-dot text-4xl">{snapshot.key.endsWith("Share") ? `${snapshot.value * 100}%` : formatCount(snapshot.value)}</dd>
-      <dd className="mt-2 text-xs text-muted-foreground">{snapshot.asOf} · {snapshot.source === "manual" ? "本人申告" : "ChatGPT profile"}</dd>
     </div>)}</dl>}
   </section>;
 }

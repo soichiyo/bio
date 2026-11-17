@@ -27,13 +27,11 @@ export function UsageWeekly({ usage, today }: { usage: WeeklyUsage | null; today
       </div>
     </div>
     <div className="mt-6 flex flex-wrap justify-end gap-x-6 gap-y-2 font-data text-[10px] text-muted-foreground">
-      <span><span className="text-foreground">●</span> = 5億 tokens<span className="ml-1">（切り上げ）</span></span>
-      <span>● 集計中</span>
+      <span><span className="text-foreground">●</span> = 5億 tokens</span>
     </div>
-    <details className="mt-5 text-xs">
-      <summary className="w-fit cursor-pointer text-muted-foreground">週別の表</summary>
+    <div className="sr-only">
       <table className="mt-4 w-full text-left">
-        <caption className="sr-only">直近26週の全ツール合算トークン数</caption>
+        <caption>週別の表: 直近26週の全ツール合算トークン数</caption>
         <thead><tr className="border-b border-border"><th scope="col" className="py-2">週の開始日</th><th scope="col" className="py-2 text-right">Tokens</th><th scope="col" className="py-2 text-right">丸の数</th></tr></thead>
         <tbody>{columns.map(column => <tr key={column.week} className="border-b border-border">
           <th scope="row" className="py-2 font-normal"><time dateTime={column.week}>{column.week}</time>{column.inProgress && <span className="ml-2 inline-block text-muted-foreground">集計中</span>}</th>
@@ -41,6 +39,6 @@ export function UsageWeekly({ usage, today }: { usage: WeeklyUsage | null; today
           <td className="py-2 text-right tabular-nums">{column.tokens === null ? "—" : column.dots}</td>
         </tr>)}</tbody>
       </table>
-    </details>
+    </div>
   </section>;
 }

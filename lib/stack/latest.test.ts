@@ -25,11 +25,13 @@ describe("Latest", () => {
     }
     expect(() => validateEntries([{name:"Leap",addedAt:"2024-02-29"}])).not.toThrow();
   });
-  it("omits empty roles and identifies added dates separately from reports", () => {
+  it("omits empty roles and shows Latest without date or source", () => {
     const html=renderToStaticMarkup(createElement(StackSection,{today,groups:[{role:"Hidden role",tools:[{name:"Hidden",hidden:true}]},{role:"Visible role",tools:[{name:"New",addedAt:today}]}]}));
     expect(html).not.toContain("Hidden role");
     expect(html).toContain("Visible role");
-    expect(html).toContain("追加日");
-    expect(html).toContain(today);
+    expect(html).toContain("New");
+    expect(html).not.toContain("追加日");
+    expect(html).not.toContain("本人申告");
+    expect(html).not.toContain(today);
   });
 });

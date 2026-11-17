@@ -3,6 +3,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { UsageWeekly } from "./UsageWeekly";
+import { PluginsSection } from "./PluginsSection";
 import { StatStrip } from "./StatStrip";
 import { UsageStatus } from "@/components/usage/UsageStatus";
 import { usageFixture } from "@/lib/usage/__fixtures__/usage";
@@ -26,6 +27,10 @@ describe("weekly usage presentation",()=>{
   expect(html).toContain("週別の表");expect(doc.body.textContent).toContain("● = 5億 tokens");
   expect(html).not.toContain("2026-11-17");expect(html).not.toContain("claude-code");
   expect(doc.querySelector("button")).toBeNull();
+  expect(doc.querySelector("table")?.parentElement?.className).toBe("sr-only");
+  expect(doc.querySelector("table")?.closest("details")).toBeNull();
+  expect(html).not.toContain("（切り上げ）");
+  expect(html).not.toContain("● 集計中");
  });
  it("extends a column to ten dots",()=>{
   const u=usageFixture();u.weeks[1].tokens=4600000000;
@@ -44,20 +49,29 @@ describe("weekly usage presentation",()=>{
  it("shows just the unavailable message when no data is available",()=>{
   expect(renderToStaticMarkup(createElement(UsageWeekly,{usage:null,today}))).toBe('<p role="status" class="text-sm text-muted-foreground">利用データを取得できません。</p>');
  });
- it("uses week-based metrics and month-only run context",()=>{
+ it("shows compact metrics with only peak month and weeks as details",()=>{
   const summary=summarizeUsage(usageFixture(),today,now);
+  summary.peak={week:"2026-09-06",tokens:7};
   const html=renderToStaticMarkup(createElement(StatStrip,{summary}));
-  for(const text of ["Peak week","週 · 取得した全履歴","週 · 今週または先週まで","Codex · 2026-09"]) expect(html).toContain(text);
+  const doc=new DOMParser().parseFromString(html,"text/html");
+  for(const text of ["Peak week","Sep 2026","13h"]) expect(html).toContain(text);
+  expect(Array.from(doc.querySelectorAll("dd.order-3")).map(el=>el.textContent)).toEqual(["Sep 2026","weeks","weeks"]);
+  expect(html).not.toContain("Codex");
   expect(html).not.toContain("2026-09-06");
-  expect(renderToStaticMarkup(createElement(StatStrip,{summary:{...summary,currentStreak:null}}))).toContain("更新待ち");
+  const missing=renderToStaticMarkup(createElement(StatStrip,{summary:null}));
+  expect(missing).toContain("—");expect(missing).not.toContain("更新待ち");
  });
- it("shows combined provenance without per-tool ranges or a data link",()=>{
-  const u=usageFixture(),summary=summarizeUsage(u,today,now);
-  const html=renderToStaticMarkup(createElement(UsageStatus,{result:{data:u,origin:"bundled"},summary,today}));
-  expect(html).toContain("Claude Code・Codexの合算です");
-  expect(html).toContain("今週分は途中の値です");
-  expect(html).toContain("保存データを表示しています");
-  expect(html).toContain("週の最大");expect(html).not.toContain("公開データを見る");
-  expect(html).not.toContain("api.github.com");expect(html).not.toContain("当日分");
+ it("shows only the actual update date, even with bundled or stale data",()=>{
+  const u=usageFixture();u.collectors[0].collectedAt="2026-10-01T00:00:00Z";
+  const html=renderToStaticMarkup(createElement(UsageStatus,{result:{data:u,origin:"bundled"}}));
+  const doc=new DOMParser().parseFromString(html,"text/html");
+  expect(doc.body.textContent).toBe("Updated 11/17");
+  expect(doc.querySelector("time")?.getAttribute("datetime")).toBe(u.generatedAt);
+  expect(renderToStaticMarkup(createElement(UsageStatus,{result:{data:null,origin:"unavailable"}}))).toBe("");
+ });
+ it("keeps skills counts without the source or snapshot date",()=>{
+  const html=renderToStaticMarkup(createElement(PluginsSection,{snapshots:usageFixture().snapshots}));
+  expect(html).toContain("Skills tried");
+  expect(html).not.toContain("2026-11-16");expect(html).not.toContain("本人申告");
  });
 });
