@@ -10,8 +10,7 @@ export function compactTokens(value: number | null): string {
 }
 export function formatDuration(seconds: number | null): string {
   if (seconds === null) return "—";
-  const h = Math.floor(seconds / 3600), m = Math.floor(seconds % 3600 / 60), s = seconds % 60;
-  return `${h ? h + "時間" : ""}${h || m ? m + "分" : ""}${s}秒`;
+  return seconds >= 3600 ? `${Math.round(seconds / 3600)}h` : `${Math.round(seconds / 60)}m`;
 }
 export function formatUpdatedAt(value: string): string {
   return new Intl.DateTimeFormat("ja-JP", {
@@ -20,3 +19,13 @@ export function formatUpdatedAt(value: string): string {
   }).format(new Date(value)) + " JST";
 }
 
+export function formatUpdatedDate(value: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Tokyo", month: "numeric", day: "numeric",
+  }).format(new Date(value));
+}
+export function formatWeekMonth(value: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Tokyo", month: "short", year: "numeric",
+  }).format(new Date(`${value}T00:00:00+09:00`));
+}
