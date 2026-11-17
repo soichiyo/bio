@@ -6,7 +6,7 @@ This file provides guidance to coding agents working in this repository.
 
 Personal portfolio/bio website for Soichiro Yoshimura. The site is built with Next.js 15 App Router, React 19, TypeScript, Tailwind CSS, Motion, and lucide-react.
 
-The current product direction is **Personal Telemetry OS**: a Nothing-inspired, dot-matrix, industrial dashboard that presents Soichiro's work, coaching, writing, projects, family, and contact channels as readable system signals.
+The current product direction is **AI Profile**: real AI usage above a readable profile of work, writing, coaching, photography, family, and contact channels. The legacy bio remains available.
 
 ## Commands
 
@@ -29,33 +29,17 @@ Type definitions live in `content/types.ts`.
 ### Page Composition
 
 - `app/layout.tsx` — metadata, global CSS, and `MotionProvider`.
-- `app/page.tsx` — selects `TelemetryBioPage` by default. `?design=legacy` or `BIO_DESIGN_VARIANT=legacy` selects `LegacyBioPage`; both are in `components/pages/`.
-- `components/PersonalOSDashboard.tsx` — main telemetry dashboard surface.
-- `components/SectionRail.tsx` — fixed left section navigator for desktop/tablet.
+- `app/page.tsx` — selects `AIProfilePage` by default. `?design=legacy` or `BIO_DESIGN_VARIANT=legacy` selects `LegacyBioPage`; both are in `components/pages/`.
+- `lib/usage/` — validated public usage data, cache/fallback, JST metrics and heatmap.
 - `components/sections/` — detailed content sections below the dashboard.
 - `components/ui/` — reusable primitives such as `ThemeToggle`, `ChatButton`, `ChatModal`, `Chip`, and `CredentialItem`.
 - `components/animations/` — Motion provider and reveal helpers.
 
-### Personal Telemetry Dashboard
+### AI Profile
 
-`PersonalOSDashboard` is the current first impression of the site. Keep it characterful but readable. Important modules include:
+`AIProfilePage` composes the approved profile layout. `getUsage()` runs only for the new design; legacy never waits for the external source. See README for data definitions and fallback handling.
 
-- Identity Core
-- Current Signal
-- Coaching Meter
-- Product Log
-- Capability Matrix
-- Writing Transmission
-- Human Network
-- Optical Archive
-- Public Channels
-- Contact Beacon
-
-When editing the dashboard:
-- Preserve mobile behavior. Several cards use different layouts at `sm`, `md`, and `lg`.
-- Avoid `h-full` inside card bodies unless the parent height is explicitly safe; cards use `overflow-hidden`, so child height mistakes can clip buttons.
-- Keep the Contact Beacon red accent rare and intentional.
-- Do not make telemetry values look arbitrary; tie them to `content/` where possible.
+Keep missing values distinct from zero. Show only active longest runs. Filters affect the heatmap and monthly table, not the five headline metrics. Preserve keyboard access and 390px layouts. Keep new CSS under `.ai-profile` and preserve legacy components and content.
 
 ## Styling
 
@@ -63,8 +47,8 @@ Tailwind CSS is used with CSS custom properties in `app/globals.css`.
 
 Current visual language:
 - Dark-first UI with light mode support.
-- Dot-matrix and segmented data surfaces.
-- Industrial borders, hairlines, module labels, and scanline hover passes.
+- Dot-matrix usage history backed by published data.
+- Thin borders, quiet labels, and ample whitespace.
 - `Doto` for hero dot numerals only.
 - `Space Mono` for uppercase labels, metadata, and numeric readouts.
 - `Space Grotesk` for readable headings and body text.

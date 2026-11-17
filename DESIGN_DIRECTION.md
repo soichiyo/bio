@@ -1,109 +1,31 @@
-# Design Direction — Personal Telemetry OS
+# Design Direction — AI Profile
 
-## Concept
+## 構成
 
-This portfolio is not a resume page with decorative motion. It is a personal operating surface for Soichiro Yoshimura: work, coaching, product craft, writing, photography, family, and personality expressed as live signals.
+AIの実際の利用状況を上に、人間の側面を下に置く1ページ。承認済みのA案を基準とする。
 
-The visitor should feel they are observing a person in motion, not reading a static profile.
+Header → Hero → 5指標 → Token usage → Stack / Plugins → Writing → Beyond AI → Contact。
 
-## Core Principle
+Beyond AIには専門領域、Career、Coaching、Photography、Familyをまとめる。経歴・記事・連絡先の一覧を何度も繰り返さない。Showcaseは公開用データが入るまでナビゲーションごと非表示にする。
 
-**Readable bio first, characterful system second.**
+## 見た目
 
-The site must still let recruiters, collaborators, and friends quickly understand who Soichiro is, what he has done, and how to contact him. The design earns its personality through structure, typography, rhythm, and small mechanical behaviors.
+黒を基調とし、細い枠線と余白で区切る。赤 `#D71921` は連絡先の主要ボタンに絞る。数字にDoto、ラベルと日時にSpace Mono、名前・見出し・本文にSpace Groteskを使う。明るいテーマでも文字、点、フォーカスを判別できるようにする。
 
-## Design DNA
+デスクトップの本文幅は最大1080px。StackとPluginsは2列、狭い画面では1列にする。390pxではヒートマップの内側だけ横スクロールさせる。新しいスタイルは `.ai-profile` 以下に置く。
 
-### Dot Matrix as Structure
+カウントアップ、根拠のない能力グラフ、固定の成長メーター、番号付きの装飾ラベルは使わない。数値は初回から実データを表示する。詳しい定義は折りたたみや凡例へ置く。
 
-Dots are used to express signal density, capability matrices, status, and activity. They are not confetti. If a dot appears, it should imply state, rhythm, history, or telemetry.
+## データと操作
 
-### Industrial Transparency
+数字の帯は全履歴。草と月別表は同じ53週の表示期間・フィルターを使う。未取得を実測0と混同しない。色は最多ツール、大きさは正の値の四分位。ツール名と数値でも意味を読めるようにする。
 
-Expose the structure: hairline borders, module IDs, labels, timestamps, coordinate-like grids, visible sections, and deliberate empty space. Cards should feel like instruments, not marketing tiles.
+草はタップ・キーボードで日付の詳細を開ける。Tab位置は1つにし、矢印キーで移動、Enterで詳細、Escapeで閉じる。写真の拡大やチャットは既存機能を使う。
 
-### One Red Signal
+StackとPluginsは公開してよい名前だけを扱う。公式画像をまだ用意していないロゴは文字で表示する。承認済みモックの仮の利用数値は採用しない。Careerの実績は既存の公開本文で確認できる内容だけを使い、未確認の実績を補わない。
 
-Nothing red is rare and earned. Use `#D71921` only as the primary beacon, preferably for contact or current availability. It should not become an ambient accent.
+## 旧デザイン
 
-### Telemetry Over Decoration
+`LegacyBioPage`、`ProfileHeader`、既存の本文と画像は保持する。`?design=legacy` で開け、利用データの取得は行わない。共有部品の既定の見た目を維持する。
 
-Every animated element should read as data: a metric counting up, a ticker transmitting writing, a signal pulsing, a meter filling, a scanline checking a module. Motion should settle unless it represents ongoing life.
-
-### Human Layer Inside the Machine
-
-The OS language should not erase warmth. Family, coaching, photography, and personality are not side notes; they are the human signal inside the system.
-
-## Typography
-
-- `Doto`: hero numerals and dot-matrix display moments only.
-- `Space Mono`: uppercase labels, status text, metadata, numeric readouts.
-- `Space Grotesk`: names, section titles, body copy, readable interface text.
-
-Avoid casual emoji-led headings in the main system surface. Use labels, IDs, and structured language instead.
-
-## Layout Strategy
-
-### Top Surface
-
-Create a high-impact `PersonalOSDashboard` above the detailed bio sections.
-
-Recommended modules:
-
-- Identity Core: name, roles, current mode, location.
-- Current Signal: Studio Prairie and current responsibility.
-- Coaching Meter: 850+ hours and certifications.
-- Product Log: LINE, Lovegraph, THE COACH, Studio Prairie.
-- Writing Ticker: Zenn and note transmissions.
-- Skill Matrix: capability signal field.
-- Family Nodes: human network.
-- Contact Beacon: the single red signal.
-
-### Detail Sections
-
-Below the dashboard, keep the page readable with calmer sections:
-
-- Career Log / Work Experience
-- Modules / Projects
-- Transmission Log / Writings
-- Capability Matrix / Skills and Expertise
-- Inner Telemetry / Personality
-- Optical Archive / Gallery
-- Human Network / Family
-- Beacon / Contact
-
-## Motion Rules
-
-- Count important numbers on first render.
-- Fill segmented meters in sequence.
-- Let tickers and live clocks move continuously.
-- Use LED pulses sparingly.
-- Add scanline hover passes on system cards.
-- Support reduced motion.
-
-Do not animate every section. The top surface can feel alive; the long-form content should feel calm and readable.
-
-## Implementation Notes
-
-- Keep content centralized in `lib/data.ts`.
-- Prefer small reusable dashboard primitives over one giant component when the pattern repeats.
-- Use existing Next.js, React, Tailwind, Motion, and lucide dependencies.
-- Do not introduce a design system or external UI framework.
-- Validate with `npm run type-check` and `npm run build`.
-
-## Design Variants
-
-The site keeps both the calmer legacy bio and the Personal Telemetry OS surface
-available so the first impression can be switched without reverting commits.
-
-- `telemetry`: the default dashboard-first Personal Telemetry OS surface.
-- `legacy`: the one-column profile page with the avatar header and emoji-led
-  sections.
-
-Switch locally with URL params:
-
-- `/` or `/?design=telemetry`
-- `/?design=legacy`
-
-Switch the default deployment by setting `BIO_DESIGN_VARIANT=legacy` or
-`BIO_DESIGN_VARIANT=telemetry`.
+`telemetry` と `personal-os` は新しいAIプロフィールへの互換名。置き換え前のダッシュボードはGit履歴と過去のVercelデプロイに残り、第3の公開画面としては維持しない。
