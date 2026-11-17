@@ -1,8 +1,16 @@
-export type ShowcaseItem = { title: string; description: string; url: string; image?: string; hidden?: boolean };
+import { validateEntries, type ToolEntry } from "./logos";
+export type ShowcaseItem = { title: string; description: string; url: string; tools: ToolEntry[]; image?: string; hidden?: boolean };
+export const showcaseEnabled = false;
 export const showcase: ShowcaseItem[] = [];
-export function visibleShowcase(items: ShowcaseItem[]) { return items.filter(item => !item.hidden); }
-export function validateShowcase(items: ShowcaseItem[]) {
+export function visibleShowcase(items: ShowcaseItem[], enabled = showcaseEnabled) { return enabled ? items.filter(item => !item.hidden) : []; }
+export function validateShowcase(items: ShowcaseItem[], assertAsset?: (path: string) => void) {
   for (const item of items) {
-    if (!item.title.trim() || !item.description.trim() || !item.url.startsWith("https://") || (item.image && !item.image.startsWith("/assets/"))) throw new Error("INVALID_SHOWCASE");
+    const url = new URL(item.url);
+    if (!item.title.trim() || !item.description.trim() || url.protocol !== "https:" || !url.hostname || url.username || url.password || !item.tools.length) throw new Error("INVALID_SHOWCASE");
+    validateEntries(item.tools);
+    if (item.image !== undefined) {
+      if (!item.image.startsWith("/assets/") || !assertAsset) throw new Error("INVALID_SHOWCASE_IMAGE");
+      assertAsset(item.image);
+    }
   }
 }

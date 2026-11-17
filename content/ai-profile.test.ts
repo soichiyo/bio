@@ -27,9 +27,10 @@ describe("AI profile content", () => {
   });
   it("keeps showcase hidden until a real entry is added; images are optional", () => {
     expect(visibleShowcase(showcase)).toEqual([]);
-    const example = {title:"Example", description:"Synthetic example", url:"https://example.com"};
+    expect(() => validateShowcase(showcase, assertPublicAsset)).not.toThrow();
+    const example = {title:"Example", description:"Synthetic example", url:"https://example.com", tools:[{name:"Example"}]};
     expect(() => validateShowcase([example])).not.toThrow();
-    expect(visibleShowcase([example, {...example, hidden:true}])).toEqual([example]);
+    expect(visibleShowcase([example, {...example, hidden:true}], true)).toEqual([example]);
     expect(() => validateShowcase([{...example,url:"javascript:alert(1)"}])).toThrow();
   });
   it("preserves public credential evidence and family", () => {
