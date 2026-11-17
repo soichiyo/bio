@@ -8,6 +8,8 @@
 .ai-profile { --usage-codex: #238a62; --usage-claude: #b96b35; --usage-cursor: #7954bd; }
 .dark .ai-profile { --usage-codex: #55b993; --usage-claude: #d69767; --usage-cursor: #ac90df; }
 .ai-profile .ai-panel { border: 1px solid hsl(var(--border)); background: hsl(var(--card)); padding: 28px; }
+.ai-profile .ai-contact-link { display: inline-flex; justify-content: center; align-items: center; padding: 12px 18px; background: #d71921; color: white; font-size: 13px; }
+.ai-profile button.rounded-full { border-radius: 0; border: 1px solid hsl(var(--border)); background: transparent; color: hsl(var(--foreground)); }
 .ai-profile :is(button, a, summary):focus-visible { outline: 2px solid hsl(var(--foreground)); outline-offset: 4px; }
 .ai-profile .usage-filter { padding: 6px 10px; border: 1px solid transparent; font-size: 12px; }
 .ai-profile .usage-filter[aria-pressed="true"] { border-color: hsl(var(--border)); background: hsl(var(--accent)); color: hsl(var(--foreground)); }
@@ -125,7 +127,8 @@ body::before {
   opacity: 0.42;
 }
 
-body:has(.legacy-bio-page)::before {
+body:has(.legacy-bio-page)::before,
+body:has(.ai-profile)::before {
   opacity: 0;
 }
 
