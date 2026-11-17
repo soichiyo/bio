@@ -1,12 +1,22 @@
 import { describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
+import { assertPublicAsset } from "@/lib/content/assets";
+import { readFileSync } from "node:fs";
 import { stack } from "./stack";
 import { plugins } from "./plugins";
 import { logos, validateEntries } from "./logos";
 import { showcase, validateShowcase, visibleShowcase } from "./showcase";
 import { aiProfile, coachingCredentials, profileFamily } from "./ai-profile";
 describe("AI profile content", () => {
+  it("checks every logo path and rejects active SVG content", () => {
+    for (const asset of Object.values(logos)) for (const path of [asset.src, asset.darkSrc].filter((path): path is string => !!path)) {
+      expect(() => assertPublicAsset(path)).not.toThrow();
+      const svg = readFileSync(join(process.cwd(), "public", path), "utf8");
+      expect(svg).not.toMatch(/<(script|foreignObject|image|iframe|html)\b|\son\w+\s*=|@import|(?:href\s*=\s*["'](?!#))|url\(\s*["']?(?:https?:|\/\/|data:)/i);
+    }
+    for (const logo of ["", "missing", "toString"]) expect(() => validateEntries([{name:"Example",logo}])).toThrow();
+  });
   it("validates published tools and rejects unknown logos", () => {
     expect(() => validateEntries([...stack.flatMap(group => group.tools), ...plugins])).not.toThrow();
     expect(() => validateEntries([{name: "Example", logo: "missing"}])).toThrow();
