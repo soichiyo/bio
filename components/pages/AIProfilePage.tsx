@@ -30,7 +30,7 @@ export function AIProfilePage({ result, writing, today, now }: { result: UsageRe
       <StatStrip summary={summary} />
       <div className="mb-8 mt-4"><UsageStatus result={result} summary={summary} today={today} /></div>
       <UsageHeatmap usage={result.data} today={today} />
-      <div className="mt-5 grid gap-5 md:grid-cols-2"><StackSection /><PluginsSection snapshots={result.data?.snapshots ?? []} /></div>
+      <div className="mt-5 grid gap-5 md:grid-cols-2"><StackSection today={today} /><PluginsSection snapshots={result.data?.snapshots ?? []} /></div>
       <div className="mt-20"><ShowcaseSection /></div>
       <WritingSection result={writing} now={now} />
       <BeyondAISection />
