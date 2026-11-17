@@ -14,7 +14,7 @@ export function WritingSection({ result }: { result: WritingResult }) {
           {result.entries.slice(0, WRITING_LIMIT).map(writing => (
             <a key={writing.url} href={writing.url} target="_blank" rel="noopener noreferrer"
               className="flex items-start gap-4 border-b border-border py-6 hover:bg-accent sm:gap-8">
-              <span className="w-10 shrink-0 font-data text-[10px] uppercase text-muted-foreground"><LogoTile name={writing.platform} logo={logoByName[WRITING_SOURCES[writing.platform].name]} /></span>
+              <span className="w-10 shrink-0 font-data text-[10px] uppercase text-muted-foreground"><LogoTile stacked name={writing.platform} logo={logoByName[WRITING_SOURCES[writing.platform].name]} /></span>
               <h3 className="min-w-0 flex-1 break-words text-sm font-medium sm:text-base">{writing.title}</h3>
               <span className="shrink-0 font-data text-[10px] text-muted-foreground">
                 {writing.publishedAt

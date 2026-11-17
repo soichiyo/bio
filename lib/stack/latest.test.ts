@@ -3,12 +3,12 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { selectLatest } from "./latest";
 import { validateEntries } from "@/content/logos";
-import { stack, latestBaseline } from "@/content/stack";
+const latestBaseline = {name:"Baseline tool",asOf:"2026-11-16"};
 import { StackSection } from "@/components/sections/StackSection";
 const today = "2026-11-20";
 describe("Latest", () => {
   it("keeps the reported baseline until a dated tool is added", () => {
-    expect(selectLatest(stack.flatMap(group => group.tools), latestBaseline, today)).toEqual({name:"Gemini 4.0",date:"2026-11-16",source:"reported"});
+    expect(selectLatest([{name:"Undated"}], latestBaseline, today)).toEqual({name:"Baseline tool",date:"2026-11-16",source:"reported"});
     expect(selectLatest([{name:"New",addedAt:"2026-11-17"}],latestBaseline,today)).toEqual({name:"New",date:"2026-11-17",source:"added"});
   });
   it("excludes hidden, future, undated and baseline-day entries", () => {

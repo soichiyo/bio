@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import { ShowcaseSection } from "./ShowcaseSection";
 import { AIProfileHeader } from "@/components/AIProfileHeader";
-import { showcaseEnabled, showcase, validateShowcase, type ShowcaseItem } from "@/content/showcase";
+import { showcaseEnabled, showcase, visibleShowcase, validateShowcase, type ShowcaseItem } from "@/content/showcase";
 import { assertPublicAsset } from "@/lib/content/assets";
 vi.mock("@/components/ui/ThemeToggle",()=>({ThemeToggle:()=>null}));
 const item:ShowcaseItem={title:"Synthetic work",description:"Local fixture",url:"https://example.com/work",tools:[{name:"Example"}]};
@@ -20,12 +20,16 @@ describe("Showcase publication",()=>{
     expect(renderToStaticMarkup(createElement(AIProfileHeader,{showcaseEnabled:true,showcaseItems:[item]}))).toContain('href="#showcase"');
   });
   it("validates optional images, logos and URLs before publishing",()=>{
+    expect(()=>validateShowcase([item,{...item,title:"Duplicate URL"}],assertPublicAsset)).toThrow("DUPLICATE_SHOWCASE_URL");
     for(const url of ["https://","https://user:pass@example.com","javascript:alert(1)","http://example.com"]) expect(()=>validateShowcase([{...item,url}],assertPublicAsset)).toThrow();
     for(const tools of [[],[{name:""}],[{name:"Example"},{name:"Example"}],[{name:"Example",logo:"missing"}]]) expect(()=>validateShowcase([{...item,tools}],assertPublicAsset)).toThrow();
     for(const image of ["/assets/showcase/missing.png","/assets/Profile-avatar.jpg",""]) expect(()=>validateShowcase([{...item,image}],assertPublicAsset)).toThrow();
     expect(()=>validateShowcase([{...item,image:"/assets/profile-avatar.jpg"}],assertPublicAsset)).not.toThrow();
   });
-  it("keeps public content disabled and empty",()=>{
-    expect(showcaseEnabled).toBe(false);expect(showcase).toEqual([]);
+  it("validates published content and keeps the default body and navigation in sync",()=>{
+    validateShowcase(showcase,assertPublicAsset);
+    const visible=visibleShowcase(showcase,showcaseEnabled).length>0;
+    expect(renderToStaticMarkup(createElement(ShowcaseSection)).includes('id="showcase"')).toBe(visible);
+    expect(renderToStaticMarkup(createElement(AIProfileHeader)).includes('href="#showcase"')).toBe(visible);
   });
 });
