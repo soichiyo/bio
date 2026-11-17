@@ -81,8 +81,12 @@ A を選び、C の要素は Showcase のカードを手で選んで載せる形
 
 1. **ヘッダー**: `soichiyo / profile` とセクションへのリンク。
 2. **Hero**: アイコン、名前、@soichiyo、タグライン、「仕事の相談をする」（赤）、「そちゃんAIと話す」。
-3. **数字の帯**: Total tokens / Peak tokens / Longest run / Longest streak / Current streak と更新日。
-4. **Token usage**: 53週 × 7日の点。点の大きさがその日の量、色がその日いちばん使ったツール。ツールで絞り込める。
+3. **数字の帯**: 2026-11-17に[週別・合算の設計](2026-11-17-weekly-usage-design.md)で置き換えた。以下は変更前の設計。
+
+   変更前: Total tokens / Peak tokens / Longest run / Longest streak / Current streak と更新日。
+4. **Token usage**: 2026-11-17に[週別・合算の設計](2026-11-17-weekly-usage-design.md)で置き換えた。以下は変更前の設計。
+
+   変更前: 53週 × 7日の点。点の大きさがその日の量、色がその日いちばん使ったツール。ツールで絞り込める。
 5. **Stack**: 役割ごと（Agents / Harness）にロゴと名前を並べ、Delegation と Latest の2行を添える。Knowledge と Ops の行は置かない（決定）。
 6. **Plugins**: ロゴの並びと、Skills tried / Skill runs / Top reasoning level / Fast mode。
 7. **Showcase**: サムネイル、題名、一言、使ったツール、リンクのカード。公開時は非表示（下の「Showcase の扱い」を参照）。
@@ -101,6 +105,8 @@ A を選び、C の要素は Showcase のカードを手で選んで載せる形
 - `LOG / 001` のような番号付きラベルと、見出し下の説明文。
 
 ### 草の決まりごと（提案）
+
+2026-11-17に[週別・合算の設計](2026-11-17-weekly-usage-design.md)で置き換えた。以下は変更前の設計。
 
 - 日付の区切りは Asia/Tokyo、週は日曜始まり、表示は直近53週。
 - 点の大きさは「使っていない」と4段階。段階の境目は、使った日の合計値の四分位で決める。
@@ -149,6 +155,8 @@ public/assets/
 - LINE Profile+ や Lovegraph の実績は Career の各行に一行で添える。
 
 ## 利用データの仕組み
+
+2026-11-17に[週別・合算の設計](2026-11-17-weekly-usage-design.md)で置き換えた。以下は変更前の設計。
 
 2026-11-17 の調査（`docs/superpowers/research/2026-11-17-usage-log-probe.md`）を受けて、この節を書き直した。実装計画は `docs/superpowers/plans/2026-11-17-ai-usage-collector.md`。
 
