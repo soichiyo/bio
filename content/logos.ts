@@ -5,6 +5,7 @@ export const logos: Record<string, LogoAsset> = {
   granola: { src: "/assets/logos/granola.svg" },
   figma: { src: "/assets/logos/figma.svg", size: 40 },
   cloudflare: { src: "/assets/logos/cloudflare.png", size: 40, neutralTile: true },
+  meta: { src: "/assets/logos/meta.svg" },
   claude: { src: "/assets/logos/claude.svg" },
   openai: { src: "/assets/logos/openai.png" },
   grok: { src: "/assets/logos/grok.png" },
@@ -23,7 +24,7 @@ export const logos: Record<string, LogoAsset> = {
 };
 export const logoByName: Record<string, string> = { GitHub: "github", Cursor: "cursor", Todoist: "todoist", Zenn: "zenn", note: "note",
   Composio: "composio", Granola: "granola", Figma: "figma", Cloudflare: "cloudflare",
-  "Claude Code": "claude", Codex: "openai", "Grok Bot": "grok", "T3 Code": "t3code", Herdr: "herdr",
+  "Claude Code": "claude", Codex: "openai", "Muse Code": "meta", "Grok Bot": "grok", "T3 Code": "t3code", Herdr: "herdr",
   Notion: "notion", Gmail: "gmail", Slack: "slack", Drive: "drive", Calendar: "calendar",
 };
 export type ToolEntry = { name: string; logo?: string; hidden?: boolean; addedAt?: string };
