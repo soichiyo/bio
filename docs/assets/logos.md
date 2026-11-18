@@ -1,6 +1,14 @@
 # ロゴの取得元と文字表示の残り
 
-確認日: 2026-11-18。現在の公開名だけを対象に確認した。公式配布ファイルを変更せず保存し、色反転は行わない。Zenn・noteは今回追加し、既存のGitHub・Cursor・Todoistの条件と表示は維持した。ロゴは名前の横の装飾画像（空alt）で、提携・推奨を示すものではない。旧デザインには適用しない。
+取得・確認日: 2026-11-18。公式ファイルは形・色・比率を変えず使用する。ロゴは名前に添える装飾画像（空alt）とし、画面に但し書きや提携・推奨を示す文言を追加しない。旧デザインには適用しない。
+
+## 採用基準（2026-11-18の本人の判断）
+
+Stack・Pluginsで使っているツールを示す用途では、公式ロゴ・アプリアイコンをそのまま使用する。公式ブランドページ・プレスキットのSVGを優先し、得られなければ公式サイト・公式リポジトリの素材を使う。SVGが得られない場合はPNGとし、第三者のアイコン集は使わない。
+
+Claude CodeにはClaudeのマーク、CodexにはOpenAIのマークを使用する。Grok BotはxAIのGrok、Muse CodeはMetaのコーディングエージェント、T3 Codeはpingdotgg/t3code、Herdrはogulcancelik/herdrに対応する。Herdrのリポジトリは現在herdrdev/herdrへ転送される。
+
+既存の40px枠に原則20pxで収め、余白と縦横比を保つ。単色素材で暗い背景に沈む場合は公式の明暗素材を使い、なければ中立色のタイルに置く。Notionは白いタイルを使用する。素材の反転・合成・切り抜きは行わない。
 
 ## 採用した素材
 
@@ -12,21 +20,35 @@
 | Zenn | [公式メディアキット](https://zenn.dev/mediakit)、[配布ZIP](https://static.zenn.studio/images/mediakit/zenn-logo.zip)の `logo-only.svg`。紹介用途・マーク単体での利用を確認。変形・装飾なし、原則フルカラー、縦横ともマークの半分程度の余白 | assets/logos/zenn.svg | 両テーマで公式の青。20px表示・上下左右10pxの余白。最小サイズの数値指定なし |
 | note | [公式ヘルプのブランドガイドライン](https://www.help-note.com/hc/ja/articles/360000235582)、[配布ZIP](https://www.help-note.com/hc/article_attachments/17204878543513)と同梱PDF（2022-12-21）。小さいソーシャルアイコンでは正方形・正円のnアイコンを使えるため、公式 `app/icon.svg` を採用 | assets/logos/note.svg | 両テーマで公式の白い角丸背景付き素材。40pxのキャンバスに配布時の内側余白を含む。ロゴタイプの最小30px指定を、nアイコンと混同しない。加工なし |
 
+## 今回追加したStack・Pluginsの素材
+
+全項目の取得日は2026-11-18。保存先は `public/assets/logos/`。PNGも配布ファイルをそのまま保存し、SVGから変換していない。
+
+| 表示名 | 取得元URL・確認した公式ページ | ファイル名・表示 |
+|---|---|---|
+| Claude Code | [Claude公式サイト](https://claude.com/)が指定する[SVGアイコン](https://claude.com/icon.svg) | claude.svg。公式のオレンジを両テーマで使用 |
+| Codex | [OpenAI公式開発者サイト](https://developers.openai.com/)が指定する[PNGアイコン](https://developers.openai.com/favicon.png)。ブランドページの図解SVGはロゴ単体ではなく、favicon.svgは直接取得403だったためPNGを採用 | openai.png。公式の青地・白マークをそのまま使用 |
+| Grok Bot | [Grok公式サイト](https://grok.com/)が指定する[PNGアイコン](https://grok.com/images/android-chrome-192x192.png)。同サイトのSVGにはforeignObjectが含まれ、既存の安全検査を維持するためPNGを採用 | grok.png。公式の黒地・白マークをそのまま使用 |
+| T3 Code | [公式リポジトリのSVG](https://github.com/pingdotgg/t3code/blob/main/assets/prod/logo.svg)、[取得ファイル](https://raw.githubusercontent.com/pingdotgg/t3code/main/assets/prod/logo.svg) | t3-code.svg。公式の黒地・白文字をそのまま使用 |
+| Herdr | [公式リポジトリのSVG](https://github.com/herdrdev/herdr/blob/master/assets/logo.svg)、[取得ファイル](https://raw.githubusercontent.com/herdrdev/herdr/master/assets/logo.svg) | herdr.svg。配布時のグレー背景を含めて使用 |
+| Notion | [公式トップページ](https://www.notion.com/)が指定する[PNGアイコン](https://www.notion.com/front-static/logo-ios.png)。ヘッダーのSVGはサイトのCSS変数に依存し単体表示が欠けたため、加工せずPNGへ切り替えた | notion.png。黒白のマークを白いタイル上に置く |
+| Gmail | [公式製品ページ](https://workspace.google.com/products/gmail/)内の[製品アイコンSVG](https://www.gstatic.com/images/branding/productlogos/gmail_2026/v2/web/192px.svg) | gmail.svg。公式の色を両テーマで使用 |
+| Slack | [公式メディアキット](https://slack.com/media-kit)内の[ロゴSVG](https://a.slack-edge.com/1f40066/marketing/img/nav/logo.svg)。旧ブランドセンターは404のため公式サイトの素材を採用 | slack.svg。公式の色を両テーマで使用 |
+| Drive | [公式製品ページ](https://workspace.google.com/products/drive/)内の[製品アイコンSVG](https://www.gstatic.com/images/branding/productlogos/drive_2026/v2/web/192px.svg) | drive.svg。公式の色を両テーマで使用 |
+| Calendar | [公式製品ページ](https://workspace.google.com/products/calendar/)内の[製品アイコンSVG](https://www.gstatic.com/images/branding/productlogos/calendar_2026/v2/web/192px.svg) | calendar.svg。公式の色を両テーマで使用 |
+
 SVGにスクリプト、HTML、イベント属性、外部参照がないことを確認した。検査ではすべてのパス要素の大文字小文字とファイルの存在も確認する。
 
 ## 文字表示のまま残す素材
 
 | 名前 | 確認先・理由 |
 |---|---|
-| Claude Code | [Anthropicの旧ブランドURL](https://www.anthropic.com/brand)は404。公式トップは取得できたが、Claude Code専用の配布素材と利用条件は未確認。製品用の公式配布先と条件が確認できれば再開 |
-| Codex | [OpenAIのブランドガイド](https://openai.com/ja-JP/brand/)はブラウザで確認。OpenAIのマークとダウンロード時の同意欄はあるが、Codex専用素材は確認できず。親ブランドで代用せず、製品用の素材・条件の確認待ち |
-| Muse Code、Grok Bot、T3 Code、Herdr | 公開名だけでは、採用すべき公式製品・配布元との対応を確定できない。製品同定待ち。本人が公式URLを指定した後に、素材と条件を調べる |
-| Notion | [公式ブランドURL](https://www.notion.com/brand)は直接取得401、ブラウザでもページなし。取得不能。現行の公式配布先・条件が確認できれば再開 |
-| Gmail、Drive、Calendar | [Googleのブランド案内](https://www.google.com/permissions/)はブランドハブへ移動。一般案内は読めたが、この3製品の配布素材と今回の用途の条件は未確認。各製品の公式配布先・条件が確認できれば再開 |
-| Slack | [メディアキット](https://slack.com/media-kit)と[利用条件](https://slack.com/intl/ja-jp/terms-of-service/slack-brand)を確認。旧ブランドセンターは404。条件にはページ上の帰属表示の指定があり、今回の「注記を戻さない」方針に合わせて採用を見送る。適用条件を満たす表示方法が確認できれば再開 |
+| Muse Code | 製品の同定は完了。[公式製品ページ](https://dev.meta.ai/products/muse-code)と[公式ドキュメント](https://dev.meta.ai/docs/muse-code/)を確認したが、掲載された画像はMetaの企業ロゴ・背景・製品画面で、Muse Code専用のロゴ・アプリアイコンを取得できなかった。Metaの企業ロゴや画面の切り抜きで代用せず、専用素材の公式配布先が見つかるまで文字表示を維持 |
 | X | [ブランドツールキット](https://about.x.com/en/who-we-are/brand-toolkit)は403。取得不能。公式素材と条件を閲覧できれば再開 |
 | LinkedIn | [ブランドサイト](https://brand.linkedin.com/)は403。取得不能。公式素材と条件を閲覧できれば再開 |
 | Facebook | [公式ロゴガイド](https://www.meta.com/brand/resources/facebook/logo/)を確認。16px以上・余白の指定に加え、ロゴの隣にFacebookと書かない指定がある。現在の「画像と名前を併記する」共通表示との両立を確認できないため文字を維持。配布時の規約同意は行っていない |
 | Instagram | [公式ガイド](https://www.meta.com/brand/resources/instagram/instagram-brand/)と配布先を確認。ダウンロードは規約への明示同意を求める画面で、今回は同意を行わず素材を未取得とした。素材内の詳細条件と、採用可能な取得方法の確認待ち |
+
+X・LinkedIn・Facebook・Instagramは今回のStack・Pluginsの対象外で、前回の保留状態を維持する。
 
 これらは画像の欠損を意味しない。登録がない項目は、名前と既存のリンクを表示する。媒体の記事順・リンク先は変えない。採用を再開する際は、公式配布先・利用条件・製品との対応を確かめてこの表を更新する。

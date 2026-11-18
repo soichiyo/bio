@@ -23,3 +23,13 @@ it("supports stacked media labels while keeping the official icon canvas", () =>
   expect(html).toContain("flex-col");expect(html).toContain('width="40"');
   expect(html).toContain('alt=""');expect(html).toContain("note");
 });
+
+it("keeps monochrome artwork on a neutral tile without changing the image or adjacent name", () => {
+  const html=renderToStaticMarkup(createElement(LogoTile,{name:"Notion",logo:"notion"}));
+  expect(html).toContain("bg-white");
+  expect(html).toContain("notion.png");
+  expect(html).toContain('width="20"');
+  expect(html).toContain('alt=""');
+  expect(html).toContain("Notion");
+  expect(html).not.toContain("invert");
+});
