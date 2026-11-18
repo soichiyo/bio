@@ -6,7 +6,7 @@
 
 Stack・Connectorsで使っているツールを示す用途では、公式ロゴ・アプリアイコンをそのまま使用する。公式ブランドページ・プレスキットのSVGを優先し、得られなければ公式サイト・公式リポジトリの素材を使う。SVGが得られない場合はPNGとし、第三者のアイコン集は使わない。
 
-Claude CodeにはClaudeのマーク、CodexにはOpenAIのマークを使用する。Grok BotはxAIのGrok、Muse CodeはMetaのコーディングエージェント、T3 Codeはpingdotgg/t3code、Herdrはogulcancelik/herdrに対応する。Herdrのリポジトリは現在herdrdev/herdrへ転送される。
+Claude CodeにはClaudeのマーク、CodexにはOpenAIのマークを使用する。Muse Codeには、2026-11-18の本人の判断によりMetaの公式マークを使用する。Grok BotはxAIのGrok、Muse CodeはMetaのコーディングエージェント、T3 Codeはpingdotgg/t3code、Herdrはogulcancelik/herdrに対応する。Herdrのリポジトリは現在herdrdev/herdrへ転送される。
 
 Stack・Connectorsは56pxの角丸タイル、Writingは44pxの角丸タイル、Contactは40px枠を使い、Stack・Connectorsの画像は32px（素材内に余白のあるFigmaと横長のCloudflareは48px）で収める。Writing・Contactは従来の20px／40pxを維持し、余白と縦横比を保つ。単色素材で暗い背景に沈む場合は公式の明暗素材を使い、なければ中立色のタイルに置く。Cloudflareは白いタイルを使用する。SkillsはSuperpowers・Pstackとも文字だけで統一する。素材の反転・合成・切り抜きは行わない。
 
@@ -26,6 +26,7 @@ Stack・Connectorsは56pxの角丸タイル、Writingは44pxの角丸タイル�
 
 | 表示名 | 取得元URL・確認した公式ページ | ファイル名・表示 |
 |---|---|---|
+| Muse Code | [Meta公式ブランドページ](https://www.meta.com/brand/resources/meta/company-brand/)が使用する[公式マークのSVG](https://static.xx.fbcdn.net/rsrc.php/yf/r/-7pQO6hUGK_.svg)。取得日: 2026-11-18。Muse Code専用素材の代わりにMetaのマークを使う本人の判断に基づく | meta.svg。公式の青いグラデーションと32pxキャンバスを変更せず、両テーマで使用 |
 | Claude Code | [Claude公式サイト](https://claude.com/)が指定する[SVGアイコン](https://claude.com/icon.svg) | claude.svg。公式のオレンジを両テーマで使用 |
 | Codex | [OpenAI公式開発者サイト](https://developers.openai.com/)が指定する[PNGアイコン](https://developers.openai.com/favicon.png)。ブランドページの図解SVGはロゴ単体ではなく、favicon.svgは直接取得403だったためPNGを採用 | openai.png。公式の青地・白マークをそのまま使用 |
 | Grok Bot | [Grok公式サイト](https://grok.com/)が指定する[PNGアイコン](https://grok.com/images/android-chrome-192x192.png)。同サイトのSVGにはforeignObjectが含まれ、既存の安全検査を維持するためPNGを採用 | grok.png。公式の黒地・白マークをそのまま使用 |
@@ -43,7 +44,6 @@ SVGにスクリプト、HTML、イベント属性、外部参照がないこと�
 
 | 名前 | 確認先・理由 |
 |---|---|
-| Muse Code | 製品の同定は完了。[公式製品ページ](https://dev.meta.ai/products/muse-code)と[公式ドキュメント](https://dev.meta.ai/docs/muse-code/)を確認したが、掲載された画像はMetaの企業ロゴ・背景・製品画面で、Muse Code専用のロゴ・アプリアイコンを取得できなかった。Metaの企業ロゴや画面の切り抜きで代用せず、専用素材の公式配布先が見つかるまで文字表示を維持 |
 | X | [ブランドツールキット](https://about.x.com/en/who-we-are/brand-toolkit)は403。取得不能。公式素材と条件を閲覧できれば再開 |
 | LinkedIn | [ブランドサイト](https://brand.linkedin.com/)は403。取得不能。公式素材と条件を閲覧できれば再開 |
 | Facebook | [公式ロゴガイド](https://www.meta.com/brand/resources/facebook/logo/)を確認。16px以上・余白の指定に加え、ロゴの隣にFacebookと書かない指定がある。現在の「画像と名前を併記する」共通表示との両立を確認できないため文字を維持。配布時の規約同意は行っていない |
@@ -64,4 +64,4 @@ X・LinkedIn・Facebook・Instagramは今回のStack・Connectorsの対象外で
 | Figma | [公式ブランドページ](https://www.figma.com/using-the-figma-brand/)の[配布ZIP](https://static.figma.com/uploads/4fbf4d754dbbc027ba1530205f8747cd97d532e5)内の `Figma Icon (Full-color).svg` | figma.svg。公式のフルカラーを両テーマで使用。配布SVGの内側余白を保ち、48pxキャンバスで表示 |
 | Cloudflare | [公式プレスキット](https://www.cloudflare.com/press/press-kit/)の[Logos.zip](https://cf-assets.www.cloudflare.com/dzlvafdwdttg/2Twekn3xyYyd94qDYAl0ed/9ab649caa40958f195166e0d9f5d9a04/Logos.zip)内の `CF-Logo 1.png`。配布ZIPにSVGがないためPNGを採用 | cloudflare.png。48pxキャンバス内で縦横比を保つ。黒い文字部分を含むため白い中立色タイルに置く |
 
-すべて配布ファイルのまま保存し、色・形・縦横比を変更していない。Stack・Connectorsの56px枠内で、Composio・Granolaは32px、Figma・Cloudflareは48pxの画像領域を使用する。Figmaは素材内に余白があり、Cloudflareは横長のため、このサイズでマークの視認性を確保する。Muse Codeの専用素材は引き続き未取得。Skillsのロゴは探さず、文字表示を維持する。
+すべて配布ファイルのまま保存し、色・形・縦横比を変更していない。Stack・Connectorsの56px枠内で、Composio・Granolaは32px、Figma・Cloudflareは48pxの画像領域を使用する。Figmaは素材内に余白があり、Cloudflareは横長のため、このサイズでマークの視認性を確保する。Muse Codeには上記のMeta公式マークを使用する。Skillsのロゴは探さず、文字表示を維持する。
