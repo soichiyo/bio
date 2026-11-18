@@ -8,7 +8,7 @@ import { StatStrip } from "@/components/sections/StatStrip";
 import { UsageStatus } from "@/components/usage/UsageStatus";
 import { UsageWeekly } from "@/components/sections/UsageWeekly";
 import { StackSection } from "@/components/sections/StackSection";
-import { PluginsSection } from "@/components/sections/PluginsSection";
+import { ConnectorsSection } from "@/components/sections/ConnectorsSection";
 import { ShowcaseSection } from "@/components/sections/ShowcaseSection";
 import { BeyondAISection } from "@/components/sections/BeyondAISection";
 import { ChatButton } from "@/components/ui/ChatButton";
@@ -30,7 +30,7 @@ export function AIProfilePage({ result, writing, today, now }: { result: UsageRe
       <StatStrip summary={summary} />
       <div className="mb-8 mt-4"><UsageStatus result={result} /></div>
       <UsageWeekly usage={result.data} today={today} />
-      <div className="mt-5 grid gap-5 md:grid-cols-2"><StackSection today={today} /><PluginsSection snapshots={result.data?.snapshots ?? []} /></div>
+      <div className="mt-5 grid gap-5 md:grid-cols-2"><StackSection today={today} /><ConnectorsSection /></div>
       <div className="mt-20"><ShowcaseSection /></div>
       <WritingSection result={writing} />
       <BeyondAISection />

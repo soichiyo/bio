@@ -3,7 +3,6 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { UsageWeekly } from "./UsageWeekly";
-import { PluginsSection } from "./PluginsSection";
 import { StatStrip } from "./StatStrip";
 import { UsageStatus } from "@/components/usage/UsageStatus";
 import { usageFixture } from "@/lib/usage/__fixtures__/usage";
@@ -68,10 +67,5 @@ describe("weekly usage presentation",()=>{
   expect(doc.body.textContent).toBe("Updated 11/17");
   expect(doc.querySelector("time")?.getAttribute("datetime")).toBe(u.generatedAt);
   expect(renderToStaticMarkup(createElement(UsageStatus,{result:{data:null,origin:"unavailable"}}))).toBe("");
- });
- it("keeps skills counts without the source or snapshot date",()=>{
-  const html=renderToStaticMarkup(createElement(PluginsSection,{snapshots:usageFixture().snapshots}));
-  expect(html).toContain("Skills tried");
-  expect(html).not.toContain("2026-11-16");expect(html).not.toContain("本人申告");
  });
 });

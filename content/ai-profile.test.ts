@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { assertPublicAsset, assertLogoAsset } from "@/lib/content/assets";
 import { isCalendarDate } from "@/lib/stack/latest";
 import { stack, latestBaseline } from "./stack";
-import { plugins } from "./plugins";
+import { connectors } from "./connectors";
 import { logos, validateEntries, validateLogoNames } from "./logos";
 import { showcase, validateShowcase, visibleShowcase } from "./showcase";
 import { aiProfile, coachingCredentials, profileFamily, careerHighlights } from "./ai-profile";
@@ -28,12 +28,12 @@ describe("AI profile content", () => {
     for (const logo of ["", "missing", "toString"]) expect(() => validateEntries([{name:"Example",logo}])).toThrow();
   });
   it("validates published tools and rejects unknown logos", () => {
-    expect(() => validateEntries([...stack.flatMap(group => group.tools), ...plugins])).not.toThrow();
+    expect(() => validateEntries([...stack.flatMap(group => group.tools), ...connectors])).not.toThrow();
     expect(() => validateEntries([{name: "Example", logo: "missing"}])).toThrow();
     expect(() => validateEntries([{name: ""}])).toThrow();
   });
   it("supports an additional tool without an image", () => {
-    expect(() => validateEntries([...plugins, {name: "Example"}])).not.toThrow();
+    expect(() => validateEntries([...connectors, {name: "Example"}])).not.toThrow();
   });
   it("validates the baseline and showcase content; images are optional", () => {
     expect(typeof latestBaseline.name).toBe("string");
