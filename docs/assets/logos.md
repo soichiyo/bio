@@ -8,7 +8,7 @@ Stack・Connectorsで使っているツールを示す用途では、公式ロ�
 
 Claude CodeにはClaudeのマーク、CodexにはOpenAIのマークを使用する。Grok BotはxAIのGrok、Muse CodeはMetaのコーディングエージェント、T3 Codeはpingdotgg/t3code、Herdrはogulcancelik/herdrに対応する。Herdrのリポジトリは現在herdrdev/herdrへ転送される。
 
-Stack・Connectorsは56pxの角丸タイル、Writingは44pxの角丸タイル、Contactは40px枠を使い、画像を原則20pxで収め、余白と縦横比を保つ。単色素材で暗い背景に沈む場合は公式の明暗素材を使い、なければ中立色のタイルに置く。Cloudflareは白いタイルを使用する。SkillsはSuperpowers・Pstackとも文字だけで統一する。素材の反転・合成・切り抜きは行わない。
+Stack・Connectorsは56pxの角丸タイル、Writingは44pxの角丸タイル、Contactは40px枠を使い、Stack・Connectorsの画像は32px（素材内に余白のあるFigmaと横長のCloudflareは48px）で収める。Writing・Contactは従来の20px／40pxを維持し、余白と縦横比を保つ。単色素材で暗い背景に沈む場合は公式の明暗素材を使い、なければ中立色のタイルに置く。Cloudflareは白いタイルを使用する。SkillsはSuperpowers・Pstackとも文字だけで統一する。素材の反転・合成・切り抜きは行わない。
 
 ## 採用した素材
 
@@ -61,7 +61,7 @@ X・LinkedIn・Facebook・Instagramは今回のStack・Connectorsの対象外で
 |---|---|---|
 | Composio | [公式サイト](https://composio.dev/)が使用する[黒マーク](https://composio.dev/logos/composio-black.svg)と[白マーク](https://composio.dev/logos/composio-white.svg)。独立したブランド配布ページは取得できず、公式サイトのSVGを採用 | composio-light.svg、composio-dark.svg。公式の明暗素材を切り替える |
 | Granola | [公式サイト](https://www.granola.ai/)のPressリンク（[grano.la/press](https://grano.la/press)）から辿った[公式配布フォルダ](https://drive.google.com/drive/folders/1GkB2Qs_313r4P8l7f3uZ8deV5j4Flzo1)の[logo-square.svg](https://drive.google.com/file/d/1OWPkmXSl0kpUCbLpJ3uIaTKIfFuvbK-L/view) | granola.svg。公式の背景色を含めて使用 |
-| Figma | [公式ブランドページ](https://www.figma.com/using-the-figma-brand/)の[配布ZIP](https://static.figma.com/uploads/4fbf4d754dbbc027ba1530205f8747cd97d532e5)内の `Figma Icon (Full-color).svg` | figma.svg。公式のフルカラーを両テーマで使用。配布SVGの内側余白を保ち、40pxキャンバスで表示 |
-| Cloudflare | [公式プレスキット](https://www.cloudflare.com/press/press-kit/)の[Logos.zip](https://cf-assets.www.cloudflare.com/dzlvafdwdttg/2Twekn3xyYyd94qDYAl0ed/9ab649caa40958f195166e0d9f5d9a04/Logos.zip)内の `CF-Logo 1.png`。配布ZIPにSVGがないためPNGを採用 | cloudflare.png。40pxキャンバス内で縦横比を保つ。黒い文字部分を含むため白い中立色タイルに置く |
+| Figma | [公式ブランドページ](https://www.figma.com/using-the-figma-brand/)の[配布ZIP](https://static.figma.com/uploads/4fbf4d754dbbc027ba1530205f8747cd97d532e5)内の `Figma Icon (Full-color).svg` | figma.svg。公式のフルカラーを両テーマで使用。配布SVGの内側余白を保ち、48pxキャンバスで表示 |
+| Cloudflare | [公式プレスキット](https://www.cloudflare.com/press/press-kit/)の[Logos.zip](https://cf-assets.www.cloudflare.com/dzlvafdwdttg/2Twekn3xyYyd94qDYAl0ed/9ab649caa40958f195166e0d9f5d9a04/Logos.zip)内の `CF-Logo 1.png`。配布ZIPにSVGがないためPNGを採用 | cloudflare.png。48pxキャンバス内で縦横比を保つ。黒い文字部分を含むため白い中立色タイルに置く |
 
-すべて配布ファイルのまま保存し、色・形・縦横比を変更していない。Stack・Connectorsの56px枠内で、Composio・Granolaは20px、Figma・Cloudflareは40pxの画像領域を使用する。Figmaは素材内に余白があり、Cloudflareは横長のため、このサイズでマークの視認性を確保する。Muse Codeの専用素材は引き続き未取得。Skillsのロゴは探さず、文字表示を維持する。
+すべて配布ファイルのまま保存し、色・形・縦横比を変更していない。Stack・Connectorsの56px枠内で、Composio・Granolaは32px、Figma・Cloudflareは48pxの画像領域を使用する。Figmaは素材内に余白があり、Cloudflareは横長のため、このサイズでマークの視認性を確保する。Muse Codeの専用素材は引き続き未取得。Skillsのロゴは探さず、文字表示を維持する。
