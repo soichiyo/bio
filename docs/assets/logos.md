@@ -4,11 +4,11 @@
 
 ## 採用基準（2026-11-18の本人の判断）
 
-Stack・Pluginsで使っているツールを示す用途では、公式ロゴ・アプリアイコンをそのまま使用する。公式ブランドページ・プレスキットのSVGを優先し、得られなければ公式サイト・公式リポジトリの素材を使う。SVGが得られない場合はPNGとし、第三者のアイコン集は使わない。
+Stack・Connectorsで使っているツールを示す用途では、公式ロゴ・アプリアイコンをそのまま使用する。公式ブランドページ・プレスキットのSVGを優先し、得られなければ公式サイト・公式リポジトリの素材を使う。SVGが得られない場合はPNGとし、第三者のアイコン集は使わない。
 
 Claude CodeにはClaudeのマーク、CodexにはOpenAIのマークを使用する。Grok BotはxAIのGrok、Muse CodeはMetaのコーディングエージェント、T3 Codeはpingdotgg/t3code、Herdrはogulcancelik/herdrに対応する。Herdrのリポジトリは現在herdrdev/herdrへ転送される。
 
-既存の40px枠に原則20pxで収め、余白と縦横比を保つ。単色素材で暗い背景に沈む場合は公式の明暗素材を使い、なければ中立色のタイルに置く。Notionは白いタイルを使用する。素材の反転・合成・切り抜きは行わない。
+既存の40px枠に原則20pxで収め、余白と縦横比を保つ。単色素材で暗い背景に沈む場合は公式の明暗素材を使い、なければ中立色のタイルに置く。Cloudflareは白いタイルを使用する。SkillsはSuperpowers・Pstackとも文字だけで統一する。素材の反転・合成・切り抜きは行わない。
 
 ## 採用した素材
 
@@ -20,7 +20,7 @@ Claude CodeにはClaudeのマーク、CodexにはOpenAIのマークを使用す�
 | Zenn | [公式メディアキット](https://zenn.dev/mediakit)、[配布ZIP](https://static.zenn.studio/images/mediakit/zenn-logo.zip)の `logo-only.svg`。紹介用途・マーク単体での利用を確認。変形・装飾なし、原則フルカラー、縦横ともマークの半分程度の余白 | assets/logos/zenn.svg | 両テーマで公式の青。20px表示・上下左右10pxの余白。最小サイズの数値指定なし |
 | note | [公式ヘルプのブランドガイドライン](https://www.help-note.com/hc/ja/articles/360000235582)、[配布ZIP](https://www.help-note.com/hc/article_attachments/17204878543513)と同梱PDF（2022-12-21）。小さいソーシャルアイコンでは正方形・正円のnアイコンを使えるため、公式 `app/icon.svg` を採用 | assets/logos/note.svg | 両テーマで公式の白い角丸背景付き素材。40pxのキャンバスに配布時の内側余白を含む。ロゴタイプの最小30px指定を、nアイコンと混同しない。加工なし |
 
-## 今回追加したStack・Pluginsの素材
+## 今回追加したStack・Connectorsの素材
 
 全項目の取得日は2026-11-18。保存先は `public/assets/logos/`。PNGも配布ファイルをそのまま保存し、SVGから変換していない。
 
@@ -49,6 +49,19 @@ SVGにスクリプト、HTML、イベント属性、外部参照がないこと�
 | Facebook | [公式ロゴガイド](https://www.meta.com/brand/resources/facebook/logo/)を確認。16px以上・余白の指定に加え、ロゴの隣にFacebookと書かない指定がある。現在の「画像と名前を併記する」共通表示との両立を確認できないため文字を維持。配布時の規約同意は行っていない |
 | Instagram | [公式ガイド](https://www.meta.com/brand/resources/instagram/instagram-brand/)と配布先を確認。ダウンロードは規約への明示同意を求める画面で、今回は同意を行わず素材を未取得とした。素材内の詳細条件と、採用可能な取得方法の確認待ち |
 
-X・LinkedIn・Facebook・Instagramは今回のStack・Pluginsの対象外で、前回の保留状態を維持する。
+X・LinkedIn・Facebook・Instagramは今回のStack・Connectorsの対象外で、前回の保留状態を維持する。
 
 これらは画像の欠損を意味しない。登録がない項目は、名前と既存のリンクを表示する。媒体の記事順・リンク先は変えない。採用を再開する際は、公式配布先・利用条件・製品との対応を確かめてこの表を更新する。
+
+## Connectorsへの変更（2026-11-18）
+
+取得日: 2026-11-18。Composio・Granola・Figma・Cloudflareを掲載する。Notion・GitHub・Gmail・Slack・Drive・Calendar・Todoistはこの枠から外す。既存素材は残し、GitHubは引き続きContactで使う。画面に出所・日付は表示しない。
+
+| 名前 | 取得元URL・確認した公式ページ | ファイル名（public/assets/logos以下） |
+|---|---|---|
+| Composio | [公式サイト](https://composio.dev/)が使用する[黒マーク](https://composio.dev/logos/composio-black.svg)と[白マーク](https://composio.dev/logos/composio-white.svg)。独立したブランド配布ページは取得できず、公式サイトのSVGを採用 | composio-light.svg、composio-dark.svg。公式の明暗素材を切り替える |
+| Granola | [公式サイト](https://www.granola.ai/)のPressリンク（[grano.la/press](https://grano.la/press)）から辿った[公式配布フォルダ](https://drive.google.com/drive/folders/1GkB2Qs_313r4P8l7f3uZ8deV5j4Flzo1)の[logo-square.svg](https://drive.google.com/file/d/1OWPkmXSl0kpUCbLpJ3uIaTKIfFuvbK-L/view) | granola.svg。公式の背景色を含めて使用 |
+| Figma | [公式ブランドページ](https://www.figma.com/using-the-figma-brand/)の[配布ZIP](https://static.figma.com/uploads/4fbf4d754dbbc027ba1530205f8747cd97d532e5)内の `Figma Icon (Full-color).svg` | figma.svg。公式のフルカラーを両テーマで使用。配布SVGの内側余白を保ち、40pxキャンバスで表示 |
+| Cloudflare | [公式プレスキット](https://www.cloudflare.com/press/press-kit/)の[Logos.zip](https://cf-assets.www.cloudflare.com/dzlvafdwdttg/2Twekn3xyYyd94qDYAl0ed/9ab649caa40958f195166e0d9f5d9a04/Logos.zip)内の `CF-Logo 1.png`。配布ZIPにSVGがないためPNGを採用 | cloudflare.png。40pxキャンバス内で縦横比を保つ。黒い文字部分を含むため白い中立色タイルに置く |
+
+すべて配布ファイルのまま保存し、色・形・縦横比を変更していない。既存の40px枠を維持し、Composio・Granolaは20px、Figma・Cloudflareは40pxの画像領域を使用する。Figmaは素材内に余白があり、Cloudflareは横長のため、このサイズでマークの視認性を確保する。Muse Codeの専用素材は引き続き未取得。Skillsのロゴは探さず、文字表示を維持する。
