@@ -48,13 +48,17 @@ describe("weekly usage presentation",()=>{
  it("shows just the unavailable message when no data is available",()=>{
   expect(renderToStaticMarkup(createElement(UsageWeekly,{usage:null,today}))).toBe('<p role="status" class="text-sm text-muted-foreground">利用データを取得できません。</p>');
  });
- it("shows compact metrics with only peak month and weeks as details",()=>{
+ it("shows numbers with inline units and no detail rows",()=>{
   const summary=summarizeUsage(usageFixture(),today,now);
   summary.peak={week:"2026-09-06",tokens:7};
   const html=renderToStaticMarkup(createElement(StatStrip,{summary}));
   const doc=new DOMParser().parseFromString(html,"text/html");
-  for(const text of ["Peak week","Sep 2026","13h"]) expect(html).toContain(text);
-  expect(Array.from(doc.querySelectorAll("dd.order-3")).map(el=>el.textContent)).toEqual(["Sep 2026","weeks","weeks"]);
+  for(const text of ["Peak week","13h06m"]) expect(html).toContain(text);
+  expect(doc.querySelectorAll("dd.order-3")).toHaveLength(0);
+  expect(doc.querySelectorAll("dd")).toHaveLength(5);
+  expect(doc.querySelectorAll("dd")[2].textContent).toBe("13h06m");
+  expect(doc.querySelectorAll("dd")[3].textContent).toMatch(/\d+weeks/);
+  expect(html).not.toContain("Sep 2026");
   expect(html).not.toContain("Codex");
   expect(html).not.toContain("2026-09-06");
   const missing=renderToStaticMarkup(createElement(StatStrip,{summary:null}));

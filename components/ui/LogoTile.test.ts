@@ -18,9 +18,9 @@ it("falls back to the name for invalid or inherited logo keys", () => {
   }
 });
 
-it("supports stacked media labels while keeping the official icon canvas", () => {
-  const html=renderToStaticMarkup(createElement(LogoTile,{name:"note",logo:"note",stacked:true}));
-  expect(html).toContain("flex-col");expect(html).toContain('width="40"');
+it("keeps media labels available to screen readers and the official icon canvas", () => {
+  const html=renderToStaticMarkup(createElement(LogoTile,{name:"note",logo:"note",variant:"writing"}));
+  expect(html).toContain("sr-only");expect(html).toContain('width="40"');
   expect(html).toContain('alt=""');expect(html).toContain("note");
 });
 
