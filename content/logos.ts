@@ -1,13 +1,26 @@
 import { isCalendarDate } from "@/lib/stack/latest";
-export type LogoAsset = { src: string; darkSrc?: string; size?: 20 | 40 };
+export type LogoAsset = { src: string; darkSrc?: string; size?: 20 | 40; neutralTile?: boolean };
 export const logos: Record<string, LogoAsset> = {
+  claude: { src: "/assets/logos/claude.svg" },
+  openai: { src: "/assets/logos/openai.png" },
+  grok: { src: "/assets/logos/grok.png" },
+  t3code: { src: "/assets/logos/t3-code.svg" },
+  herdr: { src: "/assets/logos/herdr.svg" },
+  notion: { src: "/assets/logos/notion.png", neutralTile: true },
+  gmail: { src: "/assets/logos/gmail.svg" },
+  slack: { src: "/assets/logos/slack.svg" },
+  drive: { src: "/assets/logos/drive.svg" },
+  calendar: { src: "/assets/logos/calendar.svg" },
   zenn: { src: "/assets/logos/zenn.svg" },
   note: { src: "/assets/logos/note.svg", size: 40 },
   github: { src: "/assets/logos/github-light.svg", darkSrc: "/assets/logos/github-dark.svg" },
   cursor: { src: "/assets/logos/cursor-light.svg", darkSrc: "/assets/logos/cursor-dark.svg" },
   todoist: { src: "/assets/logos/todoist-light.svg", darkSrc: "/assets/logos/todoist-dark.svg" },
 };
-export const logoByName: Record<string, string> = { GitHub: "github", Cursor: "cursor", Todoist: "todoist", Zenn: "zenn", note: "note" };
+export const logoByName: Record<string, string> = { GitHub: "github", Cursor: "cursor", Todoist: "todoist", Zenn: "zenn", note: "note",
+  "Claude Code": "claude", Codex: "openai", "Grok Bot": "grok", "T3 Code": "t3code", Herdr: "herdr",
+  Notion: "notion", Gmail: "gmail", Slack: "slack", Drive: "drive", Calendar: "calendar",
+};
 export type ToolEntry = { name: string; logo?: string; hidden?: boolean; addedAt?: string };
 export function validateEntries(entries: ToolEntry[]) {
   for (const entry of entries) {
