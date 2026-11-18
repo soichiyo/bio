@@ -8,9 +8,17 @@ export function compactTokens(value: number | null): string {
   if (value >= 10000) return (value / 10000).toLocaleString("ja-JP", { maximumFractionDigits: 1 }) + "万";
   return formatCount(value);
 }
+export function durationParts(seconds: number | null): { value: string; unit: string }[] {
+  if (seconds === null) return [{ value: "—", unit: "" }];
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return [{ value: String(minutes), unit: "m" }];
+  return [
+    { value: String(Math.floor(minutes / 60)), unit: "h" },
+    { value: String(minutes % 60).padStart(2, "0"), unit: "m" },
+  ];
+}
 export function formatDuration(seconds: number | null): string {
-  if (seconds === null) return "—";
-  return seconds >= 3600 ? `${Math.round(seconds / 3600)}h` : `${Math.round(seconds / 60)}m`;
+  return durationParts(seconds).map(part => part.value + part.unit).join("");
 }
 export function formatUpdatedAt(value: string): string {
   return new Intl.DateTimeFormat("ja-JP", {
@@ -23,9 +31,4 @@ export function formatUpdatedDate(value: string): string {
   return new Intl.DateTimeFormat("en-US", {
     timeZone: "Asia/Tokyo", month: "numeric", day: "numeric",
   }).format(new Date(value));
-}
-export function formatWeekMonth(value: string): string {
-  return new Intl.DateTimeFormat("en-US", {
-    timeZone: "Asia/Tokyo", month: "short", year: "numeric",
-  }).format(new Date(`${value}T00:00:00+09:00`));
 }

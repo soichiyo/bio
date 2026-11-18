@@ -10,6 +10,7 @@
 .ai-profile button.rounded-full { border-radius: 0; border: 1px solid hsl(var(--border)); background: transparent; color: hsl(var(--foreground)); }
 .ai-profile :is(button, a, summary):focus-visible { outline: 2px solid hsl(var(--foreground)); outline-offset: 4px; }
 @media (max-width: 640px) { .ai-profile .ai-panel { padding: 20px; } }
+.ai-profile .ai-coaching-panel { padding: 0; }
 
 :root {
   --background: 0 0% 96%;
